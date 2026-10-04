@@ -6,6 +6,9 @@ const ITEMS_POR_PAGINA = 12;
 let serieActual = null;
 let temporadaActual = 1;
 
+// Clave de OMDb proporcionada
+const OMDB_API_KEY = '794853cc';
+
 let timerCursor = null;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -27,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Desplazamiento correcto para lista de temporadas (▲ sube -120px, ▼ baja +120px)
+// Desplazamiento correcto para lista de temporadas
 function scrollTemporadas(direccion) {
   const lista = document.getElementById('lista-temporadas');
   if (lista) {
@@ -58,7 +61,7 @@ function detenerOcultarCursor() {
   document.body.classList.remove('ocultar-cursor');
 }
 
-// Carga inicial de datos
+// Carga inicial de datos enriquecidos con OMDb
 async function cargarTodoElCatalogo() {
   await Promise.all([obtenerPeliculas(), obtenerSeries()]);
   renderizarCatalogoConPaginacion();
@@ -68,32 +71,19 @@ async function obtenerPeliculas() {
   try {
     const res = await fetch('./data/peliculas.json');
     if (res.ok) {
-      let pelis = await res.json();
+      const peliculasLocales = await res.json();
       
-      // Recorremos las películas para autocompletar la imagen con OMDb si no la tiene
-      for (let peli of pelis) {
-        if (!peli.imagen || peli.imagen.trim() === "") {
-          try {
-            const omdbRes = await fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(peli.titulo)}&apikey=794853cc`);
-            const omdbData = await omdbRes.json();
-            
-            if (omdbData.Response === "True" && omdbData.Poster && omdbData.Poster !== "N/A") {
-              let posterUrl = omdbData.Poster;
-              if (posterUrl.startsWith("http://")) {
-                posterUrl = posterUrl.replace("http://", "https://");
-              }
-              peli.imagen = posterUrl;
-            } else {
-              peli.imagen = 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=300&q=80';
-            }
-          } catch (apiErr) {
-            console.error(`No se pudo obtener el póster para: ${peli.titulo}`, apiErr);
-            peli.imagen = 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=300&q=80';
-          }
-        }
-      }
-      
-      todasLasPeliculas = pelis;
+      // Enriquecemos cada película usando la API de OMDb
+      todasLasPeliculas = await Promise.all(peliculasLocales.map(async (peli) => {
+        const query = peli.tituloIngles || peli.titulo;
+        const datosOmdb = await consultarOmdb(query);
+        
+        return {
+          ...peli,
+          imagen: (datosOmdb && datosOmdb.Poster && datosOmdb.Poster !== "N/A") ? datosOmdb.Poster : peli.imagen,
+          descorta: (datosOmdb && datosOmdb.Plot && datosOmdb.Plot !== "N/A") ? datosOmdb.Plot : peli.descorta
+        };
+      }));
     }
   } catch (err) {
     console.error("Error al cargar películas:", err);
@@ -108,13 +98,37 @@ async function obtenerSeries() {
     try {
       const res = await fetch(`./data/series/${id}/info.json`);
       if (res.ok) {
-        const info = await res.json();
+        let info = await res.json();
+        const datosOmdb = await consultarOmdb(info.tituloIngles || info.titulo);
+        
+        if (datosOmdb && datosOmdb.Poster && datosOmdb.Poster !== "N/A") {
+          info.imagen = datosOmdb.Poster;
+        }
+        if (datosOmdb && datosOmdb.Plot && datosOmdb.Plot !== "N/A") {
+          info.descorta = datosOmdb.Plot;
+        }
+
         todasLasSeries.push(info);
       }
     } catch (err) {
       console.error(`Error al cargar la serie ${id}:`, err);
     }
   }
+}
+
+// Función auxiliar para consultar OMDb API
+async function consultarOmdb(titulo) {
+  try {
+    const url = `https://www.omdbapi.com/?t=${encodeURIComponent(titulo)}&apikey=${OMDB_API_KEY}`;
+    const respuesta = await fetch(url);
+    const data = await respuesta.json();
+    if (data.Response === "True") {
+      return data;
+    }
+  } catch (e) {
+    console.error("Error conectando con OMDb para:", titulo, e);
+  }
+  return null;
 }
 
 // Renderiza películas y series aplicando Filtros y Paginación
@@ -162,10 +176,9 @@ function renderizarCatalogoConPaginacion() {
 
   gridPelis.innerHTML = pelisPagina.map(peli => {
     const tituloEscapado = peli.titulo.replace(/'/g, "\\'");
-    const respaldosJSON = JSON.stringify(peli.idDriveRespaldo || []).replace(/"/g, '&quot;');
     return `
-      <div class="card" tabindex="0" onclick="reproducirPelicula('${tituloEscapado}', '${peli.idDrive}', '${peli.imagen}', ${respaldosJSON})" onkeydown="if(event.key==='Enter') reproducirPelicula('${tituloEscapado}', '${peli.idDrive}', '${peli.imagen}', ${respaldosJSON})">
-        <img src="${peli.imagen}" alt="${peli.titulo}" loading="lazy">
+      <div class="card" tabindex="0" onclick="reproducirPelicula('${tituloEscapado}', '${peli.idDrive}', '${peli.imagen}')" onkeydown="if(event.key==='Enter') reproducirPelicula('${tituloEscapado}', '${peli.idDrive}', '${peli.imagen}')">
+        <img src="${peli.imagen}" alt="${peli.titulo}">
         <div class="card-info">
           <h4>${peli.titulo}</h4>
           <p>${peli.descorta}</p>
@@ -179,7 +192,7 @@ function renderizarCatalogoConPaginacion() {
     const tituloEscapado = info.titulo.replace(/'/g, "\\'");
     return `
       <div class="card" tabindex="0" onclick="abrirSerie('${info.id}', '${tituloEscapado}', ${temporadasJSON}, '${info.imagen}')" onkeydown="if(event.key==='Enter') abrirSerie('${info.id}', '${tituloEscapado}', ${temporadasJSON}, '${info.imagen}')">
-        <img src="${info.imagen}" alt="${info.titulo}" loading="lazy">
+        <img src="${info.imagen}" alt="${info.titulo}">
         <div class="card-info">
           <h4>${info.titulo}</h4>
           <p>${info.descorta}</p>
@@ -212,8 +225,8 @@ function cambiarPagina(numPagina) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Reproducción de Películas con Links de Respaldo opcionales
-function reproducirPelicula(titulo, idDrive, imagen, respaldos = []) {
+// Reproducción de Películas
+function reproducirPelicula(titulo, idDrive, imagen) {
   document.getElementById('modal-titulo').innerText = titulo;
   document.getElementById('contenedor-temporadas').classList.add('oculto');
   
@@ -221,27 +234,11 @@ function reproducirPelicula(titulo, idDrive, imagen, respaldos = []) {
     document.getElementById('modal-backdrop').style.backgroundImage = `url('${imagen}')`;
   }
   
-  const iframe = document.getElementById('iframe-drive');
   const contenedorVideo = document.getElementById('contenedor-video');
-  const contenedorServidores = document.getElementById('opciones-servidores');
-
+  const iframe = document.getElementById('iframe-drive');
+  
   iframe.src = `https://drive.google.com/file/d/${idDrive}/preview`;
   contenedorVideo.classList.remove('oculto');
-
-  if (respaldos && respaldos.length > 0) {
-    let botonesHTML = `<span style="font-size:13px; color:#aaa; margin-right:5px;">Servidores:</span>`;
-    botonesHTML += `<button class="btn-servidor activo" onclick="cambiarServidor('${idDrive}', this)">Enlace 1 (Principal)</button>`;
-    
-    respaldos.forEach((idResp, index) => {
-      botonesHTML += `<button class="btn-servidor" onclick="cambiarServidor('${idResp}', this)">Enlace ${index + 2} (Respaldo)</button>`;
-    });
-
-    contenedorServidores.innerHTML = botonesHTML;
-    contenedorServidores.classList.remove('oculto');
-  } else {
-    contenedorServidores.classList.add('oculto');
-    contenedorServidores.innerHTML = '';
-  }
   
   document.getElementById('modal-reproductor').classList.remove('oculto');
   document.querySelector('.cerrar-modal').focus();
@@ -249,24 +246,11 @@ function reproducirPelicula(titulo, idDrive, imagen, respaldos = []) {
   iniciarOcultarCursor();
 }
 
-// Función para alternar servidores en caliente
-function cambiarServidor(idDrive, elementoBtn) {
-  const iframe = document.getElementById('iframe-drive');
-  iframe.src = `https://drive.google.com/file/d/${idDrive}/preview`;
-
-  const botones = document.querySelectorAll('.btn-servidor');
-  botones.forEach(b => b.classList.remove('activo'));
-  if (elementoBtn) {
-    elementoBtn.classList.add('activo');
-  }
-}
-
 // Apertura de Serie
 function abrirSerie(serieId, titulo, temporadas, imagenFondo) {
   serieActual = serieId;
   document.getElementById('modal-titulo').innerText = titulo;
   document.getElementById('contenedor-video').classList.add('oculto');
-  document.getElementById('opciones-servidores').classList.add('oculto');
   document.getElementById('iframe-drive').src = '';
 
   if (imagenFondo) {
@@ -307,9 +291,8 @@ async function cargarCapitulosTemporada(numTemp) {
 
     listaEpisodios.innerHTML = episodios.map(ep => {
       const tituloEscapado = ep.titulo.replace(/'/g, "\\'");
-      const respaldosEpJSON = JSON.stringify(ep.idDriveRespaldo || []).replace(/"/g, '&quot;');
       return `
-        <div class="card-episodio" tabindex="0" onclick="reproducirEpisodio('${tituloEscapado}', '${ep.idDrive}', ${respaldosEpJSON})" onkeydown="if(event.key==='Enter') reproducirEpisodio('${tituloEscapado}', '${ep.idDrive}', ${respaldosEpJSON})">
+        <div class="card-episodio" tabindex="0" onclick="reproducirEpisodio('${tituloEscapado}', '${ep.idDrive}')" onkeydown="if(event.key==='Enter') reproducirEpisodio('${tituloEscapado}', '${ep.idDrive}')">
           <div class="info-episodio">
             <span class="num-capitulo">Capítulo ${ep.capitulo}</span>
             <span class="titulo-capitulo">${ep.titulo}</span>
@@ -323,28 +306,12 @@ async function cargarCapitulosTemporada(numTemp) {
   }
 }
 
-function reproducirEpisodio(tituloCapitulo, idDrive, respaldos = []) {
+function reproducirEpisodio(tituloCapitulo, idDrive) {
   const contenedorVideo = document.getElementById('contenedor-video');
   const iframe = document.getElementById('iframe-drive');
-  const contenedorServidores = document.getElementById('opciones-servidores');
   
   iframe.src = `https://drive.google.com/file/d/${idDrive}/preview`;
   contenedorVideo.classList.remove('oculto');
-
-  if (respaldos && respaldos.length > 0) {
-    let botonesHTML = `<span style="font-size:13px; color:#aaa; margin-right:5px;">Servidores:</span>`;
-    botonesHTML += `<button class="btn-servidor activo" onclick="cambiarServidor('${idDrive}', this)">Enlace 1 (Principal)</button>`;
-    
-    respaldos.forEach((idResp, index) => {
-      botonesHTML += `<button class="btn-servidor" onclick="cambiarServidor('${idResp}', this)">Enlace ${index + 2} (Respaldo)</button>`;
-    });
-
-    contenedorServidores.innerHTML = botonesHTML;
-    contenedorServidores.classList.remove('oculto');
-  } else {
-    contenedorServidores.classList.add('oculto');
-    contenedorServidores.innerHTML = '';
-  }
 
   document.querySelector('.modal-contenido').scrollTop = 0;
   iniciarOcultarCursor();
@@ -354,7 +321,6 @@ function cerrarModal() {
   document.getElementById('modal-reproductor').classList.add('oculto');
   document.getElementById('iframe-drive').src = '';
   document.getElementById('modal-backdrop').style.backgroundImage = 'none';
-  document.getElementById('opciones-servidores').classList.add('oculto');
   
   detenerOcultarCursor();
 }
