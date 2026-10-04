@@ -322,6 +322,41 @@ body.ocultar-cursor * {
   border: 0;
 }
 
+/* ==========================================
+   OPCIONES DE SERVIDORES / RESPALDOS
+   ========================================== */
+.opciones-servidores {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.85);
+  padding: 10px 20px;
+  border-bottom: 1px solid #333;
+  flex-wrap: wrap;
+  border-radius: 8px;
+  margin-bottom: -10px;
+}
+
+.btn-servidor {
+  background: #222;
+  color: #ccc;
+  border: 1px solid #444;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.btn-servidor:hover,
+.btn-servidor.activo {
+  background: #e50914;
+  color: #fff;
+  border-color: #fff;
+  font-weight: bold;
+}
+
 .watermark-topright {
   position: absolute;
   top: 0;
