@@ -1,231 +1,299 @@
-const API_KEY = '794853cc';
-let contenidoGlobal = [];
-let filtroActivo = 'todo';
+// Estado global de la aplicación
+let todasLasPeliculas = [];
+let todasLasSeries = [];
+let paginaActual = 1;
+const ITEMS_POR_PAGINA = 12;
+let serieActual = null;
+let temporadaActual = 1;
 
-// 1. Iniciar la aplicación
+let timerCursor = null;
+
 document.addEventListener('DOMContentLoaded', () => {
-    cargarContenido();
+  cargarTodoElCatalogo();
+
+  // Prevención de pérdida de foco y atajos en Smart TV
+  document.addEventListener('keydown', (e) => {
+    const activo = document.activeElement;
+
+    if (e.key === 'ArrowUp' || e.keyCode === 38) {
+      if (activo && (activo.classList.contains('nav-btn') || activo.classList.contains('cerrar-modal') || activo.id === 'input-busqueda')) {
+        e.preventDefault();
+      }
+    }
+
+    if (e.key === 'Escape' || e.key === 'Back' || e.keyCode === 10009 || e.keyCode === 27) {
+      cerrarModal();
+    }
+  });
 });
 
-async function cargarContenido() {
-    try {
-        const respuesta = await fetch('data/peliculas.json');
-        contenidoGlobal = await respuesta.json();
-        renderizarCatalogo();
-    } catch (error) {
-        console.error("Error al cargar peliculas.json:", error);
+// Desplazamiento correcto para lista de temporadas (▲ sube -120px, ▼ baja +120px)
+function scrollTemporadas(direccion) {
+  const lista = document.getElementById('lista-temporadas');
+  if (lista) {
+    lista.scrollBy({ top: direccion * 120, behavior: 'smooth' });
+  }
+}
+
+// Ocultar cursor tras 3 segundos de inactividad durante la reproducción
+function iniciarOcultarCursor() {
+  detenerOcultarCursor();
+  document.addEventListener('mousemove', resetearTimerCursor);
+  document.addEventListener('keydown', resetearTimerCursor);
+  resetearTimerCursor();
+}
+
+function resetearTimerCursor() {
+  document.body.classList.remove('ocultar-cursor');
+  clearTimeout(timerCursor);
+  timerCursor = setTimeout(() => {
+    document.body.classList.add('ocultar-cursor');
+  }, 3000);
+}
+
+function detenerOcultarCursor() {
+  clearTimeout(timerCursor);
+  document.removeEventListener('mousemove', resetearTimerCursor);
+  document.removeEventListener('keydown', resetearTimerCursor);
+  document.body.classList.remove('ocultar-cursor');
+}
+
+// Carga inicial de datos
+async function cargarTodoElCatalogo() {
+  await Promise.all([obtenerPeliculas(), obtenerSeries()]);
+  renderizarCatalogoConPaginacion();
+}
+
+async function obtenerPeliculas() {
+  try {
+    const res = await fetch('./data/peliculas.json');
+    if (res.ok) {
+      todasLasPeliculas = await res.json();
     }
+  } catch (err) {
+    console.error("Error al cargar películas:", err);
+  }
 }
 
-// 2. Consulta a OMDb API
-async function obtenerPortada(titulo) {
+async function obtenerSeries() {
+  const seriesIds = ['rick-and-morty'];
+  todasLasSeries = [];
+
+  for (const id of seriesIds) {
     try {
-        const respuesta = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&t=${encodeURIComponent(titulo)}`);
-        const datos = await respuesta.json();
-        if (datos.Response === "True" && datos.Poster && datos.Poster !== "N/A") {
-            return datos.Poster;
-        }
-        return 'https://via.placeholder.com/300x450/222/fff?text=Sin+Portada';
-    } catch (error) {
-        return 'https://via.placeholder.com/300x450/222/e50914?text=Error';
+      const res = await fetch(`./data/series/${id}/info.json`);
+      if (res.ok) {
+        const info = await res.json();
+        todasLasSeries.push(info);
+      }
+    } catch (err) {
+      console.error(`Error al cargar la serie ${id}:`, err);
     }
+  }
 }
 
-// 3. Sistema de Búsqueda y Filtrado
-function buscarContenido() {
-    renderizarCatalogo();
-}
+// Renderiza películas y series aplicando Filtros y Paginación
+function renderizarCatalogoConPaginacion() {
+  const inputBusqueda = document.getElementById('input-busqueda').value.toLowerCase().trim();
+  const secPelis = document.getElementById('seccion-peliculas');
+  const secSeries = document.getElementById('seccion-series');
+  const gridPelis = document.getElementById('grid-peliculas');
+  const gridSeries = document.getElementById('grid-series');
+  const paginacionContainer = document.getElementById('paginacion-container');
 
-function filtrar(tipo, evento) {
-    filtroActivo = tipo;
-    document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-    if (evento) evento.target.classList.add('active');
-    renderizarCatalogo();
-}
+  const pelisFiltradas = todasLasPeliculas.filter(p => p.titulo.toLowerCase().includes(inputBusqueda));
+  const seriesFiltradas = todasLasSeries.filter(s => s.titulo.toLowerCase().includes(inputBusqueda));
 
-// 4. Renderizar Interfaz (Optimizado para no congelar la pantalla)
-function renderizarCatalogo() {
-    const busqueda = document.getElementById('input-busqueda').value.toLowerCase();
-    
-    // Filtrar por texto
-    const filtrados = contenidoGlobal.filter(item => 
-        item.titulo.toLowerCase().includes(busqueda) || 
-        (item.tituloIngles && item.tituloIngles.toLowerCase().includes(busqueda))
-    );
+  const filtroActivo = document.querySelector('.nav-btn.active')?.getAttribute('onclick') || 'todo';
 
-    // Separar en categorías (asume que tu JSON tiene una propiedad "tipo": "pelicula" o "serie")
-    const peliculas = filtrados.filter(item => !item.tipo || item.tipo === 'pelicula');
-    const series = filtrados.filter(item => item.tipo === 'serie');
+  let itemsAMostrar = [];
 
-    const secPeliculas = document.getElementById('seccion-peliculas');
-    const secSeries = document.getElementById('seccion-series');
-    const gridPeliculas = document.getElementById('grid-peliculas');
-    const gridSeries = document.getElementById('grid-series');
+  if (filtroActivo.includes('peliculas')) {
+    secPelis.style.display = 'block';
+    secSeries.style.display = 'none';
+    itemsAMostrar = pelisFiltradas.map(p => ({ ...p, tipo: 'pelicula' }));
+  } else if (filtroActivo.includes('series')) {
+    secPelis.style.display = 'none';
+    secSeries.style.display = 'block';
+    itemsAMostrar = seriesFiltradas.map(s => ({ ...s, tipo: 'serie' }));
+  } else {
+    secPelis.style.display = 'block';
+    secSeries.style.display = 'block';
+    itemsAMostrar = [
+      ...pelisFiltradas.map(p => ({ ...p, tipo: 'pelicula' })),
+      ...seriesFiltradas.map(s => ({ ...s, tipo: 'serie' }))
+    ];
+  }
 
-    // Controlar qué secciones se ven según el botón del menú pulsado
-    secPeliculas.style.display = (filtroActivo === 'todo' || filtroActivo === 'pelicula') && peliculas.length > 0 ? 'block' : 'none';
-    secSeries.style.display = (filtroActivo === 'todo' || filtroActivo === 'serie') && series.length > 0 ? 'block' : 'none';
+  const totalPaginas = Math.ceil(itemsAMostrar.length / ITEMS_POR_PAGINA) || 1;
+  if (paginaActual > totalPaginas) paginaActual = 1;
 
-    // Inyectar HTML con un "Cargando..."
-    gridPeliculas.innerHTML = peliculas.map(p => crearTarjetaHTML(p)).join('');
-    gridSeries.innerHTML = series.map(s => crearTarjetaHTML(s)).join('');
+  const inicio = (paginaActual - 1) * ITEMS_POR_PAGINA;
+  const fin = inicio + ITEMS_POR_PAGINA;
+  const paginaItems = itemsAMostrar.slice(inicio, fin);
 
-    // Cargar las portadas en segundo plano
-    cargarPortadasAsincronas(peliculas.concat(series));
-}
+  const pelisPagina = paginaItems.filter(i => i.tipo === 'pelicula');
+  const seriesPagina = paginaItems.filter(i => i.tipo === 'serie');
 
-function crearTarjetaHTML(item) {
-    const idImg = `img-${item.id}`;
-    // Definir si se abre como peli o serie
-    const tipo = item.tipo || 'pelicula';
-    
+  gridPelis.innerHTML = pelisPagina.map(peli => {
+    const tituloEscapado = peli.titulo.replace(/'/g, "\\'");
     return `
-        <div class="card" onclick="abrirModal('${item.id}', '${tipo}')" tabindex="0">
-            <img id="${idImg}" src="https://via.placeholder.com/300x450/111/444?text=Cargando..." alt="${item.titulo}">
-            <div class="card-info">
-                <h4>${item.titulo}</h4>
-                <p>${item.descorta || ''}</p>
-            </div>
+      <div class="card" tabindex="0" onclick="reproducirPelicula('${tituloEscapado}', '${peli.idDrive}', '${peli.imagen}')" onkeydown="if(event.key==='Enter') reproducirPelicula('${tituloEscapado}', '${peli.idDrive}', '${peli.imagen}')">
+        <img src="${peli.imagen}" alt="${peli.titulo}">
+        <div class="card-info">
+          <h4>${peli.titulo}</h4>
+          <p>${peli.descorta}</p>
         </div>
+      </div>
     `;
+  }).join('');
+
+  gridSeries.innerHTML = seriesPagina.map(info => {
+    const temporadasJSON = JSON.stringify(info.temporadasDisponibles).replace(/"/g, '&quot;');
+    const tituloEscapado = info.titulo.replace(/'/g, "\\'");
+    return `
+      <div class="card" tabindex="0" onclick="abrirSerie('${info.id}', '${tituloEscapado}', ${temporadasJSON}, '${info.imagen}')" onkeydown="if(event.key==='Enter') abrirSerie('${info.id}', '${tituloEscapado}', ${temporadasJSON}, '${info.imagen}')">
+        <img src="${info.imagen}" alt="${info.titulo}">
+        <div class="card-info">
+          <h4>${info.titulo}</h4>
+          <p>${info.descorta}</p>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  let paginacionHTML = '';
+  if (totalPaginas > 1) {
+    for (let i = 1; i <= totalPaginas; i++) {
+      paginacionHTML += `
+        <button class="btn-pagina ${i === paginaActual ? 'activa' : ''}" tabindex="0" onclick="cambiarPagina(${i})">
+          ${i}
+        </button>
+      `;
+    }
+  }
+  paginacionContainer.innerHTML = paginacionHTML;
 }
 
-async function cargarPortadasAsincronas(listaItems) {
-    for (let item of listaItems) {
-        const imgEl = document.getElementById(`img-${item.id}`);
-        if (imgEl) {
-            const tituloABuscar = item.tituloIngles || item.titulo;
-            const urlPortada = await obtenerPortada(tituloABuscar);
-            imgEl.src = urlPortada;
-        }
-    }
+function buscarContenido() {
+  paginaActual = 1;
+  renderizarCatalogoConPaginacion();
 }
 
-// 5. Control del Modal Pantalla Completa
-async function abrirModal(id, tipo) {
-    const itemActual = contenidoGlobal.find(i => i.id === id);
-    if (!itemActual) return;
+function cambiarPagina(numPagina) {
+  paginaActual = numPagina;
+  renderizarCatalogoConPaginacion();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-    const modal = document.getElementById('modal-reproductor');
-    const tituloEl = document.getElementById('modal-titulo');
-    const backdrop = document.getElementById('modal-backdrop');
-    const contVideo = document.getElementById('contenedor-video');
-    const contTemporadas = document.getElementById('contenedor-temporadas');
-    
-    tituloEl.textContent = itemActual.titulo;
-    
-    // Aplicar portada de fondo en el modal
-    const portada = await obtenerPortada(itemActual.tituloIngles || itemActual.titulo);
-    backdrop.style.backgroundImage = `url('${portada}')`;
+// Reproducción de Películas
+function reproducirPelicula(titulo, idDrive, imagen) {
+  document.getElementById('modal-titulo').innerText = titulo;
+  document.getElementById('contenedor-temporadas').classList.add('oculto');
+  
+  // Establece imagen de fondo
+  if (imagen) {
+    document.getElementById('modal-backdrop').style.backgroundImage = `url('${imagen}')`;
+  }
+  
+  const contenedorVideo = document.getElementById('contenedor-video');
+  const iframe = document.getElementById('iframe-drive');
+  
+  iframe.src = `https://drive.google.com/file/d/${idDrive}/preview`;
+  contenedorVideo.classList.remove('oculto');
+  
+  document.getElementById('modal-reproductor').classList.remove('oculto');
+  document.querySelector('.cerrar-modal').focus();
 
-    if (tipo === 'pelicula') {
-        contVideo.classList.remove('oculto');
-        contTemporadas.classList.add('oculto');
-        prepararServidores(itemActual); // Activa la lógica de Enlace 1 y 2
-    } else if (tipo === 'serie') {
-        contVideo.classList.add('oculto');
-        contTemporadas.classList.remove('oculto');
-        cargarTemporadas(itemActual);
-    }
+  iniciarOcultarCursor();
+}
 
-    modal.classList.remove('oculto');
+// Apertura de Serie (Apertura Pantalla Completa + Imagen de Fondo)
+function abrirSerie(serieId, titulo, temporadas, imagenFondo) {
+  serieActual = serieId;
+  document.getElementById('modal-titulo').innerText = titulo;
+  document.getElementById('contenedor-video').classList.add('oculto');
+  document.getElementById('iframe-drive').src = '';
+
+  // Coloca la portada de la serie de fondo
+  if (imagenFondo) {
+    document.getElementById('modal-backdrop').style.backgroundImage = `url('${imagenFondo}')`;
+  }
+
+  // Renderizar temporadas
+  const listaTemp = document.getElementById('lista-temporadas');
+  listaTemp.innerHTML = temporadas.map((t, index) => `
+    <button class="btn-temporada ${index === 0 ? 'activa' : ''}" tabindex="0" onclick="seleccionarTemporada(${t}, event)">
+      Temporada ${t}
+    </button>
+  `).join('');
+
+  document.getElementById('contenedor-temporadas').classList.remove('oculto');
+  document.getElementById('modal-reproductor').classList.remove('oculto');
+
+  cargarCapitulosTemporada(temporadas[0]);
+  document.querySelector('.cerrar-modal').focus();
+}
+
+function seleccionarTemporada(numTemp, event) {
+  document.querySelectorAll('.btn-temporada').forEach(btn => btn.classList.remove('activa'));
+  if (event && event.target) {
+    event.target.classList.add('activa');
+  }
+  cargarCapitulosTemporada(numTemp);
+}
+
+async function cargarCapitulosTemporada(numTemp) {
+  temporadaActual = numTemp;
+  const listaEpisodios = document.getElementById('lista-capitulos');
+
+  try {
+    const res = await fetch(`./data/series/${serieActual}/t${numTemp}.json`);
+    if (!res.ok) throw new Error("Archivo no encontrado");
+
+    const episodios = await res.json();
+
+    listaEpisodios.innerHTML = episodios.map(ep => {
+      const tituloEscapado = ep.titulo.replace(/'/g, "\\'");
+      return `
+        <div class="card-episodio" tabindex="0" onclick="reproducirEpisodio('${tituloEscapado}', '${ep.idDrive}')" onkeydown="if(event.key==='Enter') reproducirEpisodio('${tituloEscapado}', '${ep.idDrive}')">
+          <div class="info-episodio">
+            <span class="num-capitulo">Capítulo ${ep.capitulo}</span>
+            <span class="titulo-capitulo">${ep.titulo}</span>
+          </div>
+          <span class="icono-play">▶</span>
+        </div>
+      `;
+    }).join('');
+  } catch (err) {
+    listaEpisodios.innerHTML = '<p style="color: #aaa; padding: 20px; text-align: center;">Esta temporada estará disponible próximamente.</p>';
+  }
+}
+
+function reproducirEpisodio(tituloCapitulo, idDrive) {
+  const contenedorVideo = document.getElementById('contenedor-video');
+  const iframe = document.getElementById('iframe-drive');
+  
+  iframe.src = `https://drive.google.com/file/d/${idDrive}/preview`;
+  contenedorVideo.classList.remove('oculto');
+
+  document.querySelector('.modal-contenido').scrollTop = 0;
+  iniciarOcultarCursor();
 }
 
 function cerrarModal() {
-    document.getElementById('modal-reproductor').classList.add('oculto');
-    document.getElementById('iframe-drive').src = '';
-    const contVideo = document.getElementById('contenedor-video');
-    contVideo.classList.add('oculto'); // Ocultar iframe para evitar sonido fantasma
+  document.getElementById('modal-reproductor').classList.add('oculto');
+  document.getElementById('iframe-drive').src = '';
+  document.getElementById('modal-backdrop').style.backgroundImage = 'none';
+  
+  detenerOcultarCursor();
 }
 
-// 6. Lógica de Enlaces de Respaldo (Servidores)
-function prepararServidores(peli) {
-    const opcionesDiv = document.getElementById('opciones-servidores');
-    const enlaces = [peli.idDrive];
-    
-    if (peli.idDriveRespaldo && Array.isArray(peli.idDriveRespaldo)) {
-        enlaces.push(...peli.idDriveRespaldo);
-    }
-
-    if (enlaces.length > 1) {
-        opcionesDiv.innerHTML = enlaces.map((id, index) => `
-            <button class="btn-servidor ${index === 0 ? 'activo' : ''}" onclick="cambiarServidor('${id}', this)">
-                ${index === 0 ? 'Enlace 1 (Principal)' : `Enlace ${index + 1} (Respaldo)`}
-            </button>
-        `).join('');
-        opcionesDiv.classList.remove('oculto');
-    } else {
-        opcionesDiv.classList.add('oculto');
-    }
-
-    // Arrancar reproduciendo el enlace 1
-    cambiarServidor(enlaces[0]);
-}
-
-function cambiarServidor(idDrive, botonClickeado = null) {
-    document.getElementById('iframe-drive').src = `https://drive.google.com/file/d/${idDrive}/preview`;
-    
-    if (botonClickeado) {
-        document.querySelectorAll('.btn-servidor').forEach(btn => btn.classList.remove('activo'));
-        botonClickeado.classList.add('activo');
-    }
-}
-
-// 7. Lógica de Series (Temporadas y Capítulos)
-function cargarTemporadas(serie) {
-    const listaTemp = document.getElementById('lista-temporadas');
-    listaTemp.innerHTML = '';
-    
-    if (!serie.temporadas) return;
-
-    serie.temporadas.forEach((temp, index) => {
-        const btn = document.createElement('button');
-        btn.className = `btn-temporada ${index === 0 ? 'activa' : ''}`;
-        btn.textContent = `Temporada ${temp.numero}`;
-        btn.onclick = (e) => {
-            document.querySelectorAll('.btn-temporada').forEach(b => b.classList.remove('activa'));
-            e.target.classList.add('activa');
-            cargarCapitulos(temp);
-        };
-        listaTemp.appendChild(btn);
-    });
-
-    // Cargar los capítulos de la primera temporada por defecto
-    if (serie.temporadas.length > 0) {
-        cargarCapitulos(serie.temporadas[0]);
-    }
-}
-
-function cargarCapitulos(temporada) {
-    const listaCap = document.getElementById('lista-capitulos');
-    listaCap.innerHTML = '';
-
-    temporada.capitulos.forEach(cap => {
-        listaCap.innerHTML += `
-            <div class="card-episodio" onclick="reproducirCapitulo('${cap.idDrive}')" tabindex="0">
-                <div class="info-episodio">
-                    <span class="num-capitulo">Capítulo ${cap.num}</span>
-                    <span class="titulo-capitulo">${cap.titulo || `Episodio ${cap.num}`}</span>
-                </div>
-                <span class="icono-play">▶</span>
-            </div>
-        `;
-    });
-}
-
-function reproducirCapitulo(idDrive) {
-    // Ocultar menú de temporadas y mostrar reproductor
-    document.getElementById('contenedor-temporadas').classList.add('oculto');
-    const contVideo = document.getElementById('contenedor-video');
-    contVideo.classList.remove('oculto');
-    
-    // Ocultar botones de servidores para los capítulos
-    document.getElementById('opciones-servidores').classList.add('oculto');
-    
-    document.getElementById('iframe-drive').src = `https://drive.google.com/file/d/${idDrive}/preview`;
-}
-
-function scrollTemporadas(direccion) {
-    const lista = document.getElementById('lista-temporadas');
-    lista.scrollBy({ top: direccion * 60, behavior: 'smooth' });
+function filtrar(tipo, event) {
+  document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+  if (event && event.target) {
+    event.target.classList.add('active');
+  }
+  paginaActual = 1;
+  renderizarCatalogoConPaginacion();
 }
