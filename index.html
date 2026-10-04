@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Mechaflix</title>
+
+  <meta name="theme-color" content="#141414">
+  <link rel="icon" type="image/svg+xml" href="logo.svg">
+  <link rel="apple-touch-icon" href="logo.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Encabezado / Navegación y Buscador -->
+  <header class="header">
+    <div class="header-top">
+      <div class="logo-container">
+        <img src="logo.svg" alt="Mechaflix Logo" class="logo-img" onerror="this.style.display='none'">
+        <h1 class="logo">MECHAFLIX</h1>
+      </div>
+      
+      <!-- Buscador -->
+      <div class="buscador-container">
+        <input 
+          type="text" 
+          id="input-busqueda" 
+          placeholder="🔍 Buscar película o serie..." 
+          oninput="buscarContenido()" 
+          tabindex="0"
+        >
+      </div>
+    </div>
+
+    <nav class="nav-menu">
+      <button class="nav-btn active" tabindex="0" onclick="filtrar('todo', event)">Inicio</button>
+      <button class="nav-btn" tabindex="0" onclick="filtrar('pelicula', event)">Películas</button>
+      <button class="nav-btn" tabindex="0" onclick="filtrar('serie', event)">Series</button>
+    </nav>
+  </header>
+
+  <!-- Contenedor Principal -->
+  <main class="main-container">
+    <section id="seccion-peliculas" class="seccion">
+      <h2>Películas</h2>
+      <div id="grid-peliculas" class="grid-catalogo"></div>
+    </section>
+
+    <section id="seccion-series" class="seccion">
+      <h2>Series</h2>
+      <div id="grid-series" class="grid-catalogo"></div>
+    </section>
+
+    <!-- Controles de Paginación -->
+    <div id="paginacion-container" class="paginacion-container"></div>
+  </main>
+
+  <!-- Ventana Modal / Reproductor a Pantalla Completa -->
+  <div id="modal-reproductor" class="modal oculto">
+    <!-- Capa de imagen de fondo de la serie -->
+    <div id="modal-backdrop" class="modal-backdrop"></div>
+    
+    <div class="modal-contenido">
+      <button class="cerrar-modal" tabindex="0" onclick="cerrarModal()" aria-label="Cerrar">&times;</button>
+      <h3 id="modal-titulo">Cargando...</h3>
+      
+      <!-- REPRODUCTOR EN PRIMER PLANO -->
+      <div id="contenedor-video" class="contenedor-video oculto">
+        
+        <!-- Opciones de Servidores (Enlace 1, Enlace 2) NUEVO -->
+        <div id="opciones-servidores" class="opciones-servidores oculto"></div>
+        
+        <div class="watermark-topright">
+          <img src="logo.svg" alt="Logo" onerror="this.style.display='none'">
+          <span>MECHAFLIX</span>
+        </div>
+        <iframe id="iframe-drive" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+
+      <!-- TEMPORADAS Y CAPÍTULOS (MODO PANTALLA COMPLETA) -->
+      <div id="contenedor-temporadas" class="contenedor-doble-columna oculto">
+        <!-- Columna izquierda: Menú de Temporadas -->
+        <div class="columna-temporadas-wrapper">
+          <button class="btn-scroll-temp" tabindex="0" onclick="scrollTemporadas(-1)" aria-label="Subir temporadas">▲</button>
+          <div class="columna-temporadas" id="lista-temporadas"></div>
+          <button class="btn-scroll-temp" tabindex="0" onclick="scrollTemporadas(1)" aria-label="Bajar temporadas">▼</button>
+        </div>
+
+        <!-- Columna derecha: Lista de Capítulos -->
+        <div class="columna-capitulos" id="lista-capitulos"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

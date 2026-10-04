@@ -1,0 +1,43 @@
+/* ==========================================
+   ESTILOS PARA BOTONES DE SERVIDORES DE RESPALDO
+   ========================================== */
+.opciones-servidores {
+  display: flex;
+  gap: 10px;
+  padding: 10px 15px;
+  background: #000000;
+  border-bottom: 2px solid #e50914;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 10;
+}
+
+.btn-servidor {
+  background: #222222;
+  color: #aaaaaa;
+  border: 1px solid #444444;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.btn-servidor:hover, .btn-servidor:focus {
+  background: #333333;
+  color: #ffffff;
+}
+
+.btn-servidor.activo {
+  background: #e50914;
+  color: #ffffff;
+  border-color: #e50914;
+}
+
+/* Ajuste sutil del iframe para acomodar los botones */
+.contenedor-video iframe {
+  top: 55px; /* Deja espacio para los botones de servidores */
+  height: calc(100% - 55px);
+}

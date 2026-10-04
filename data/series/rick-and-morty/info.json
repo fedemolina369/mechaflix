@@ -1,0 +1,10 @@
+{
+  "id": "rick-and-morty",
+  "tipo": "serie",
+  "titulo": "Rick and Morty",
+  "tituloIngles": "Rick and Morty",
+  "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHYKRFH6G3rkKWo6XrANmFEtiHf-r4gulMo30VQmrI4g&s=10",
+  "descorta": "Aventuras intergalácticas del científico Rick y su nieto Morty a través del multiverso.",
+  "descripCompleta": "El científico Rick y su nieto Morty viajan por distintas dimensiones y planetas, enfrentando situaciones absurdas y desastrosas en esta comedia animada de ciencia ficción.",
+  "temporadasDisponibles": [1, 2, 3, 4, 5, 6, 7, 8]
+}

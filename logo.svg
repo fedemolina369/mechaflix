@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Degradado Rojo Mechaflix -->
+    <linearGradient id="mechaRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF1E27" />
+      <stop offset="100%" stop-color="#B30006" />
+    </linearGradient>
+    
+    <!-- Degradado de Fondo Oscuro -->
+    <linearGradient id="bgDark" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#222222" />
+      <stop offset="100%" stop-color="#090909" />
+    </linearGradient>
+
+    <!-- Sombra del Logo -->
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- Fondo Cuadrado con Bordes Redondeados -->
+  <rect width="512" height="512" rx="96" fill="url(#bgDark)" stroke="#FF1E27" stroke-width="12"/>
+
+  <!-- Letra "M" Estilo Mecha / Futurista -->
+  <g filter="url(#shadow)">
+    <path d="M 110 390 L 110 122 L 185 122 L 256 265 L 327 122 L 402 122 L 402 390 L 332 390 L 332 230 L 278 335 L 234 335 L 180 230 L 180 390 Z" fill="url(#mechaRed)" />
+    
+    <!-- Símbolo de Play de Video en el Centro de la M -->
+    <polygon points="238,210 292,245 238,280" fill="#FFFFFF" />
+  </g>
+</svg>
