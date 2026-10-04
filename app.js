@@ -137,9 +137,10 @@ function renderizarCatalogoConPaginacion() {
 
   gridPelis.innerHTML = pelisPagina.map(peli => {
     const tituloEscapado = peli.titulo.replace(/'/g, "\\'");
+    const respaldosJSON = JSON.stringify(peli.idDriveRespaldo || []).replace(/"/g, '&quot;');
     return `
-      <div class="card" tabindex="0" onclick="reproducirPelicula('${tituloEscapado}', '${peli.idDrive}', '${peli.imagen}')" onkeydown="if(event.key==='Enter') reproducirPelicula('${tituloEscapado}', '${peli.idDrive}', '${peli.imagen}')">
-        <img src="${peli.imagen}" alt="${peli.titulo}">
+      <div class="card" tabindex="0" onclick="reproducirPelicula('${tituloEscapado}', '${peli.idDrive}', '${peli.imagen}', ${respaldosJSON})" onkeydown="if(event.key==='Enter') reproducirPelicula('${tituloEscapado}', '${peli.idDrive}', '${peli.imagen}', ${respaldosJSON})">
+        <img src="${peli.imagen}" alt="${peli.titulo}" loading="lazy">
         <div class="card-info">
           <h4>${peli.titulo}</h4>
           <p>${peli.descorta}</p>
@@ -153,7 +154,7 @@ function renderizarCatalogoConPaginacion() {
     const tituloEscapado = info.titulo.replace(/'/g, "\\'");
     return `
       <div class="card" tabindex="0" onclick="abrirSerie('${info.id}', '${tituloEscapado}', ${temporadasJSON}, '${info.imagen}')" onkeydown="if(event.key==='Enter') abrirSerie('${info.id}', '${tituloEscapado}', ${temporadasJSON}, '${info.imagen}')">
-        <img src="${info.imagen}" alt="${info.titulo}">
+        <img src="${info.imagen}" alt="${info.titulo}" loading="lazy">
         <div class="card-info">
           <h4>${info.titulo}</h4>
           <p>${info.descorta}</p>
@@ -186,21 +187,36 @@ function cambiarPagina(numPagina) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Reproducción de Películas
-function reproducirPelicula(titulo, idDrive, imagen) {
+// Reproducción de Películas con Links de Respaldo opcionales
+function reproducirPelicula(titulo, idDrive, imagen, respaldos = []) {
   document.getElementById('modal-titulo').innerText = titulo;
   document.getElementById('contenedor-temporadas').classList.add('oculto');
   
-  // Establece imagen de fondo
   if (imagen) {
     document.getElementById('modal-backdrop').style.backgroundImage = `url('${imagen}')`;
   }
   
-  const contenedorVideo = document.getElementById('contenedor-video');
   const iframe = document.getElementById('iframe-drive');
-  
+  const contenedorVideo = document.getElementById('contenedor-video');
+  const contenedorServidores = document.getElementById('opciones-servidores');
+
   iframe.src = `https://drive.google.com/file/d/${idDrive}/preview`;
   contenedorVideo.classList.remove('oculto');
+
+  if (respaldos && respaldos.length > 0) {
+    let botonesHTML = `<span style="font-size:13px; color:#aaa; margin-right:5px;">Servidores:</span>`;
+    botonesHTML += `<button class="btn-servidor activo" onclick="cambiarServidor('${idDrive}', this)">Enlace 1 (Principal)</button>`;
+    
+    respaldos.forEach((idResp, index) => {
+      botonesHTML += `<button class="btn-servidor" onclick="cambiarServidor('${idResp}', this)">Enlace ${index + 2} (Respaldo)</button>`;
+    });
+
+    contenedorServidores.innerHTML = botonesHTML;
+    contenedorServidores.classList.remove('oculto');
+  } else {
+    contenedorServidores.classList.add('oculto');
+    contenedorServidores.innerHTML = '';
+  }
   
   document.getElementById('modal-reproductor').classList.remove('oculto');
   document.querySelector('.cerrar-modal').focus();
@@ -208,19 +224,30 @@ function reproducirPelicula(titulo, idDrive, imagen) {
   iniciarOcultarCursor();
 }
 
-// Apertura de Serie (Apertura Pantalla Completa + Imagen de Fondo)
+// Función para alternar servidores en caliente
+function cambiarServidor(idDrive, elementoBtn) {
+  const iframe = document.getElementById('iframe-drive');
+  iframe.src = `https://drive.google.com/file/d/${idDrive}/preview`;
+
+  const botones = document.querySelectorAll('.btn-servidor');
+  botones.forEach(b => b.classList.remove('activo'));
+  if (elementoBtn) {
+    elementoBtn.classList.add('activo');
+  }
+}
+
+// Apertura de Serie
 function abrirSerie(serieId, titulo, temporadas, imagenFondo) {
   serieActual = serieId;
   document.getElementById('modal-titulo').innerText = titulo;
   document.getElementById('contenedor-video').classList.add('oculto');
+  document.getElementById('opciones-servidores').classList.add('oculto');
   document.getElementById('iframe-drive').src = '';
 
-  // Coloca la portada de la serie de fondo
   if (imagenFondo) {
     document.getElementById('modal-backdrop').style.backgroundImage = `url('${imagenFondo}')`;
   }
 
-  // Renderizar temporadas
   const listaTemp = document.getElementById('lista-temporadas');
   listaTemp.innerHTML = temporadas.map((t, index) => `
     <button class="btn-temporada ${index === 0 ? 'activa' : ''}" tabindex="0" onclick="seleccionarTemporada(${t}, event)">
@@ -255,8 +282,9 @@ async function cargarCapitulosTemporada(numTemp) {
 
     listaEpisodios.innerHTML = episodios.map(ep => {
       const tituloEscapado = ep.titulo.replace(/'/g, "\\'");
+      const respaldosEpJSON = JSON.stringify(ep.idDriveRespaldo || []).replace(/"/g, '&quot;');
       return `
-        <div class="card-episodio" tabindex="0" onclick="reproducirEpisodio('${tituloEscapado}', '${ep.idDrive}')" onkeydown="if(event.key==='Enter') reproducirEpisodio('${tituloEscapado}', '${ep.idDrive}')">
+        <div class="card-episodio" tabindex="0" onclick="reproducirEpisodio('${tituloEscapado}', '${ep.idDrive}', ${respaldosEpJSON})" onkeydown="if(event.key==='Enter') reproducirEpisodio('${tituloEscapado}', '${ep.idDrive}', ${respaldosEpJSON})">
           <div class="info-episodio">
             <span class="num-capitulo">Capítulo ${ep.capitulo}</span>
             <span class="titulo-capitulo">${ep.titulo}</span>
@@ -270,12 +298,28 @@ async function cargarCapitulosTemporada(numTemp) {
   }
 }
 
-function reproducirEpisodio(tituloCapitulo, idDrive) {
+function reproducirEpisodio(tituloCapitulo, idDrive, respaldos = []) {
   const contenedorVideo = document.getElementById('contenedor-video');
   const iframe = document.getElementById('iframe-drive');
+  const contenedorServidores = document.getElementById('opciones-servidores');
   
   iframe.src = `https://drive.google.com/file/d/${idDrive}/preview`;
   contenedorVideo.classList.remove('oculto');
+
+  if (respaldos && respaldos.length > 0) {
+    let botonesHTML = `<span style="font-size:13px; color:#aaa; margin-right:5px;">Servidores:</span>`;
+    botonesHTML += `<button class="btn-servidor activo" onclick="cambiarServidor('${idDrive}', this)">Enlace 1 (Principal)</button>`;
+    
+    respaldos.forEach((idResp, index) => {
+      botonesHTML += `<button class="btn-servidor" onclick="cambiarServidor('${idResp}', this)">Enlace ${index + 2} (Respaldo)</button>`;
+    });
+
+    contenedorServidores.innerHTML = botonesHTML;
+    contenedorServidores.classList.remove('oculto');
+  } else {
+    contenedorServidores.classList.add('oculto');
+    contenedorServidores.innerHTML = '';
+  }
 
   document.querySelector('.modal-contenido').scrollTop = 0;
   iniciarOcultarCursor();
@@ -285,6 +329,7 @@ function cerrarModal() {
   document.getElementById('modal-reproductor').classList.add('oculto');
   document.getElementById('iframe-drive').src = '';
   document.getElementById('modal-backdrop').style.backgroundImage = 'none';
+  document.getElementById('opciones-servidores').classList.add('oculto');
   
   detenerOcultarCursor();
 }
