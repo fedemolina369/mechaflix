@@ -78,13 +78,17 @@ async function obtenerPeliculas() {
             const omdbData = await omdbRes.json();
             
             if (omdbData.Response === "True" && omdbData.Poster && omdbData.Poster !== "N/A") {
-              peli.imagen = omdbData.Poster;
+              let posterUrl = omdbData.Poster;
+              if (posterUrl.startsWith("http://")) {
+                posterUrl = posterUrl.replace("http://", "https://");
+              }
+              peli.imagen = posterUrl;
             } else {
-              peli.imagen = 'https://via.placeholder.com/300x450?text=Sin+Imagen';
+              peli.imagen = 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=300&q=80';
             }
           } catch (apiErr) {
             console.error(`No se pudo obtener el póster para: ${peli.titulo}`, apiErr);
-            peli.imagen = 'https://via.placeholder.com/300x450?text=Sin+Imagen';
+            peli.imagen = 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=300&q=80';
           }
         }
       }
