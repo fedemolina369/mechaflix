@@ -1,58 +1,75 @@
 [
   {
-    "titulo": "Harry Potter y la piedra filosofal",
-    "descorta": "Un peligroso asesino escala de Azkaban...",
-    "idDrive": "TU_ID_DE_GOOGLE_DRIVE_AQUI",
-    "idDriveRespaldo": [],
-    "imagen": ""
+    "id": "spiderman-un-nuevo-dia",
+    "tipo": "pelicula",
+    "titulo": "Spider-Man: Un nuevo día",
+    "tituloIngles": "Spider-Man",
+    "idDrive": "12UvmUePMIwNan2Z-j6C1hLXLZ6mpeQYJ",
+    "idDriveRespaldo": [
+      "1BX3PE5Z6j-fpI5dpvRRVWh9_UwV2i7bp"
+    ],
+    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9zzsHf-9ozw_nxTwDlkcZmwqaiLDFUkwEBYDCKabMcg&s=10",
+    "descorta": "Un nuevo comienzo para Peter Parker en Nueva York tras reiniciar su vida.",
+    "descripCompleta": "Peter Parker vive de forma independiente en Nueva York protegiendo la ciudad como Spider-Man, enfrentando nuevos retos y villanos en una etapa completamente renovada."
   },
   {
-    "titulo": "Harry Potter y la cámara secreta",
-    "descorta": "Harry es elegido misteriosamente...",
-    "idDrive": "TU_ID_DE_GOOGLE_DRIVE_AQUI",
-    "idDriveRespaldo": [],
-    "imagen": ""
+    "id": "paw-patrol-dino",
+    "tipo": "pelicula",
+    "titulo": "PAW Patrol: La Dino Película",
+    "tituloIngles": "PAW Patrol Dino Rescue",
+    "idDrive": "1p5DSsqGFVLkkKckRmT-ewhCs4MpqzCLM",
+    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJ6fGghMF9Sb5FGofBMPw5c7_AoeiA7o9Aks4pemFHcw&s=10",
+    "descorta": "Los cachorros rescatan dinosaurios en una misteriosa isla tropical.",
+    "descripCompleta": "Tras naufragar en una isla habitada por dinosaurios, la patrulla canina une fuerzas con Rex para proteger el lugar y a sus habitantes de las amenazas del alcalde Humdinger."
   },
   {
-    "titulo": "Harry Potter y el prisionero de Azkaban",
-    "descorta": "Harry crea un ejército estudiantil...",
-    "idDrive": "TU_ID_DE_GOOGLE_DRIVE_AQUI",
-    "idDriveRespaldo": [],
-    "imagen": ""
+    "id": "zona-cero",
+    "tipo": "pelicula",
+    "titulo": "Zona Cero",
+    "tituloIngles": "Ground Zero",
+    "idDrive": "1hJP2qShjg-GcAxnddCNwWN107PSmethF",
+    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1Byd8jgK9ZUHzsRiKtZj4qtZglu5x5VJR1wqZEtJZEA&s=10",
+    "descorta": "Supervivientes atrapados deben escapar de un brote viral repentino.",
+    "descripCompleta": "Durante un evento científico se libera un virus altamente contagioso, obligando a los asistentes a luchar por sobrevivir en una instalación cerrada."
   },
   {
-    "titulo": "Harry Potter y el cáliz de fuego",
-    "descorta": "Dumbledore y Harry buscan...",
-    "idDrive": "TU_ID_DE_GOOGLE_DRIVE_AQUI",
-    "idDriveRespaldo": [],
-    "imagen": ""
+    "id": "stranger-things",
+    "tipo": "serie",
+    "titulo": "Stranger Things",
+    "tituloIngles": "Stranger Things",
+    "descorta": "Un niño desaparece y sus amigos inician una búsqueda que revelará secretos.",
+    "temporadasDisponibles": [1, 2],
+    "temporadas": [
+      {
+        "numero": 1,
+        "capitulos": [
+          { "num": 1, "titulo": "La desaparición de Will Byers", "idDrive": "PON_EL_ID_DEL_CAPITULO_1_AQUI" },
+          { "num": 2, "titulo": "La chica rara de Maple Street", "idDrive": "PON_EL_ID_DEL_CAPITULO_2_AQUI" }
+        ]
+      },
+      {
+        "numero": 2,
+        "capitulos": [
+          { "num": 1, "titulo": "Madmax", "idDrive": "PON_EL_ID_DEL_CAPITULO_1_AQUI" }
+        ]
+      }
+    ]
   },
   {
-    "titulo": "Harry Potter y la Orden del Fénix",
-    "descorta": "Harry, Ron y Hermione...",
-    "idDrive": "TU_ID_DE_GOOGLE_DRIVE_AQUI",
-    "idDriveRespaldo": [],
-    "imagen": ""
-  },
-  {
-    "titulo": "Harry Potter y el misterio del príncipe",
-    "descorta": "La épica batalla final entre las...",
-    "idDrive": "TU_ID_DE_GOOGLE_DRIVE_AQUI",
-    "idDriveRespaldo": [],
-    "imagen": ""
-  },
-  {
-    "titulo": "Backrooms",
-    "descorta": "Terror y misterio en dimensiones paralelas...",
-    "idDrive": "TU_ID_DE_GOOGLE_DRIVE_AQUI",
-    "idDriveRespaldo": [],
-    "imagen": ""
-  },
-  {
-    "titulo": "El Padrino",
-    "descorta": "El patriarca de una familia mafiosa...",
-    "idDrive": "TU_ID_DE_GOOGLE_DRIVE_AQUI",
-    "idDriveRespaldo": [],
-    "imagen": ""
+    "id": "the-boys",
+    "tipo": "serie",
+    "titulo": "The Boys",
+    "tituloIngles": "The Boys",
+    "descorta": "Un grupo de vigilantes se propone acabar con superhéroes corruptos.",
+    "temporadasDisponibles": [1],
+    "temporadas": [
+      {
+        "numero": 1,
+        "capitulos": [
+          { "num": 1, "titulo": "El nombre del juego", "idDrive": "PON_EL_ID_DEL_CAPITULO_1_AQUI" },
+          { "num": 2, "titulo": "Cherry", "idDrive": "PON_EL_ID_DEL_CAPITULO_2_AQUI" }
+        ]
+      }
+    ]
   }
 ]
