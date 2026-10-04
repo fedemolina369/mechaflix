@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function cargarContenido() {
     try {
-        const respuesta = await fetch('peliculas.json');
+        const respuesta = await fetch('data/peliculas.json');
         contenidoGlobal = await respuesta.json();
         renderizarCatalogo();
     } catch (error) {
