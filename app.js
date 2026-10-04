@@ -68,7 +68,28 @@ async function obtenerPeliculas() {
   try {
     const res = await fetch('./data/peliculas.json');
     if (res.ok) {
-      todasLasPeliculas = await res.json();
+      let pelis = await res.json();
+      
+      // Recorremos las películas para autocompletar la imagen con OMDb si no la tiene
+      for (let peli of pelis) {
+        if (!peli.imagen || peli.imagen.trim() === "") {
+          try {
+            const omdbRes = await fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(peli.titulo)}&apikey=794853cc`);
+            const omdbData = await omdbRes.json();
+            
+            if (omdbData.Response === "True" && omdbData.Poster && omdbData.Poster !== "N/A") {
+              peli.imagen = omdbData.Poster;
+            } else {
+              peli.imagen = 'https://via.placeholder.com/300x450?text=Sin+Imagen';
+            }
+          } catch (apiErr) {
+            console.error(`No se pudo obtener el póster para: ${peli.titulo}`, apiErr);
+            peli.imagen = 'https://via.placeholder.com/300x450?text=Sin+Imagen';
+          }
+        }
+      }
+      
+      todasLasPeliculas = pelis;
     }
   } catch (err) {
     console.error("Error al cargar películas:", err);
