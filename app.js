@@ -2,7 +2,7 @@
 let todasLasPeliculas = [];
 let todasLasSeries = [];
 let paginaActual = 1;
-const ITEMS_POR_PAGINA = 16;
+const ITEMS_POR_PAGINA = 24;
 let serieActual = null;
 let temporadaActual = 1;
 
