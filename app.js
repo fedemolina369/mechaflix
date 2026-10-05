@@ -73,15 +73,23 @@ async function obtenerPeliculas() {
     if (res.ok) {
       const peliculasLocales = await res.json();
       
-      // Enriquecemos cada película usando la API de OMDb
       todasLasPeliculas = await Promise.all(peliculasLocales.map(async (peli) => {
+        
+        // 1. Si ya colocaste una imagen propia válida en el JSON, la usamos directamente
+        if (peli.imagen && peli.imagen.trim() !== "" && peli.imagen !== "N/A") {
+          return peli; // No llama a la API y carga instantáneamente
+        }
+
+        // 2. Si te olvidaste y dejaste la imagen vacía, la API entra al rescate
         const query = peli.tituloIngles || peli.titulo;
         const datosOmdb = await consultarOmdb(query);
-        
+
         return {
           ...peli,
-          imagen: (datosOmdb && datosOmdb.Poster && datosOmdb.Poster !== "N/A") ? datosOmdb.Poster : peli.imagen,
-          descorta: (datosOmdb && datosOmdb.Plot && datosOmdb.Plot !== "N/A") ? datosOmdb.Plot : peli.descorta
+          imagen: (datosOmdb && datosOmdb.Poster && datosOmdb.Poster !== "N/A") 
+            ? datosOmdb.Poster 
+            : 'https://via.placeholder.com/300x450?text=Sin+Imagen', // Imagen por defecto si tampoco está en OMDb
+          descorta: peli.descorta || (datosOmdb && datosOmdb.Plot !== "N/A" ? datosOmdb.Plot : 'Sin descripción')
         };
       }));
     }
