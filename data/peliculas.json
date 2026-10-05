@@ -201,7 +201,7 @@
     "titulo": "El Increíble Hulk",
     "tituloIngles": "The Incredible Hulk",
     "idDrive": "1WshZKFkeLmLxCUUMfY2eQxzoYuSKJ_7K",
-    "imagen": "https://placehold.co/500x750/1a1a1a/00ff00?text=The+Incredible+Hulk",
+    "imagen": "",
     "descorta": "Bruce Banner busca desesperadamente una cura para su alter ego gigante y verde.",
     "descripCompleta": "Mientras huye del ejército de los Estados Unidos, Bruce Banner intenta controlar a la criatura que lleva dentro y evitar que su poder caiga en manos equivocadas."
   },
@@ -211,7 +211,7 @@
     "titulo": "Iron Man 2",
     "tituloIngles": "Iron Man 2",
     "idDrive": "16xSivknt4_iye3Vx2FU9pYBplc2kH6Zh",
-    "imagen": "https://placehold.co/500x750/1a1a1a/ff3333?text=Iron+Man+2",
+    "imagen": "",
     "descorta": "Con su identidad revelada, Tony Stark se enfrenta a un nuevo villano y a problemas de salud.",
     "descripCompleta": "Ahora que el mundo sabe que él es Iron Man, Tony Stark debe lidiar con la presión del gobierno, su propia tecnología fallida y la venganza de un poderoso enemigo, Ivan Vanko."
   },
@@ -241,7 +241,7 @@
     "titulo": "Iron Man 3",
     "tituloIngles": "Iron Man 3",
     "idDrive": "1bw9rHR8MWfc8fY4qgxBn2NNXtr7rXQOL",
-    "imagen": "https://placehold.co/500x750/1a1a1a/ff3333?text=Iron+Man+3",
+    "imagen": "",
     "descorta": "Tony Stark enfrenta a un terrorista implacable que destruye todo su mundo.",
     "descripCompleta": "Traumatizado por los eventos en Nueva York, Tony Stark se ve obligado a depender de su instinto para proteger a sus seres queridos frente a la amenaza del Mandarín."
   },
@@ -251,7 +251,7 @@
     "titulo": "Thor: El Mundo Oscuro",
     "tituloIngles": "Thor: The Dark World",
     "idDrive": "1EHOQTRD4Lrx1rJ1sMqsV4bz_jakG2TIp",
-    "imagen": "https://placehold.co/500x750/1a1a1a/aaaaaa?text=Thor+The+Dark+World",
+    "imagen": "",
     "descorta": "Thor debe salvar el cosmos de una antigua raza de Elfos Oscuros.",
     "descripCompleta": "Ante el regreso de Malekith, Thor se embarca en un peligroso viaje personal y se ve forzado a aliarse con Loki para salvar a Jane Foster y a los Nueve Reinos."
   },
@@ -264,7 +264,7 @@
     "idDriveRespaldo": [
       "1Yi0XCLUCWqdMcXPSf4b1BXNFp7eGpTUY"
     ],
-    "imagen": "https://placehold.co/500x750/1a1a1a/3366ff?text=Captain+America+Civil+War",
+    "imagen": "",
     "descorta": "Los Vengadores se dividen en dos facciones enfrentadas por los Acuerdos de Sokovia.",
     "descripCompleta": "La presión política para controlar a los superhéroes provoca una fractura en el equipo. Steve Rogers defiende la libertad de actuar sin supervisión, mientras que Tony Stark apoya el control del gobierno."
   },
@@ -294,7 +294,7 @@
     "titulo": "Ant-Man",
     "tituloIngles": "Ant-Man",
     "idDrive": "1c1IGEY5HAGOerVt0yfvvhiHrZniHq-cQ",
-    "imagen": "https://placehold.co/500x750/1a1a1a/ff0000?text=Ant-Man",
+    "imagen": "",
     "descorta": "Un ladrón adquiere un traje que le permite encogerse de tamaño y aumentar su fuerza.",
     "descripCompleta": "Armado con una tecnología asombrosa, Scott Lang debe ayudar a su mentor, el Dr. Hank Pym, a proteger el secreto del traje de Ant-Man y realizar un atraco que salvará al mundo."
   },
@@ -304,7 +304,7 @@
     "titulo": "Doctor Strange",
     "tituloIngles": "Doctor Strange",
     "idDrive": "1iJrdUF95cynMzXLjlXRMIE3M4eMuLPCX",
-    "imagen": "https://placehold.co/500x750/1a1a1a/cc00ff?text=Doctor+Strange",
+    "imagen": "",
     "descorta": "Un cirujano brillante descubre el mundo de la magia y las dimensiones alternativas.",
     "descripCompleta": "Tras un accidente de coche que arruina su carrera, Stephen Strange viaja a Katmandú en busca de cura, encontrando en su lugar los secretos de las artes místicas y realidades ocultas."
   },
@@ -314,7 +314,7 @@
     "titulo": "Spider-Man: De Regreso a Casa",
     "tituloIngles": "Spider-Man: Homecoming",
     "idDrive": "1_qPYmFIpZJU01ZS2kofZyeVoipqqgXrP",
-    "imagen": "https://placehold.co/500x750/1a1a1a/ff0000?text=Spider-Man+Homecoming",
+    "imagen": "",
     "descorta": "Peter Parker equilibra su vida en la preparatoria con su identidad como superhéroe.",
     "descripCompleta": "Bajo la tutela de Tony Stark, el joven Peter Parker intenta demostrar que es más que un superhéroe amigable de vecindario, mientras se enfrenta al peligroso Buitre."
   },
@@ -324,7 +324,7 @@
     "titulo": "Pantera Negra",
     "tituloIngles": "Black Panther",
     "idDrive": "1EjzM-PoMiSiy8-mGV8FDXFGSJPMDLmEf",
-    "imagen": "https://placehold.co/500x750/1a1a1a/6600cc?text=Black+Panther",
+    "imagen": "",
     "descorta": "T'Challa asume el trono de la avanzada y oculta nación de Wakanda.",
     "descripCompleta": "Tras la muerte de su padre, T'Challa regresa a su hogar en Wakanda. Sin embargo, su trono es desafiado por un adversario del pasado, lo que desata un conflicto que pone en peligro al mundo."
   },
@@ -334,7 +334,7 @@
     "titulo": "Thor: Ragnarok",
     "tituloIngles": "Thor: Ragnarok",
     "idDrive": "10xbh2cnRgR8vZe3myPKtePgDcWol8OrX",
-    "imagen": "https://placehold.co/500x750/1a1a1a/33ff33?text=Thor+Ragnarok",
+    "imagen": "",
     "descorta": "Thor debe escapar del planeta Sakaar para salvar Asgard de la diosa de la muerte, Hela.",
     "descripCompleta": "Atrapado al otro lado del universo sin su poderoso martillo, Thor debe competir en una lucha de gladiadores contra su viejo amigo, Hulk, y correr contrarreloj para evitar la destrucción de su hogar."
   },
@@ -344,7 +344,7 @@
     "titulo": "Ant-Man y la Avispa",
     "tituloIngles": "Ant-Man and the Wasp",
     "idDrive": "1JIeDK8eFmnuoddXx3dkhj77sjwmujvsY",
-    "imagen": "https://placehold.co/500x750/1a1a1a/ffcc00?text=Ant-Man+and+the+Wasp",
+    "imagen": "",
     "descorta": "Scott Lang colabora con Hope van Dyne para rescatar a su madre del Reino Cuántico.",
     "descripCompleta": "Mientras cumple arresto domiciliario, Scott Lang recibe una nueva misión de Hank Pym y Hope, quienes han desarrollado un traje de Avispa, para explorar los misterios del Reino Cuántico."
   },
@@ -354,7 +354,7 @@
     "titulo": "Vengadores: Guerra del Infinito",
     "tituloIngles": "Avengers: Infinity War",
     "idDrive": "1e7pIiTCgALLJHReRaJGVcWl4xq8LEm6k",
-    "imagen": "https://placehold.co/500x750/1a1a1a/aa00ff?text=Avengers+Infinity+War",
+    "imagen": "",
     "descorta": "Los Vengadores se enfrentan a Thanos, quien busca juntar las Seis Gemas del Infinito.",
     "descripCompleta": "El mayor enfrentamiento de todos los tiempos. Todos los héroes de la Tierra y el espacio deberán sacrificarlo todo para detener la devastación universal que planea desatar Thanos."
   },
@@ -364,7 +364,7 @@
     "titulo": "Vengadores: Endgame",
     "tituloIngles": "Avengers: Endgame",
     "idDrive": "1HTrgx3kD7vvReObQIaBWfIJ3qwXSR0I-",
-    "imagen": "https://placehold.co/500x750/1a1a1a/aa00ff?text=Avengers+Endgame",
+    "imagen": "",
     "descorta": "Los Vengadores sobrevivientes intentan revertir el chasquido que destruyó a la mitad del universo.",
     "descripCompleta": "Tras los devastadores eventos provocados por Thanos, los superhéroes que quedan en pie buscan la manera de viajar en el tiempo y restaurar el orden en el universo."
   },
@@ -374,7 +374,7 @@
     "titulo": "Shang-Chi y la Leyenda de los Diez Anillos",
     "tituloIngles": "Shang-Chi and the Legend of the Ten Rings",
     "idDrive": "1iURZdYMkJsdKCYV1hssTSSWHjPY9vrde",
-    "imagen": "https://placehold.co/500x750/1a1a1a/ff3333?text=Shang-Chi",
+    "imagen": "",
     "descorta": "Un experto en artes marciales debe enfrentarse a su pasado familiar y a una organización secreta.",
     "descripCompleta": "Shang-Chi se ve arrastrado de regreso a la red de la misteriosa organización de los Diez Anillos liderada por su padre, y deberá enfrentarse al legado del que pensaba haber escapado."
   },
@@ -384,7 +384,7 @@
     "titulo": "Eternals",
     "tituloIngles": "Eternals",
     "idDrive": "1lQchxRn5zNAcTwAb6lo5yhk-aQNg1KB3",
-    "imagen": "https://placehold.co/500x750/1a1a1a/ffff00?text=Eternals",
+    "imagen": "",
     "descorta": "Un grupo de héroes inmortales sale de las sombras para proteger a la Tierra.",
     "descripCompleta": "Los Eternos, una raza alienígena ancestral que ha vivido en la Tierra en secreto durante miles de años, se reúnen para proteger a la humanidad de sus contrapartes malvadas, los Desviantes."
   },
@@ -394,7 +394,7 @@
     "titulo": "Spider-Man: Sin Camino a Casa",
     "tituloIngles": "Spider-Man: No Way Home",
     "idDrive": "1sGU13d7YoIA-KlzTT7_4AXng-0UTvqCr",
-    "imagen": "https://placehold.co/500x750/1a1a1a/ff0000?text=Spider-Man+No+Way+Home",
+    "imagen": "",
     "descorta": "Un hechizo sale mal y desata el multiverso, trayendo villanos de otras dimensiones.",
     "descripCompleta": "Con su identidad revelada, Peter acude al Doctor Strange por ayuda. Sin embargo, el hechizo se sale de control y villanos de otras realidades llegan para destruir su mundo."
   },
@@ -404,7 +404,7 @@
     "titulo": "Doctor Strange en el Multiverso de la Locura",
     "tituloIngles": "Doctor Strange in the Multiverse of Madness",
     "idDrive": "1LDoEn4pIhvqH_H8PLECaMwvUxniDVKS-",
-    "imagen": "https://placehold.co/500x750/1a1a1a/cc00ff?text=Doctor+Strange+Multiverse",
+    "imagen": "",
     "descorta": "Doctor Strange viaja a través del multiverso para proteger a una misteriosa joven.",
     "descripCompleta": "Para restaurar un mundo en constante cambio, Strange viaja a través de las asombrosas y peligrosas realidades alternativas del multiverso y se enfrenta a un poderoso adversario."
   },
@@ -417,7 +417,7 @@
     "idDriveRespaldo": [
       "1QZUc58Tjte0zW8OytEO1PJVizpAVod65"
     ],
-    "imagen": "https://placehold.co/500x750/1a1a1a/00ffff?text=Thor+Love+and+Thunder",
+    "imagen": "",
     "descorta": "Thor recluta aliados para detener a Gorr, el Carnicero de Dioses.",
     "descripCompleta": "El retiro de Thor se ve interrumpido por la aparición de un asesino galáctico que busca la extinción de los dioses. Para enfrentarlo, pide ayuda al Rey Valquiria, Korg y su ex novia Jane Foster."
   },
@@ -427,7 +427,7 @@
     "titulo": "Pantera Negra: Wakanda por Siempre",
     "tituloIngles": "Black Panther: Wakanda Forever",
     "idDrive": "1K48FHRtvuwUT48QQEUJbWZKFNB3e-Buc",
-    "imagen": "https://placehold.co/500x750/1a1a1a/6600cc?text=Wakanda+Forever",
+    "imagen": "",
     "descorta": "Wakanda lucha por proteger su nación tras la trágica muerte del Rey T'Challa.",
     "descripCompleta": "Mientras la nación de Wakanda llora a su rey, la Reina Ramonda y la Princesa Shuri deben defender su hogar de las potencias mundiales y enfrentar una nueva amenaza proveniente del océano."
   },
@@ -437,7 +437,7 @@
     "titulo": "Ant-Man y la Avispa: Quantumanía",
     "tituloIngles": "Ant-Man and the Wasp: Quantumania",
     "idDrive": "1d_ONvT1rBWohzwqhm3qppgRW4cEcgJdA",
-    "imagen": "https://placehold.co/500x750/1a1a1a/ffcc00?text=Quantumania",
+    "imagen": "",
     "descorta": "La familia de Scott Lang es absorbida hacia el Reino Cuántico, donde descubren un nuevo imperio.",
     "descripCompleta": "Explorando las profundidades del Reino Cuántico, los héroes interactúan con extrañas criaturas y se embarcan en una aventura que los enfrentará contra el imponente Kang el Conquistador."
   },
@@ -447,7 +447,7 @@
     "titulo": "Las Marvels",
     "tituloIngles": "The Marvels",
     "idDrive": "1pfBmrjQ2XUO7J0JJOH1XHyjZQUWpeqUn",
-    "imagen": "https://placehold.co/500x750/1a1a1a/ff3333?text=The+Marvels",
+    "imagen": "",
     "descorta": "Los poderes de la Capitana Marvel se entrelazan inesperadamente con los de Monica Rambeau y Ms. Marvel.",
     "descripCompleta": "Cada vez que usan sus poderes, las tres heroínas intercambian de lugar en el espacio. Deberán aprender a trabajar en equipo para desentrañar el misterio y salvar el universo de una gran amenaza."
   },
@@ -457,7 +457,7 @@
     "titulo": "Capitán América: Un Mundo Valiente",
     "tituloIngles": "Captain America: Brave New World",
     "idDrive": "1dxRqZvDXsp1rsG9J0Hk_Wmxfa6uu2YKn",
-    "imagen": "https://placehold.co/500x750/1a1a1a/3366ff?text=Brave+New+World",
+    "imagen": "",
     "descorta": "Sam Wilson asume por completo su papel como el nuevo Capitán América.",
     "descripCompleta": "En su primer gran desafío global como el Capitán América, Sam Wilson deberá desenmascarar un complot internacional y demostrar que es digno de llevar el emblemático escudo."
   },
@@ -467,7 +467,7 @@
     "titulo": "Thunderbolts",
     "tituloIngles": "Thunderbolts",
     "idDrive": "1MFcH3j-WTiol7t6O5noFWnu83PLj-ShN",
-    "imagen": "https://placehold.co/500x750/1a1a1a/666666?text=Thunderbolts",
+    "imagen": "",
     "descorta": "Un equipo de antihéroes es reclutado por el gobierno para misiones peligrosas.",
     "descripCompleta": "Personajes de moralidad dudosa, antiguos villanos y mercenarios se unen bajo órdenes secretas en un equipo encubierto destinado a realizar el trabajo sucio que los Vengadores no harían."
   },
@@ -487,7 +487,7 @@
     "titulo": "Harry Potter y la Cámara Secreta",
     "tituloIngles": "Harry Potter and the Chamber of Secrets",
     "idDrive": "1TbMbQfE_A9m9jH7PfzW8FoMBfwTRk9QL",
-    "imagen": "https://placehold.co/500x750/1a1a1a/ffcc00?text=Harry+Potter+Chamber+Of+Secrets",
+    "imagen": "",
     "descorta": "Un monstruo aterroriza a los estudiantes del colegio Hogwarts.",
     "descripCompleta": "Harry regresa a su segundo año en Hogwarts, pero una serie de ataques misteriosos a estudiantes lleva a descubrir que la legendaria Cámara Secreta ha sido abierta nuevamente."
   },
@@ -497,7 +497,7 @@
     "titulo": "Harry Potter y el Prisionero de Azkaban",
     "tituloIngles": "Harry Potter and the Prisoner of Azkaban",
     "idDrive": "1ypkl3B-Th5AvlAraiLZTa6EDe5g7nDep",
-    "imagen": "https://placehold.co/500x750/1a1a1a/3366ff?text=Harry+Potter+Prisoner+Azkaban",
+    "imagen": "",
     "descorta": "Un peligroso asesino escapa de la prisión mágica para buscar a Harry.",
     "descripCompleta": "Sirius Black, un infame seguidor de Voldemort, se escapa de Azkaban. Harry, Ron y Hermione deberán descubrir la verdad detrás del prisionero mientras se enfrentan a los terribles Dementores."
   },
@@ -507,7 +507,7 @@
     "titulo": "Harry Potter y el Cáliz de Fuego",
     "tituloIngles": "Harry Potter and the Goblet of Fire",
     "idDrive": "1oQfoug_BlCcl1NrwrHzmrFm2T1bbIitU",
-    "imagen": "https://placehold.co/500x750/1a1a1a/cc0000?text=Harry+Potter+Goblet+Of+Fire",
+    "imagen": "",
     "descorta": "Harry es elegido misteriosamente para competir en un peligroso torneo mágico.",
     "descripCompleta": "Hogwarts acoge el Torneo de los Tres Magos. Aunque es demasiado joven, el nombre de Harry sale del Cáliz de Fuego, forzándolo a competir en pruebas letales mientras fuerzas oscuras se agrupan."
   },
@@ -517,7 +517,7 @@
     "titulo": "Harry Potter y la Orden del Fénix",
     "tituloIngles": "Harry Potter and the Order of the Phoenix",
     "idDrive": "1SBB5exGiaJFIW8eE5X3FSwSuz0zW1ko7",
-    "imagen": "https://placehold.co/500x750/1a1a1a/3399ff?text=Harry+Potter+Order+Phoenix",
+    "imagen": "",
     "descorta": "Harry crea un ejército estudiantil para prepararse ante el retorno de Voldemort.",
     "descripCompleta": "El Ministerio de Magia se niega a creer que Voldemort ha regresado. Harry organiza a sus compañeros para enseñarles Defensa Contra las Artes Oscuras ante la tiranía de la nueva profesora Umbridge."
   },
@@ -527,7 +527,7 @@
     "titulo": "Harry Potter y el Misterio del Príncipe",
     "tituloIngles": "Harry Potter and the Half-Blood Prince",
     "idDrive": "1hNwmAMqBqCctJvNp8nqLhP1x1_ei2Zpl",
-    "imagen": "https://placehold.co/500x750/1a1a1a/00ff00?text=Harry+Potter+Half-Blood+Prince",
+    "imagen": "",
     "descorta": "Dumbledore y Harry buscan desentrañar el pasado oscuro de Voldemort.",
     "descripCompleta": "En su sexto año, Harry encuentra un viejo libro de pociones de un misterioso 'Príncipe Mestizo' y acompaña a Dumbledore en la recolección de recuerdos para descubrir cómo destruir a Voldemort."
   },
@@ -537,7 +537,7 @@
     "titulo": "Harry Potter y las Reliquias de la Muerte – Parte 1",
     "tituloIngles": "Harry Potter and the Deathly Hallows – Part 1",
     "idDrive": "1hNwmAMqBqCctJvNp8nqLhP1x1_ei2Zpl",
-    "imagen": "https://placehold.co/500x750/1a1a1a/666666?text=Harry+Potter+Deathly+Hallows+1",
+    "imagen": "",
     "descorta": "Harry, Ron y Hermione emprenden un viaje para destruir los Horrocruxes.",
     "descripCompleta": "El trío de amigos abandona Hogwarts para buscar y destruir los fragmentos del alma de Voldemort escondidos en los Horrocruxes, evadiendo a los mortífagos que han tomado el control del Ministerio."
   },
@@ -547,116 +547,8 @@
     "titulo": "Harry Potter y las Reliquias de la Muerte – Parte 2",
     "tituloIngles": "Harry Potter and the Deathly Hallows – Part 2",
     "idDrive": "1-2oXGCq3sh08FzWNgmd7Ox2SblbYunTz",
-    "imagen": "https://placehold.co/500x750/1a1a1a/ff6600?text=Harry+Potter+Deathly+Hallows+2",
-    "descorta": "La épica batalla final entre las fuerzas del bien y el Señor Tenebroso.",
-    "descripCompleta": "La búsqueda de los últimos Horrocruxes culmina en un épico asalto en el castillo de Hogwarts. Harry Potter deberá hacer su sacrificio final en la batalla definitiva contra Lord Voldemort."
-  },
-  {
-    "id": "el-padrino",
-    "tipo": "pelicula",
-    "titulo": "El Padrino",
-    "tituloIngles": "The Godfather",
-    "idDrive": "1OyfNV24aTui99FHn9QerZwGdJyEdOz5d",
-    "imagen": "https://image.tmdb.org/t/p/w500/3bhkrj58Vtu7enYsRolD1fZdja1.jpg",
-    "descorta": "El patriarca de una dinastía criminal transfiere el control de su imperio a su renuente hijo.",
-    "descripCompleta": "La épica historia de la familia Corleone, que explora la ascensión de Michael Corleone desde ser un marginado familiar hasta convertirse en el implacable líder de la mafia neoyorquina."
-  },
-  {
-    "id": "toy-story-4",
-    "tipo": "pelicula",
-    "titulo": "Toy Story 4",
-    "tituloIngles": "Toy Story 4",
-    "idDrive": "1dBAjMtN9efNXkAGunHScUOzH7M8V8SfR",
-    "imagen": "https://placehold.co/500x750/1a1a1a/ffcc00?text=Toy+Story+4",
-    "descorta": "Woody y sus amigos conocen a un nuevo juguete en una emocionante excursión.",
-    "descripCompleta": "Cuando Bonnie añade un peculiar juguete hecho a mano llamado Forky a su colección, Woody se embarca en una aventura para mostrarle a Forky el verdadero significado de ser un juguete."
-  },
-  {
-    "id": "robot-salvaje",
-    "tipo": "pelicula",
-    "titulo": "Robot Salvaje",
-    "tituloIngles": "The Wild Robot",
-    "idDrive": "1-CUmzj00Cu6LioH3qjaTYorVlM0QUd2_",
-    "imagen": "https://placehold.co/500x750/1a1a1a/33cc33?text=The+Wild+Robot",
-    "descorta": "Un robot naufraga en una isla deshabitada y aprende a convivir con la naturaleza.",
-    "descripCompleta": "La unidad ROZZUM 7134 se estrella en una isla salvaje. Allí deberá adaptar su programación y forjar vínculos inesperados con los animales locales para sobrevivir y criar a un pequeño ganso."
-  },
-  {
-    "id": "scary-movie-6",
-    "tipo": "pelicula",
-    "titulo": "Scary Movie 6: Terroríficamente Incorrecta",
-    "tituloIngles": "Scary Movie (2026)",
-    "idDrive": "12XdY3YeAFuvLsTXctqfxFtS4MGj1JTM6",
-    "imagen": "https://placehold.co/500x750/1a1a1a/ff0000?text=Scary+Movie+6",
-    "descorta": "La franquicia de comedia regresa para parodiar los mayores éxitos de terror modernos.",
-    "descripCompleta": "Nuevos y viejos rostros se reúnen en esta descabellada comedia que hace sátira de las películas de terror más populares de la última década con el clásico humor absurdo de la saga."
-  },
-  {
-    "id": "backrooms",
-    "tipo": "pelicula",
-    "titulo": "Backrooms: Sin Salida",
-    "tituloIngles": "Backrooms: No Exit",
-    "idDrive": "1j5AFJ94oyPMiAtmiH7wRYU25K0QfQoe1",
-    "imagen": "https://placehold.co/500x750/1a1a1a/ffff99?text=Backrooms",
-    "descorta": "Un grupo de personas cae en un laberinto infinito y espeluznante de oficinas amarillas.",
-    "descripCompleta": "Tras un extraño fallo en la realidad, un equipo queda atrapado en Los Backrooms, un infinito complejo de pasillos húmedos y vacíos. Deberán encontrar la salida mientras son acechados."
-  },
-  {
-    "id": "maldicion-tiburon",
-    "tipo": "pelicula",
-    "titulo": "La Maldición del Tiburón",
-    "tituloIngles": "Curse of the Shark",
-    "idDrive": "1NwfnofQjOqAS6a0IUg5ALP14MPzPPS-r",
-    "imagen": "https://placehold.co/500x750/1a1a1a/0066cc?text=Curse+Of+The+Shark",
-    "descorta": "Una antigua leyenda del mar cobra vida amenazando a una comunidad costera.",
-    "descripCompleta": "Los habitantes de un pequeño pueblo pesquero despiertan una antigua maldición abisal, desatando la furia de un gigantesco tiburón poseído que buscará venganza a toda costa."
-  },
-  {
-    "id": "batman-ocaso",
-    "tipo": "pelicula",
-    "titulo": "Batman: El Ocaso del Caballero Oscuro – Parte 1",
-    "tituloIngles": "Batman: Knightfall – Part 1",
-    "idDrive": "12-V6UDAroRhsEkK_puiTZkMLOtPKYBQU",
-    "imagen": "https://placehold.co/500x750/1a1a1a/666666?text=Batman+Knightfall",
-    "descorta": "Un agotado Bruce Wayne se enfrenta al estratega más letal de Gotham: Bane.",
-    "descripCompleta": "Gotham City se hunde en el caos tras una fuga masiva en Arkham orquestada por Bane. Un Batman llevado al límite físico y mental deberá enfrentarse a su desafío definitivo para salvar su ciudad."
-  },
-  {
-    "id": "stranger-things",
-    "tipo": "serie",
-    "titulo": "Stranger Things",
-    "tituloIngles": "Stranger Things",
-    "descorta": "Un niño desaparece y sus amigos inician una búsqueda que revelará secretos.",
-    "temporadas": [
-      {
-        "numero": 1,
-        "capitulos": [
-          { "num": 1, "titulo": "La desaparición de Will Byers", "idDrive": "PON_EL_ID_DEL_CAPITULO_1_AQUI" },
-          { "num": 2, "titulo": "La chica rara de Maple Street", "idDrive": "PON_EL_ID_DEL_CAPITULO_2_AQUI" }
-        ]
-      },
-      {
-        "numero": 2,
-        "capitulos": [
-          { "num": 1, "titulo": "Madmax", "idDrive": "PON_EL_ID_DEL_CAPITULO_1_AQUI" }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "the-boys",
-    "tipo": "serie",
-    "titulo": "The Boys",
-    "tituloIngles": "The Boys",
-    "descorta": "Un grupo de vigilantes se propone acabar con superhéroes corruptos.",
-    "temporadas": [
-      {
-        "numero": 1,
-        "capitulos": [
-          { "num": 1, "titulo": "El nombre del juego", "idDrive": "PON_EL_ID_DEL_CAPITULO_1_AQUI" },
-          { "num": 2, "titulo": "Cherry", "idDrive": "PON_EL_ID_DEL_CAPITULO_2_AQUI" }
-        ]
-      }
-    ]
+    "imagen": "",
+    "descorta": "La épica batalla final entre las fuerzas del bien y el Señor Tenebroso",
+    "descripCompleta": "La batalla entre las fuerzas del bien y del mal del mundo mágico se convierte en una guerra a gran escala. Harry Potter deberá hacer el sacrificio final mientras se acerca el enfrentamiento decisivo con Lord Voldemort."
   }
 ]
