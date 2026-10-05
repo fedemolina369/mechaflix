@@ -149,7 +149,7 @@ let pelisPagina = [];
   let seriesPagina = [];
   let totalPaginas = 1;
 
-  if (filtroActivo.includes('peliculas')) {
+  if (filtroActivo.includes('pelicula')) {
     secPelis.style.display = 'block';
     secSeries.style.display = 'none';
     
@@ -159,7 +159,7 @@ let pelisPagina = [];
     
     pelisPagina = pelisFiltradas.slice(inicio, inicio + ITEMS_POR_PAGINA);
     
-  } else if (filtroActivo.includes('series')) {
+  } else if (filtroActivo.includes('serie')) {
     secPelis.style.display = 'none';
     secSeries.style.display = 'block';
     
@@ -169,12 +169,11 @@ let pelisPagina = [];
     
     seriesPagina = seriesFiltradas.slice(inicio, inicio + ITEMS_POR_PAGINA);
     
-  } else {
-    // INICIO: Mostrar ambos contenedores
+} else {
+    // Opción 'todo' (Inicio): Mostrar ambas secciones
     secPelis.style.display = 'block';
     secSeries.style.display = 'block';
     
-    // Calcula las páginas basándose en la categoría que tenga más títulos
     totalPaginas = Math.max(
       Math.ceil(pelisFiltradas.length / ITEMS_POR_PAGINA),
       Math.ceil(seriesFiltradas.length / ITEMS_POR_PAGINA)
@@ -183,7 +182,6 @@ let pelisPagina = [];
     if (paginaActual > totalPaginas) paginaActual = 1;
     const inicio = (paginaActual - 1) * ITEMS_POR_PAGINA;
     
-    // Cortamos ambas listas de forma INDEPENDIENTE para que siempre se llenen ambos grids
     pelisPagina = pelisFiltradas.slice(inicio, inicio + ITEMS_POR_PAGINA);
     seriesPagina = seriesFiltradas.slice(inicio, inicio + ITEMS_POR_PAGINA);
   }
