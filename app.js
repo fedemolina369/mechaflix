@@ -153,7 +153,7 @@ function renderizarCatalogoConPaginacion() {
 
   const filtroActivo = document.querySelector('.nav-btn.active')?.getAttribute('onclick') || 'todo';
 
-let pelisPagina = [];
+  let pelisPagina = [];
   let seriesPagina = [];
   let totalPaginas = 1;
 
@@ -177,7 +177,7 @@ let pelisPagina = [];
     
     seriesPagina = seriesFiltradas.slice(inicio, inicio + ITEMS_POR_PAGINA);
     
-} else {
+  } else {
     // Opción 'todo' (Inicio): Mostrar ambas secciones
     secPelis.style.display = 'block';
     secSeries.style.display = 'block';
@@ -196,8 +196,12 @@ let pelisPagina = [];
 
   gridPelis.innerHTML = pelisPagina.map(peli => {
     const tituloEscapado = peli.titulo.replace(/'/g, "\\'");
+    
+    // Adaptación a tu JSON: Extraemos el primer ID del array idDriveRespaldo si existe
+    const idRespaldo = (peli.idDriveRespaldo && peli.idDriveRespaldo.length > 0) ? peli.idDriveRespaldo[0] : '';
+    
     return `
-      <div class="card" tabindex="0" onclick="reproducirPelicula('${tituloEscapado}', '${peli.idDrive}', '${peli.imagen}')" onkeydown="if(event.key==='Enter') reproducirPelicula('${tituloEscapado}', '${peli.idDrive}', '${peli.imagen}')">
+      <div class="card" tabindex="0" onclick="reproducirPelicula('${tituloEscapado}', '${peli.idDrive}', '${peli.imagen}', '${idRespaldo}')" onkeydown="if(event.key==='Enter') reproducirPelicula('${tituloEscapado}', '${peli.idDrive}', '${peli.imagen}', '${idRespaldo}')">
         <img src="${peli.imagen}" alt="${peli.titulo}">
         <div class="card-info">
           <h4>${peli.titulo}</h4>
@@ -245,8 +249,8 @@ function cambiarPagina(numPagina) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Reproducción de Películas
-function reproducirPelicula(titulo, idDrive, imagen) {
+// Reproducción de Películas CON FUNCIÓN DE RESPALDO
+function reproducirPelicula(titulo, idDrive, imagen, idRespaldo) {
   document.getElementById('modal-titulo').innerText = titulo;
   document.getElementById('contenedor-temporadas').classList.add('oculto');
   
@@ -257,8 +261,42 @@ function reproducirPelicula(titulo, idDrive, imagen) {
   const contenedorVideo = document.getElementById('contenedor-video');
   const iframe = document.getElementById('iframe-drive');
   
+  // Cargar el enlace principal por defecto
   iframe.src = `https://drive.google.com/file/d/${idDrive}/preview`;
   contenedorVideo.classList.remove('oculto');
+  
+  // -- Lógica para el botón de cambio de servidor --
+  let btnCambio = document.getElementById('btn-cambiar-servidor');
+  
+  // Si el botón no existe en el HTML, lo creamos dinámicamente
+  if (!btnCambio) {
+    btnCambio = document.createElement('button');
+    btnCambio.id = 'btn-cambiar-servidor';
+    // Estilos del botón para que resalte
+    btnCambio.style.cssText = 'padding: 10px 20px; margin-bottom: 15px; cursor: pointer; background: #e50914; color: white; border: none; border-radius: 4px; font-weight: bold; display: block; margin-left: auto; margin-right: auto; font-size: 14px; transition: background 0.3s ease;';
+    btnCambio.onmouseover = () => btnCambio.style.background = '#b20710';
+    btnCambio.onmouseout = () => btnCambio.style.background = '#e50914';
+    contenedorVideo.insertBefore(btnCambio, iframe);
+  }
+
+  // Si existe un enlace de respaldo válido pasado por parámetro
+  if (idRespaldo && idRespaldo !== 'undefined' && idRespaldo.trim() !== '') {
+    btnCambio.style.display = 'block';
+    btnCambio.innerText = '⚠️ ¿Video caído? Probar Servidor 2';
+    
+    let usandoPrincipal = true;
+    
+    // Al hacer clic, alternamos entre el idDrive principal y el idRespaldo
+    btnCambio.onclick = function() {
+      usandoPrincipal = !usandoPrincipal;
+      const idActual = usandoPrincipal ? idDrive : idRespaldo;
+      iframe.src = `https://drive.google.com/file/d/${idActual}/preview`;
+      btnCambio.innerText = usandoPrincipal ? '⚠️ ¿Video caído? Probar Servidor 2' : '🔙 Volver al Servidor 1';
+    };
+  } else {
+    // Si la película no tiene un enlace de respaldo, ocultamos el botón
+    btnCambio.style.display = 'none';
+  }
   
   document.getElementById('modal-reproductor').classList.remove('oculto');
   document.querySelector('.cerrar-modal').focus();
@@ -272,6 +310,10 @@ function abrirSerie(serieId, titulo, temporadas, imagenFondo) {
   document.getElementById('modal-titulo').innerText = titulo;
   document.getElementById('contenedor-video').classList.add('oculto');
   document.getElementById('iframe-drive').src = '';
+
+  // Ocultar botón de servidor si quedó visible de alguna película
+  const btnCambio = document.getElementById('btn-cambiar-servidor');
+  if (btnCambio) btnCambio.style.display = 'none';
 
   if (imagenFondo) {
     document.getElementById('modal-backdrop').style.backgroundImage = `url('${imagenFondo}')`;
