@@ -145,34 +145,48 @@ function renderizarCatalogoConPaginacion() {
 
   const filtroActivo = document.querySelector('.nav-btn.active')?.getAttribute('onclick') || 'todo';
 
-  let itemsAMostrar = [];
+let pelisPagina = [];
+  let seriesPagina = [];
+  let totalPaginas = 1;
 
   if (filtroActivo.includes('peliculas')) {
     secPelis.style.display = 'block';
     secSeries.style.display = 'none';
-    itemsAMostrar = pelisFiltradas.map(p => ({ ...p, tipo: 'pelicula' }));
+    
+    totalPaginas = Math.ceil(pelisFiltradas.length / ITEMS_POR_PAGINA) || 1;
+    if (paginaActual > totalPaginas) paginaActual = 1;
+    const inicio = (paginaActual - 1) * ITEMS_POR_PAGINA;
+    
+    pelisPagina = pelisFiltradas.slice(inicio, inicio + ITEMS_POR_PAGINA);
+    
   } else if (filtroActivo.includes('series')) {
     secPelis.style.display = 'none';
     secSeries.style.display = 'block';
-    itemsAMostrar = seriesFiltradas.map(s => ({ ...s, tipo: 'serie' }));
+    
+    totalPaginas = Math.ceil(seriesFiltradas.length / ITEMS_POR_PAGINA) || 1;
+    if (paginaActual > totalPaginas) paginaActual = 1;
+    const inicio = (paginaActual - 1) * ITEMS_POR_PAGINA;
+    
+    seriesPagina = seriesFiltradas.slice(inicio, inicio + ITEMS_POR_PAGINA);
+    
   } else {
+    // INICIO: Mostrar ambos contenedores
     secPelis.style.display = 'block';
     secSeries.style.display = 'block';
-    itemsAMostrar = [
-      ...pelisFiltradas.map(p => ({ ...p, tipo: 'pelicula' })),
-      ...seriesFiltradas.map(s => ({ ...s, tipo: 'serie' }))
-    ];
+    
+    // Calcula las páginas basándose en la categoría que tenga más títulos
+    totalPaginas = Math.max(
+      Math.ceil(pelisFiltradas.length / ITEMS_POR_PAGINA),
+      Math.ceil(seriesFiltradas.length / ITEMS_POR_PAGINA)
+    ) || 1;
+    
+    if (paginaActual > totalPaginas) paginaActual = 1;
+    const inicio = (paginaActual - 1) * ITEMS_POR_PAGINA;
+    
+    // Cortamos ambas listas de forma INDEPENDIENTE para que siempre se llenen ambos grids
+    pelisPagina = pelisFiltradas.slice(inicio, inicio + ITEMS_POR_PAGINA);
+    seriesPagina = seriesFiltradas.slice(inicio, inicio + ITEMS_POR_PAGINA);
   }
-
-  const totalPaginas = Math.ceil(itemsAMostrar.length / ITEMS_POR_PAGINA) || 1;
-  if (paginaActual > totalPaginas) paginaActual = 1;
-
-  const inicio = (paginaActual - 1) * ITEMS_POR_PAGINA;
-  const fin = inicio + ITEMS_POR_PAGINA;
-  const paginaItems = itemsAMostrar.slice(inicio, fin);
-
-  const pelisPagina = paginaItems.filter(i => i.tipo === 'pelicula');
-  const seriesPagina = paginaItems.filter(i => i.tipo === 'serie');
 
   gridPelis.innerHTML = pelisPagina.map(peli => {
     const tituloEscapado = peli.titulo.replace(/'/g, "\\'");
