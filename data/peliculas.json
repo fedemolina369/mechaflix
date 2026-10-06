@@ -427,7 +427,7 @@
     "titulo": "Ant-Man y la Avispa: Quantumanía",
     "tituloIngles": "Ant-Man and the Wasp: Quantumania",
     "idDrive": "1d_ONvT1rBWohzwqhm3qppgRW4cEcgJdA",
-    "imagen": "",
+    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZrRTu3JjQ13cU_F1PUndXCX9KwrhV4eCnxUiYj-DFzA&s=10",
     "descorta": "La familia de Scott Lang es absorbida hacia el Reino Cuántico, donde descubren un nuevo imperio.",
     "descripCompleta": "Explorando las profundidades del Reino Cuántico, los héroes interactúan con extrañas criaturas y se embarcan en una aventura que los enfrentará contra el imponente Kang el Conquistador."
   },
@@ -437,7 +437,7 @@
     "titulo": "Las Marvels",
     "tituloIngles": "The Marvels",
     "idDrive": "1pfBmrjQ2XUO7J0JJOH1XHyjZQUWpeqUn",
-    "imagen": "",
+    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJRzc60aYCJXE1Ayoh3r1Zami0DCzD17NY0XOcfMtwuA&s=10",
     "descorta": "Los poderes de la Capitana Marvel se entrelazan inesperadamente con los de Monica Rambeau y Ms. Marvel.",
     "descripCompleta": "Cada vez que usan sus poderes, las tres heroínas intercambian de lugar en el espacio. Deberán aprender a trabajar en equipo para desentrañar el misterio y salvar el universo de una gran amenaza."
   },
@@ -535,13 +535,20 @@
     "id": "minions-y-monstruos",
     "tipo": "pelicula",
     "titulo": "Minions y Monstruos",
-    "idDrive": "19f-FVzpoLF9vcas8Eqr-4cy-PDT9D0ZB"
+    "idDrive": "19f-FVzpoLF9vcas8Eqr-4cy-PDT9D0ZB",
+    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1MNg7r1TzhmRKfeGzlF7tt2OQAJGKAeDalf0aXMbb3A&s=10",
+    "descorta": "Los Minions conquistan Hollywood como estrellas de cine, lo pierden todo, liberan monstruos y deben unirse para salvar el planeta.",
+    "descripCompleta": "Ambientada en la época dorada de Hollywood, los Minions se convierten en inesperadas estrellas de cine, pero tras desatar el caos y liberar criaturas monstruosas por el mundo, deberán unir fuerzas para intentar salvar el planeta del desastre que ellos mismos provocaron."
   },
   {
-    "id": "supergirl",
+"id": "supergirl",
     "tipo": "pelicula",
     "titulo": "Supergirl",
-    "idDrive": "1uS29F51rZuRQCZrF_dYOPi-ugD0sQ9Md"
+    "tituloIngles": "Supergirl",
+    "idDrive": "1uS29F51rZuRQCZrF_dYOPi-ugD0sQ9Md",
+    "imagen": "https://image.tmdb.org/t/p/w500/6y19ny91CF0smAlXtjWWUR0X0vB.jpg",
+    "descorta": "Kara Zor-El emprende un viaje intergaláctico junto a una joven y su superperro para hacer justicia.",
+    "descripCompleta": "Tras presenciar la destrucción de su mundo y cargar con los recuerdos de su pasado, Kara Zor-El se embarca en una aventura a través de la galaxia en busca de un despiadado criminal que hirió a su fiel compañero Krypto, encontrando en el camino un propósito heroico renovado."
   },
   {
     "id": "la-muerte-de-robin-hood",
