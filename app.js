@@ -5,6 +5,7 @@ let paginaActual = 1;
 const ITEMS_POR_PAGINA = 24;
 let serieActual = null;
 let temporadaActual = 1;
+let peliculaActualDrive = { principal: '', respaldo: '' };
 
 // Clave de OMDb proporcionada
 const OMDB_API_KEY = '794853cc';
@@ -30,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Desplazamiento correcto para lista de temporadas
+// Desplazamiento para lista de temporadas
 function scrollTemporadas(direccion) {
   const lista = document.getElementById('lista-temporadas');
   if (lista) {
@@ -38,7 +39,7 @@ function scrollTemporadas(direccion) {
   }
 }
 
-// Ocultar cursor tras 3 segundos de inactividad durante la reproducción
+// Ocultar cursor tras 3 segundos de inactividad
 function iniciarOcultarCursor() {
   detenerOcultarCursor();
   document.addEventListener('mousemove', resetearTimerCursor);
@@ -74,13 +75,10 @@ async function obtenerPeliculas() {
       const peliculasLocales = await res.json();
       
       todasLasPeliculas = await Promise.all(peliculasLocales.map(async (peli) => {
-        
-        // 1. Si ya colocaste una imagen propia válida en el JSON, la usamos directamente
         if (peli.imagen && peli.imagen.trim() !== "" && peli.imagen !== "N/A") {
-          return peli; // No llama a la API y carga instantáneamente
+          return peli;
         }
 
-        // 2. Si te olvidaste y dejaste la imagen vacía, la API entra al rescate
         const query = peli.tituloIngles || peli.titulo;
         const datosOmdb = await consultarOmdb(query);
 
@@ -88,7 +86,7 @@ async function obtenerPeliculas() {
           ...peli,
           imagen: (datosOmdb && datosOmdb.Poster && datosOmdb.Poster !== "N/A") 
             ? datosOmdb.Poster 
-            : 'https://via.placeholder.com/300x450?text=Sin+Imagen', // Imagen por defecto si tampoco está en OMDb
+            : 'https://via.placeholder.com/300x450?text=Sin+Imagen',
           descorta: peli.descorta || (datosOmdb && datosOmdb.Plot !== "N/A" ? datosOmdb.Plot : 'Sin descripción')
         };
       }));
@@ -124,7 +122,6 @@ async function obtenerSeries() {
   }
 }
 
-// Función auxiliar para consultar OMDb API
 async function consultarOmdb(titulo) {
   try {
     const url = `https://www.omdbapi.com/?t=${encodeURIComponent(titulo)}&apikey=${OMDB_API_KEY}`;
@@ -139,7 +136,7 @@ async function consultarOmdb(titulo) {
   return null;
 }
 
-// Renderiza películas y series aplicando Filtros y Paginación
+// Renderiza películas y series aplicando filtros y paginación
 function renderizarCatalogoConPaginacion() {
   const inputBusqueda = document.getElementById('input-busqueda').value.toLowerCase().trim();
   const secPelis = document.getElementById('seccion-peliculas');
@@ -178,7 +175,6 @@ function renderizarCatalogoConPaginacion() {
     seriesPagina = seriesFiltradas.slice(inicio, inicio + ITEMS_POR_PAGINA);
     
   } else {
-    // Opción 'todo' (Inicio): Mostrar ambas secciones
     secPelis.style.display = 'block';
     secSeries.style.display = 'block';
     
@@ -196,8 +192,6 @@ function renderizarCatalogoConPaginacion() {
 
   gridPelis.innerHTML = pelisPagina.map(peli => {
     const tituloEscapado = peli.titulo.replace(/'/g, "\\'");
-    
-    // Adaptación a tu JSON: Extraemos el primer ID del array idDriveRespaldo si existe
     const idRespaldo = (peli.idDriveRespaldo && peli.idDriveRespaldo.length > 0) ? peli.idDriveRespaldo[0] : '';
     
     return `
@@ -249,7 +243,7 @@ function cambiarPagina(numPagina) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Reproducción de Películas CON FUNCIÓN DE RESPALDO
+// Reproducción de Películas con Capa Flotante de Servidores
 function reproducirPelicula(titulo, idDrive, imagen, idRespaldo) {
   document.getElementById('modal-titulo').innerText = titulo;
   document.getElementById('contenedor-temporadas').classList.add('oculto');
@@ -261,47 +255,54 @@ function reproducirPelicula(titulo, idDrive, imagen, idRespaldo) {
   const contenedorVideo = document.getElementById('contenedor-video');
   const iframe = document.getElementById('iframe-drive');
   
-  // Cargar el enlace principal por defecto
+  peliculaActualDrive = {
+    principal: idDrive,
+    respaldo: (idRespaldo && idRespaldo !== 'undefined') ? idRespaldo.trim() : ''
+  };
+
   iframe.src = `https://drive.google.com/file/d/${idDrive}/preview`;
   contenedorVideo.classList.remove('oculto');
   
-  // -- Lógica para el botón de cambio de servidor --
-  let btnCambio = document.getElementById('btn-cambiar-servidor');
-  
-  // Si el botón no existe en el HTML, lo creamos dinámicamente
-  if (!btnCambio) {
-    btnCambio = document.createElement('button');
-    btnCambio.id = 'btn-cambiar-servidor';
-    // Estilos del botón para que resalte
-    btnCambio.style.cssText = 'padding: 10px 20px; margin-bottom: 15px; cursor: pointer; background: #e50914; color: white; border: none; border-radius: 4px; font-weight: bold; display: block; margin-left: auto; margin-right: auto; font-size: 14px; transition: background 0.3s ease;';
-    btnCambio.onmouseover = () => btnCambio.style.background = '#b20710';
-    btnCambio.onmouseout = () => btnCambio.style.background = '#e50914';
-    contenedorVideo.insertBefore(btnCambio, iframe);
-  }
+  renderizarCapaServidores();
 
-  // Si existe un enlace de respaldo válido pasado por parámetro
-  if (idRespaldo && idRespaldo !== 'undefined' && idRespaldo.trim() !== '') {
-    btnCambio.style.display = 'block';
-    btnCambio.innerText = '⚠️ ¿Video caído? Probar Servidor 2';
-    
-    let usandoPrincipal = true;
-    
-    // Al hacer clic, alternamos entre el idDrive principal y el idRespaldo
-    btnCambio.onclick = function() {
-      usandoPrincipal = !usandoPrincipal;
-      const idActual = usandoPrincipal ? idDrive : idRespaldo;
-      iframe.src = `https://drive.google.com/file/d/${idActual}/preview`;
-      btnCambio.innerText = usandoPrincipal ? '⚠️ ¿Video caído? Probar Servidor 2' : '🔙 Volver al Servidor 1';
-    };
-  } else {
-    // Si la película no tiene un enlace de respaldo, ocultamos el botón
-    btnCambio.style.display = 'none';
-  }
-  
   document.getElementById('modal-reproductor').classList.remove('oculto');
   document.querySelector('.cerrar-modal').focus();
 
   iniciarOcultarCursor();
+}
+
+function renderizarCapaServidores() {
+  const contenedorVideo = document.getElementById('contenedor-video');
+  let capa = document.getElementById('capa-servidores');
+  
+  if (!capa) {
+    capa = document.createElement('div');
+    capa.id = 'capa-servidores';
+    capa.className = 'capa-servidores';
+    contenedorVideo.appendChild(capa);
+  }
+
+  const tieneRespaldo = peliculaActualDrive.respaldo !== '';
+
+  capa.innerHTML = `
+    <button class="btn-servidor activo" tabindex="0" onclick="cambiarServidor(1)">Servidor 1</button>
+    ${tieneRespaldo ? `<button class="btn-servidor" tabindex="0" onclick="cambiarServidor(2)">Servidor 2 (Respaldo)</button>` : ''}
+  `;
+}
+
+function cambiarServidor(numServidor) {
+  const iframe = document.getElementById('iframe-drive');
+  const btns = document.querySelectorAll('.capa-servidores .btn-servidor');
+  
+  btns.forEach(btn => btn.classList.remove('activo'));
+
+  if (numServidor === 1) {
+    iframe.src = `https://drive.google.com/file/d/${peliculaActualDrive.principal}/preview`;
+    if (btns[0]) btns[0].classList.add('activo');
+  } else if (numServidor === 2 && peliculaActualDrive.respaldo) {
+    iframe.src = `https://drive.google.com/file/d/${peliculaActualDrive.respaldo}/preview`;
+    if (btns[1]) btns[1].classList.add('activo');
+  }
 }
 
 // Apertura de Serie
@@ -311,9 +312,8 @@ function abrirSerie(serieId, titulo, temporadas, imagenFondo) {
   document.getElementById('contenedor-video').classList.add('oculto');
   document.getElementById('iframe-drive').src = '';
 
-  // Ocultar botón de servidor si quedó visible de alguna película
-  const btnCambio = document.getElementById('btn-cambiar-servidor');
-  if (btnCambio) btnCambio.style.display = 'none';
+  const capa = document.getElementById('capa-servidores');
+  if (capa) capa.innerHTML = '';
 
   if (imagenFondo) {
     document.getElementById('modal-backdrop').style.backgroundImage = `url('${imagenFondo}')`;
@@ -383,6 +383,9 @@ function cerrarModal() {
   document.getElementById('modal-reproductor').classList.add('oculto');
   document.getElementById('iframe-drive').src = '';
   document.getElementById('modal-backdrop').style.backgroundImage = 'none';
+  
+  const capa = document.getElementById('capa-servidores');
+  if (capa) capa.innerHTML = '';
   
   detenerOcultarCursor();
 }
