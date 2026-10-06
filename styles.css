@@ -112,8 +112,8 @@ body.ocultar-cursor * {
 /* Layout Principal */
 .main-container {
   padding: 25px 20px;
-  max-width: 1400px; /* Evita que en pantallas gigantes se estire de más */
-  margin: 0 auto;    /* Centra todo el sitio */
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .seccion {
@@ -217,7 +217,7 @@ body.ocultar-cursor * {
 }
 
 /* ==========================================
-   MODAL PANTALLA COMPLETA CON FONDO GRIS / POSTER
+   MODAL PANTALLA COMPLETA
    ========================================== */
 
 .modal {
@@ -236,7 +236,6 @@ body.ocultar-cursor * {
   display: none !important;
 }
 
-/* Capa de imagen de fondo desenfocada */
 .modal-backdrop {
   position: absolute;
   top: 0;
@@ -250,7 +249,6 @@ body.ocultar-cursor * {
   z-index: 1;
 }
 
-/* Panel principal a pantalla completa con fondo traslúcido */
 .modal-contenido {
   position: relative;
   z-index: 2;
@@ -301,13 +299,16 @@ body.ocultar-cursor * {
   text-shadow: 0 2px 8px rgba(0,0,0,0.8);
 }
 
-/* Contenedor de Video */
+/* ==========================================
+   CONTENEDOR DE VIDEO Y OVERLAY DE SERVIDORES
+   ========================================== */
+
 .contenedor-video {
   position: relative;
   width: 100%;
   max-width: 1100px;
   margin: 0 auto;
-  padding-bottom: 45%; /* Relación de aspecto optimizada */
+  padding-bottom: 45%;
   height: 0;
   background: #000000;
   border-radius: 12px;
@@ -323,41 +324,46 @@ body.ocultar-cursor * {
   width: 100%;
   height: 100%;
   border: 0;
+  z-index: 1;
 }
 
-/* ==========================================
-   OPCIONES DE SERVIDORES / RESPALDOS
-   ========================================== */
-.opciones-servidores {
+/* Marco flotante por encima del video en modo ventana */
+.capa-servidores {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 25;
   display: flex;
-  align-items: center;
-  gap: 8px;
+  gap: 10px;
   background: rgba(0, 0, 0, 0.85);
-  padding: 10px 20px;
-  border-bottom: 1px solid #333;
-  flex-wrap: wrap;
+  padding: 8px 12px;
   border-radius: 8px;
-  margin-bottom: -10px;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
 }
 
 .btn-servidor {
-  background: #222;
-  color: #ccc;
-  border: 1px solid #444;
-  padding: 6px 14px;
+  background: #222222;
+  color: #cccccc;
+  border: 2px solid #444444;
+  padding: 8px 16px;
   border-radius: 6px;
   font-size: 13px;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.2s ease;
   outline: none;
+  transition: all 0.2s ease;
 }
 
 .btn-servidor:hover,
+.btn-servidor:focus,
 .btn-servidor.activo {
   background: #e50914;
-  color: #fff;
-  border-color: #fff;
-  font-weight: bold;
+  border-color: #ffffff;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(229, 9, 20, 0.7);
+  transform: scale(1.05);
 }
 
 .watermark-topright {
@@ -402,11 +408,10 @@ body.ocultar-cursor * {
   grid-template-columns: 240px 1fr;
   gap: 25px;
   flex: 1;
-  min-height: 0; /* Permite scroll interno */
+  min-height: 0;
   margin-top: 10px;
 }
 
-/* Wrapper de temporadas con botones arriba y abajo */
 .columna-temporadas-wrapper {
   display: flex;
   flex-direction: column;
@@ -429,7 +434,6 @@ body.ocultar-cursor * {
   display: none;
 }
 
-/* Botones arriba (▲) y abajo (▼) */
 .btn-scroll-temp {
   background: rgba(35, 35, 35, 0.9);
   color: #ffffff;
@@ -478,7 +482,6 @@ body.ocultar-cursor * {
   transform: translateX(4px);
 }
 
-/* Columna de Capítulos */
 .columna-capitulos {
   display: flex;
   flex-direction: column;
