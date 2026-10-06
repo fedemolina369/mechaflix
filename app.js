@@ -5,6 +5,12 @@ let paginaActual = 1;
 const ITEMS_POR_PAGINA = 24;
 let serieActual = null;
 let temporadaActual = 1;
+
+// Control de episodios de series
+let episodiosTemporadaActual = [];
+let indiceEpisodioActual = -1;
+let esSerie = false;
+
 let peliculaActualDrive = { principal: '', respaldo: '' };
 
 // Clave de OMDb proporcionada
@@ -136,7 +142,7 @@ async function consultarOmdb(titulo) {
   return null;
 }
 
-// Renderiza películas y series aplicando filtros y paginación
+// Renderiza catálogo con filtros y paginación
 function renderizarCatalogoConPaginacion() {
   const inputBusqueda = document.getElementById('input-busqueda').value.toLowerCase().trim();
   const secPelis = document.getElementById('seccion-peliculas');
@@ -243,8 +249,11 @@ function cambiarPagina(numPagina) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Reproducción de Películas con Capa Flotante de Servidores
+// Reproducción de Películas
 function reproducirPelicula(titulo, idDrive, imagen, idRespaldo) {
+  esSerie = false;
+  indiceEpisodioActual = -1;
+
   document.getElementById('modal-titulo').innerText = titulo;
   document.getElementById('contenedor-temporadas').classList.add('oculto');
   
@@ -286,7 +295,7 @@ function renderizarCapaServidores() {
 
   capa.innerHTML = `
     <button class="btn-servidor activo" tabindex="0" onclick="cambiarServidor(1)">Servidor 1</button>
-    ${tieneRespaldo ? `<button class="btn-servidor" tabindex="0" onclick="cambiarServidor(2)">Servidor 2</button>` : ''}
+    ${tieneRespaldo ? `<button class="btn-servidor" tabindex="0" onclick="cambiarServidor(2)">Servidor 2 (Respaldo)</button>` : ''}
   `;
 }
 
@@ -305,9 +314,12 @@ function cambiarServidor(numServidor) {
   }
 }
 
-// Apertura de Serie
+// Reproducción y Navegación de Series (Estilo Reproductor de Música)
 function abrirSerie(serieId, titulo, temporadas, imagenFondo) {
   serieActual = serieId;
+  esSerie = true;
+  indiceEpisodioActual = -1;
+
   document.getElementById('modal-titulo').innerText = titulo;
   document.getElementById('contenedor-video').classList.add('oculto');
   document.getElementById('iframe-drive').src = '';
@@ -349,34 +361,82 @@ async function cargarCapitulosTemporada(numTemp) {
     const res = await fetch(`./data/series/${serieActual}/t${numTemp}.json`);
     if (!res.ok) throw new Error("Archivo no encontrado");
 
-    const episodios = await res.json();
+    episodiosTemporadaActual = await res.json();
 
-    listaEpisodios.innerHTML = episodios.map(ep => {
-      const tituloEscapado = ep.titulo.replace(/'/g, "\\'");
-      return `
-        <div class="card-episodio" tabindex="0" onclick="reproducirEpisodio('${tituloEscapado}', '${ep.idDrive}')" onkeydown="if(event.key==='Enter') reproducirEpisodio('${tituloEscapado}', '${ep.idDrive}')">
-          <div class="info-episodio">
-            <span class="num-capitulo">Capítulo ${ep.capitulo}</span>
-            <span class="titulo-capitulo">${ep.titulo}</span>
-          </div>
-          <span class="icono-play">▶</span>
+    listaEpisodios.innerHTML = episodiosTemporadaActual.map((ep, index) => `
+      <div class="card-episodio ${index === indiceEpisodioActual ? 'activa' : ''}" tabindex="0" onclick="reproducirEpisodio(${index})" onkeydown="if(event.key==='Enter') reproducirEpisodio(${index})">
+        <div class="info-episodio">
+          <span class="num-capitulo">Capítulo ${ep.capitulo}</span>
+          <span class="titulo-capitulo">${ep.titulo}</span>
         </div>
-      `;
-    }).join('');
+        <span class="icono-play">▶</span>
+      </div>
+    `).join('');
   } catch (err) {
+    episodiosTemporadaActual = [];
     listaEpisodios.innerHTML = '<p style="color: #aaa; padding: 20px; text-align: center;">Esta temporada estará disponible próximamente.</p>';
   }
 }
 
-function reproducirEpisodio(tituloCapitulo, idDrive) {
+function reproducirEpisodio(index) {
+  if (!episodiosTemporadaActual || !episodiosTemporadaActual[index]) return;
+
+  indiceEpisodioActual = index;
+  esSerie = true;
+
+  const ep = episodiosTemporadaActual[index];
   const contenedorVideo = document.getElementById('contenedor-video');
   const iframe = document.getElementById('iframe-drive');
   
-  iframe.src = `https://drive.google.com/file/d/${idDrive}/preview`;
+  iframe.src = `https://drive.google.com/file/d/${ep.idDrive}/preview`;
   contenedorVideo.classList.remove('oculto');
+
+  // Resaltar episodio activo en la lista
+  document.querySelectorAll('.card-episodio').forEach((card, i) => {
+    if (i === index) {
+      card.classList.add('activa');
+    } else {
+      card.classList.remove('activa');
+    }
+  });
+
+  renderizarControlesSerie();
 
   document.querySelector('.modal-contenido').scrollTop = 0;
   iniciarOcultarCursor();
+}
+
+function renderizarControlesSerie() {
+  const contenedorVideo = document.getElementById('contenedor-video');
+  let capa = document.getElementById('capa-servidores');
+  
+  if (!capa) {
+    capa = document.createElement('div');
+    capa.id = 'capa-servidores';
+    capa.className = 'capa-servidores';
+    contenedorVideo.appendChild(capa);
+  }
+
+  const epActual = episodiosTemporadaActual[indiceEpisodioActual];
+  const tieneAnterior = indiceEpisodioActual > 0;
+  const tieneSiguiente = indiceEpisodioActual < episodiosTemporadaActual.length - 1;
+
+  capa.innerHTML = `
+    <button class="btn-servidor" tabindex="0" ${tieneAnterior ? 'onclick="cambiarEpisodio(-1)"' : 'disabled style="opacity:0.4; cursor:not-allowed;"'}>
+      ⏮ Anterior
+    </button>
+    <span class="info-ep-pantalla">Cap. ${epActual ? epActual.capitulo : ''}</span>
+    <button class="btn-servidor" tabindex="0" ${tieneSiguiente ? 'onclick="cambiarEpisodio(1)"' : 'disabled style="opacity:0.4; cursor:not-allowed;"'}>
+      Siguiente ⏭
+    </button>
+  `;
+}
+
+function cambiarEpisodio(direccion) {
+  const nuevoIndice = indiceEpisodioActual + direccion;
+  if (nuevoIndice >= 0 && nuevoIndice < episodiosTemporadaActual.length) {
+    reproducirEpisodio(nuevoIndice);
+  }
 }
 
 function cerrarModal() {
@@ -386,6 +446,9 @@ function cerrarModal() {
   
   const capa = document.getElementById('capa-servidores');
   if (capa) capa.innerHTML = '';
+  
+  esSerie = false;
+  indiceEpisodioActual = -1;
   
   detenerOcultarCursor();
 }
