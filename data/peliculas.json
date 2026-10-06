@@ -43,7 +43,7 @@
     "descripCompleta": "La aparente calma de una comunidad veraniega se destruye cuando un misterioso heladero empieza a repartir productos con oscuras consecuencias."
   },
   {
-    "id": "vertigo 2 - Punto Muerto",
+    "id": "vertigo-2-punto-muerto",
     "tipo": "pelicula",
     "titulo": "Vértigo 2: Punto Muerto",
     "tituloIngles": "Fall 2: Deadpoint",
@@ -141,16 +141,6 @@
     "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS34CltVd8Gr21BGM5yXb3BGaPe566GvqeEDE-tR7qzQQ&s=10",
     "descorta": "Un profesor intenta salvar a la Tierra desde el espacio profundo.",
     "descripCompleta": "Al despertar a bordo de una nave espacial con amnesia parcial, un científico debe recordar su misión e idear una solución para evitar la extinción de la Tierra."
-  },
-  {
-    "id": "zootopia-2",
-    "tipo": "pelicula",
-    "titulo": "Zootopia 2 (2025)",
-    "tituloIngles": "Zootopia 2",
-    "idDrive": "1r4L_d0RP_1NU5O0Moa6ZAr3VXmZRETbm",
-    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_I5FQy0-2PFMyRGxP5w_R-BjaU9b23hh9gKpqoT58xA&s=10",
-    "descorta": "Judy Hopps y Nick Wilde investigan un nuevo e intrigante caso.",
-    "descripCompleta": "Los célebres detectives de Zootopia se reúnen para resolver un misterio lleno de giros impredecibles en la gran metrópolis animal."
   },
   {
     "id": "los-4-fantasticos",
@@ -534,21 +524,431 @@
   {
     "id": "hp-7-1",
     "tipo": "pelicula",
-    "titulo": "Harry Potter y las Reliquias de la Muerte – Parte 1",
-    "tituloIngles": "Harry Potter and the Deathly Hallows – Part 1",
-    "idDrive": "1hNwmAMqBqCctJvNp8nqLhP1x1_ei2Zpl",
-    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXA6LZwZ_HhcnbF5yUF7MnplCvVcJxG9mSUhK-irH-Kg&s=10",
-    "descorta": "Harry, Ron y Hermione emprenden un viaje para destruir los Horrocruxes.",
-    "descripCompleta": "El trío de amigos abandona Hogwarts para buscar y destruir los fragmentos del alma de Voldemort escondidos en los Horrocruxes, evadiendo a los mortífagos que han tomado el control del Ministerio."
+    "titulo": "Harry Potter y las Reliquias de la Muerte - Parte 1",
+    "tituloIngles": "Harry Potter and the Deathly Hallows: Part 1",
+    "idDrive": "",
+    "imagen": "",
+    "descorta": "Harry, Ron y Hermione buscan destruir los Horrocruxes.",
+    "descripCompleta": "El trío debe emprender una peligrosa misión lejos de Hogwarts para encontrar y destruir los fragmentos del alma de Voldemort antes de que sea demasiado tarde."
   },
   {
-    "id": "hp-7-2",
+    "id": "minions-y-monstruos",
     "tipo": "pelicula",
-    "titulo": "Harry Potter y las Reliquias de la Muerte – Parte 2",
-    "tituloIngles": "Harry Potter and the Deathly Hallows – Part 2",
-    "idDrive": "1-2oXGCq3sh08FzWNgmd7Ox2SblbYunTz",
-    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmcCy7AsetB47r3tA4VcHmiPOZBqQOQqo-sPRXj3K9-A&s=10",
-    "descorta": "La épica batalla final entre las fuerzas del bien y el Señor Tenebroso",
-    "descripCompleta": "La batalla entre las fuerzas del bien y del mal del mundo mágico se convierte en una guerra a gran escala. Harry Potter deberá hacer el sacrificio final mientras se acerca el enfrentamiento decisivo con Lord Voldemort."
+    "titulo": "Minions y Monstruos",
+    "idDrive": "19f-FVzpoLF9vcas8Eqr-4cy-PDT9D0ZB"
+  },
+  {
+    "id": "supergirl",
+    "tipo": "pelicula",
+    "titulo": "Supergirl",
+    "idDrive": "1uS29F51rZuRQCZrF_dYOPi-ugD0sQ9Md"
+  },
+  {
+    "id": "la-muerte-de-robin-hood",
+    "tipo": "pelicula",
+    "titulo": "La muerte de Robin Hood",
+    "idDrive": "1Xp4E-6VYqs1zInXtvgRSwqrvGeZ9IBVZ"
+  },
+  {
+    "id": "el-dia-de-la-revelacion",
+    "tipo": "pelicula",
+    "titulo": "El día de la revelación",
+    "idDrive": "1I4-Vb3thU-LM9Xy-Qa5gbgL2fcaDj0Nc"
+  },
+  {
+    "id": "amos-del-universo",
+    "tipo": "pelicula",
+    "titulo": "Amos del Universo",
+    "idDrive": "1UlVaJ2YOivNX9PT9esEf0I7R6NdTOXq1"
+  },
+  {
+    "id": "star-wars-the-mandalorian",
+    "tipo": "pelicula",
+    "titulo": "Star Wars: The Mandalorian",
+    "idDrive": "1OjmkOaTl1axbByNkfGSkznfVjDoENX-T"
+  },
+  {
+    "id": "obsesion",
+    "tipo": "pelicula",
+    "titulo": "Obsesión",
+    "idDrive": "1BMvJUyaTkN9mwX-TCC_ZgNXYMAVSxORB"
+  },
+  {
+    "id": "deseo",
+    "tipo": "pelicula",
+    "titulo": "Deseo",
+    "idDrive": "15cunPrCvJu4PxJ94lN38uaZWYXXnPoOD"
+  },
+  {
+    "id": "la-posesion-de-la-momia",
+    "tipo": "pelicula",
+    "titulo": "La posesión de la momia",
+    "idDrive": "10CKqa7LZp8YkUu_3AO0Gw1-PrKhdw6Mt"
+  },
+  {
+    "id": "super-mario-galaxy-la-pelicula",
+    "tipo": "pelicula",
+    "titulo": "Super Mario Galaxy: La película",
+    "idDrive": "1ByYt6p5MSNl648etHJa8ddUYbMGgCW2j"
+  },
+  {
+    "id": "zeta",
+    "tipo": "pelicula",
+    "titulo": "Zeta",
+    "idDrive": "19eKI1qakmmD0DINqMRsnlU1zJipu3tBI"
+  },
+  {
+    "id": "los-juegos-del-hambre",
+    "tipo": "pelicula",
+    "titulo": "Los juegos del hambre",
+    "idDrive": "15uSv6Q1FgGr-kbnuUmO-_gKxIKes2KRA"
+  },
+  {
+    "id": "los-juegos-del-hambre-en-llamas",
+    "tipo": "pelicula",
+    "titulo": "Los juegos del hambre: En llamas",
+    "idDrive": "1DNB7ekF1r5dv1auqv9HCA71Y05Yj9PA_"
+  },
+  {
+    "id": "los-juegos-del-hambre-sinsajo-parte-1",
+    "tipo": "pelicula",
+    "titulo": "Los juegos del hambre: Sinsajo - Parte 1",
+    "idDrive": "1DXpB3LW7f4nVVhoYMwTNVzLRG2ea6mco"
+  },
+  {
+    "id": "los-juegos-del-hambre-balada-de-pajaros",
+    "tipo": "pelicula",
+    "titulo": "Los juegos del hambre: Balada de pájaros cantores y serpientes",
+    "idDrive": "1MRpAwaCgkvMXn7cXiNMqMIPcYzGIyvd8"
+  },
+  {
+    "id": "toy-story-4",
+    "tipo": "pelicula",
+    "titulo": "Toy Story 4",
+    "idDrive": "1dBAjMtN9efNXkAGunHScUOzH7M8V8SfR"
+  },
+  {
+    "id": "capitana-marvel",
+    "tipo": "pelicula",
+    "titulo": "Capitana Marvel",
+    "idDrive": "19d2BUjQ1WyP0bOqIuVwZLi8hq5QuzsG4"
+  },
+  {
+    "id": "robocop",
+    "tipo": "pelicula",
+    "titulo": "RoboCop",
+    "idDrive": "1gaZAdaNRt6SMlc9xTQVDjLjKkZ-1ypDR"
+  },
+  {
+    "id": "apocalypto",
+    "tipo": "pelicula",
+    "titulo": "Apocalypto",
+    "idDrive": "1YJtENVv7dFkiPUrR-HacM3vHpjdkwJpK"
+  },
+  {
+    "id": "hombres-de-negro",
+    "tipo": "pelicula",
+    "titulo": "Hombres de negro",
+    "idDrive": "1kHJ0aEsuEst6nsp0ghvGk6BtkAUzj62Y"
+  },
+  {
+    "id": "espias-a-escondidas",
+    "tipo": "pelicula",
+    "titulo": "Espías a escondidas",
+    "idDrive": "17qUrrqyF_ognYJ_yzlmz2pyQlB9AxZaL"
+  },
+  {
+    "id": "el-padrino",
+    "tipo": "pelicula",
+    "titulo": "El padrino",
+    "idDrive": "1OyfNV24aTui99FHn9QerZwGdJyEdOz5d"
+  },
+  {
+    "id": "los-caballeros-del-zodiaco-alma-de-oro",
+    "tipo": "pelicula",
+    "titulo": "Los Caballeros del Zodiaco: Alma de Oro",
+    "idDrive": "1cIPvTlTDr6hgarwiKtRRsWD20cF7h-dN"
+  },
+  {
+    "id": "los-tres-chiflados",
+    "tipo": "pelicula",
+    "titulo": "Los tres chiflados",
+    "idDrive": "16jptnMbvtuP8ihu2NqHyYwS2M2HNfJTE"
+  },
+  {
+    "id": "maquina-de-guerra",
+    "tipo": "pelicula",
+    "titulo": "Máquina de guerra",
+    "idDrive": "1g-lyE7mHhpnzA-rCgjo191Tc4I2A-oBp"
+  },
+  {
+    "id": "pokemon-el-surgimiento-de-darkrai",
+    "tipo": "pelicula",
+    "titulo": "Pokémon: El surgimiento de Darkrai",
+    "idDrive": "1-Bh_G4LG0HR-BG8eVYWS-o2uOWeul1Af"
+  },
+  {
+    "id": "los-croods-2-una-nueva-era",
+    "tipo": "pelicula",
+    "titulo": "Los Croods 2: Una nueva era",
+    "idDrive": "1GDj_YxfaBTa_unp8qSydMOsSk-JeQHpB"
+  },
+  {
+    "id": "mujer-maravilla",
+    "tipo": "pelicula",
+    "titulo": "Mujer Maravilla",
+    "idDrive": "1tdtIb-bdH_z5IvC3srq8Oa7smExnbI8i"
+  },
+  {
+    "id": "el-cuervo",
+    "tipo": "pelicula",
+    "titulo": "El cuervo",
+    "idDrive": "10R9Ehqo8_PFMHxj4eLLxXaE_IDhaRImK"
+  },
+  {
+    "id": "bumblebee",
+    "tipo": "pelicula",
+    "titulo": "Bumblebee",
+    "idDrive": "13ufcKILV2BV3CJX_yLEMB2hBCJ_3rqEL"
+  },
+  {
+    "id": "pearl-harbor",
+    "tipo": "pelicula",
+    "titulo": "Pearl Harbor",
+    "idDrive": "1aVVC_04MNqYQHetjdRPALxVbKd-qB8-1"
+  },
+  {
+    "id": "sangre-sudor-y-gloria",
+    "tipo": "pelicula",
+    "titulo": "Sangre, sudor y gloria",
+    "idDrive": "1HlAZ5SYiRtMadhZERbYDqn2aG9NqXCkI"
+  },
+  {
+    "id": "la-casa-gucci",
+    "tipo": "pelicula",
+    "titulo": "La casa Gucci",
+    "idDrive": "1JgaDCBdOCOWCyxom7dCXnsEioXnLO2_s"
+  },
+  {
+    "id": "10-cosas-que-odio-de-ti",
+    "tipo": "pelicula",
+    "titulo": "10 cosas que odio de ti",
+    "idDrive": "1_0irnw0CW4HhNbFuIH-GS5spdyCZV4ji"
+  },
+  {
+    "id": "a-todos-los-chicos-de-los-que-me-enamore",
+    "tipo": "pelicula",
+    "titulo": "A todos los chicos de los que me enamoré",
+    "idDrive": "1K835Kw2vl_Crh8ud2S-uqKSRSbm8spyW"
+  },
+  {
+    "id": "flores-en-el-atico",
+    "tipo": "pelicula",
+    "titulo": "Flores en el ático",
+    "idDrive": "1F4JIfmgz8P4uYRyhIy1vYJ2rtPIFqRd2"
+  },
+  {
+    "id": "petalos-al-viento",
+    "tipo": "pelicula",
+    "titulo": "Pétalos al viento",
+    "idDrive": "1tTjSu8GWBFEseYb6o6EzwMsMo9BaHf9J"
+  },
+  {
+    "id": "viviendo-con-mi-ex",
+    "tipo": "pelicula",
+    "titulo": "Viviendo con mi ex",
+    "idDrive": "1L1WjK1q1MCnhq8MgHt7pp-wTJLj-8pDx"
+  },
+  {
+    "id": "una-semana-en-corcega",
+    "tipo": "pelicula",
+    "titulo": "Una semana en Córcega",
+    "idDrive": "11Oa4SVquIWVTnm6GN0EK6xn5I_G2jI2x"
+  },
+  {
+    "id": "nosotros",
+    "tipo": "pelicula",
+    "titulo": "Nosotros",
+    "idDrive": "19tTcpzDdhFo-ERyU277gP7FPVAdm4Zfi"
+  },
+  {
+    "id": "viejos",
+    "tipo": "pelicula",
+    "titulo": "Viejos",
+    "idDrive": "1346OHn6cv6A19eFBgc8d_2IUDYhuRnrP"
+  },
+  {
+    "id": "prison-break",
+    "tipo": "pelicula",
+    "titulo": "Prison Break",
+    "idDrive": "12j_1ydN80IAbuFSJAYjFSR5rCtTEqyAa"
+  },
+  {
+    "id": "el-conjuro-3-el-diablo-me-obligo-a-hacerlo",
+    "tipo": "pelicula",
+    "titulo": "El conjuro 3: El diablo me obligó a hacerlo",
+    "idDrive": "1ieGbEbYGHSCAE02uY9TJi-vaRnAKyU3E"
+  },
+  {
+    "id": "escuadron-suicida",
+    "tipo": "pelicula",
+    "titulo": "Escuadrón Suicida",
+    "idDrive": "1uBLG4wrHubiifJMYlYLoD5-FqwOFeJ9q"
+  },
+  {
+    "id": "365-dias",
+    "tipo": "pelicula",
+    "titulo": "365 días",
+    "idDrive": "10CPQUrVg0euo15qlcXEAb88pgl4hvUcK"
+  },
+  {
+    "id": "jurassic-world-el-reino-caido",
+    "tipo": "pelicula",
+    "titulo": "Jurassic World: El reino caído",
+    "idDrive": "17pOT828OddAZOTlMYlEpSBNsIsRU71r6"
+  },
+  {
+    "id": "inframundo-4-el-despertar",
+    "tipo": "pelicula",
+    "titulo": "Inframundo 4: El despertar",
+    "idDrive": "17bMiwZKIU0AlmO3Ed-j_FuiiEnbJaE63"
+  },
+  {
+    "id": "jamaica-bajo-cero",
+    "tipo": "pelicula",
+    "titulo": "Jamaica bajo cero",
+    "idDrive": "17MzXGxUWWGTZY-87tOniZyrWxWhi5N5N"
+  },
+  {
+    "id": "hotel-transylvania-transformania",
+    "tipo": "pelicula",
+    "titulo": "Hotel Transylvania: Transformanía",
+    "idDrive": "172zGHGZFGXmhpNmOuJq5QrejZ-9tLDts"
+  },
+  {
+    "id": "coyote-vs-acme",
+    "tipo": "pelicula",
+    "titulo": "Coyote vs. Acme",
+    "idDrive": "1lrPGzSanHhVxeVhjtGkSrpzf06W10mGs"
+  },
+  {
+    "id": "pinocho",
+    "tipo": "pelicula",
+    "titulo": "Pinocho",
+    "idDrive": "12xx22yBmiMfcIbv6Yh7Jh37WSeIpc5Uu"
+  },
+  {
+    "id": "la-vida-secreta-de-tus-mascotas-2",
+    "tipo": "pelicula",
+    "titulo": "La vida secreta de tus mascotas 2",
+    "idDrive": "1RPMyQmqeLoRmYBMulGCd70LvB3w-3jO4"
+  },
+  {
+    "id": "ruega-por-nosotros",
+    "tipo": "pelicula",
+    "titulo": "Ruega por nosotros",
+    "idDrive": "1pVrvsDOpIrZ2EVXDwdhOzgglCsoMYHI9"
+  },
+  {
+    "id": "el-ejercito-de-los-muertos",
+    "tipo": "pelicula",
+    "titulo": "El ejército de los muertos",
+    "idDrive": "1ZHNDYJTCwB173aXbpXLEsAL-VeJO6Cq7"
+  },
+  {
+    "id": "cruella",
+    "tipo": "pelicula",
+    "titulo": "Cruella",
+    "idDrive": "1i5Ubm44E1s6neL4RKSinVEajNqPupJgx"
+  },
+  {
+    "id": "inframundo",
+    "tipo": "pelicula",
+    "titulo": "Inframundo",
+    "idDrive": "1anincyyOtr1TZASIvGQsy6EnKHeAg5Qq"
+  },
+  {
+    "id": "el-efecto-mariposa",
+    "tipo": "pelicula",
+    "titulo": "El efecto mariposa",
+    "idDrive": "1Q57JUWrKsyYDYWOKnqhaeMq7CAYIbu0s"
+  },
+  {
+    "id": "la-posesion-de-hannah-grace",
+    "tipo": "pelicula",
+    "titulo": "La posesión de Hannah Grace",
+    "idDrive": "1-5eP67wVlEshNp-PaVkwq9H_Ge8K9PIO"
+  },
+  {
+    "id": "constantine",
+    "tipo": "pelicula",
+    "titulo": "Constantine",
+    "idDrive": "1Sr3Ncd6TlE7I1beypl0l2i3THGgfHTkO"
+  },
+  {
+    "id": "jumanji",
+    "tipo": "pelicula",
+    "titulo": "Jumanji",
+    "idDrive": "18opd_sJficZtG2qlq4ePXU62GaCWDXQJ"
+  },
+  {
+    "id": "godzilla-vs-kong",
+    "tipo": "pelicula",
+    "titulo": "Godzilla vs. Kong",
+    "idDrive": "10_hYjUaLVH2BUfQxe1KvWP31JHLIM47O"
+  },
+  {
+    "id": "soul",
+    "tipo": "pelicula",
+    "titulo": "Soul",
+    "idDrive": "1D0AzAKaj6ZJCHx2vtw2f_mh-xkzRYjLf"
+  },
+  {
+    "id": "mulan",
+    "tipo": "pelicula",
+    "titulo": "Mulán",
+    "idDrive": "1vEqTj3lC86k4UkLMApsZIutXjfmk2jeZ"
+  },
+  {
+    "id": "mas-alla-de-la-luna",
+    "tipo": "pelicula",
+    "titulo": "Más allá de la luna",
+    "idDrive": "1w9tIfHecI_5agDxtYCMg1GcVUIoqs8IX"
+  },
+  {
+    "id": "el-llamado-salvaje",
+    "tipo": "pelicula",
+    "titulo": "El llamado salvaje",
+    "idDrive": "1XZrDWY8E6Tpcux7dKKVLPyZRb2uR2ttp"
+  },
+  {
+    "id": "trilogia-de-looney-tunes",
+    "tipo": "pelicula",
+    "titulo": "Trilogía de Looney Tunes",
+    "idDrive": "0B9996bPdTlHpTDJGRHRHOHpIcm8"
+  },
+  {
+    "id": "remi",
+    "tipo": "pelicula",
+    "titulo": "Remi",
+    "idDrive": "1Ioegav1PXALc5JkdIyi4nkYQjfdVS67o"
+  },
+  {
+    "id": "shadow",
+    "tipo": "pelicula",
+    "titulo": "Shadow",
+    "idDrive": "1jpZN3Y4heWVj4v29EGVa7AfO780zRptS"
+  },
+  {
+    "id": "novelas",
+    "tipo": "pelicula",
+    "titulo": "Novelas",
+    "idDrive": "1l6TuOfMwM-CkVx4D851sah2JmUqUs-pU"
+  },
+  {
+    "id": "arrastrame-al-infierno",
+    "tipo": "pelicula",
+    "titulo": "Arrástrame al infierno",
+    "idDrive": "1Sm4USjIOjrS-YYaE86oRtHGRgScKczt0"
   }
 ]
