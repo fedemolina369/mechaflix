@@ -286,7 +286,7 @@ function renderizarCapaServidores() {
 
   capa.innerHTML = `
     <button class="btn-servidor activo" tabindex="0" onclick="cambiarServidor(1)">Servidor 1</button>
-    ${tieneRespaldo ? `<button class="btn-servidor" tabindex="0" onclick="cambiarServidor(2)">Servidor 2 (Respaldo)</button>` : ''}
+    ${tieneRespaldo ? `<button class="btn-servidor" tabindex="0" onclick="cambiarServidor(2)">Servidor 2</button>` : ''}
   `;
 }
 
