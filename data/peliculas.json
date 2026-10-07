@@ -540,7 +540,8 @@
     "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRECREgluOC5ZCuKe3VV5RYT6vjfwHPZgWRcpNQyAqILg&s=10",
     "descorta": "Harry, Ron y Hermione regresan a Hogwarts para encontrar y destruir los últimos Horrocruxes de Voldemort",
     "descripCompleta":"Harry, Ron y Hermione regresan a Hogwarts para encontrar y destruir los últimos Horrocruxes de Voldemort en una épica batalla final.", a pesar de las objeciones de su familia.",
-  {
+   },
+   {
     "id": "minions-y-monstruos",
     "tipo": "pelicula",
     "titulo": "Minions y Monstruos",
