@@ -103,7 +103,7 @@ async function obtenerPeliculas() {
 }
 
 async function obtenerSeries() {
-  const seriesIds = ['rick-and-morty'];
+  const seriesIds = ['rick-and-morty','moon-knight'];
   todasLasSeries = [];
 
   for (const id of seriesIds) {
