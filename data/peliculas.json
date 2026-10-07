@@ -538,10 +538,10 @@
     "tituloIngles": "Harry Potter and the Deathly Hallows – Part 2",
     "idDrive": "1-2oXGCq3sh08FzWNgmd7Ox2SblbYunTz",
     "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRECREgluOC5ZCuKe3VV5RYT6vjfwHPZgWRcpNQyAqILg&s=10",
-    "descorta": "Harry, Ron y Hermione regresan a Hogwarts para encontrar y destruir los últimos Horrocruxes de Voldemort",
-    "descripCompleta":"Harry, Ron y Hermione regresan a Hogwarts para encontrar y destruir los últimos Horrocruxes de Voldemort en una épica batalla final.", a pesar de las objeciones de su familia.",
-   },
-   {
+    "descorta": "Harry, Ron y Hermione regresan a Hogwarts para encontrar y destruir los últimos Horrocruxes de Voldemort.",
+    "descripCompleta": "Harry, Ron y Hermione regresan a Hogwarts para encontrar y destruir los últimos Horrocruxes de Voldemort en una épica batalla final."
+  },
+  {
     "id": "minions-y-monstruos",
     "tipo": "pelicula",
     "titulo": "Minions y Monstruos",
@@ -1036,29 +1036,29 @@
     "tipo": "pelicula",
     "titulo": "La boda de mi mejor amigo",
     "año": 1997,
-    "descorta": "Julianne Potter se da cuenta de que está enamorada de su mejor amigo justo",
-    "descipCompleta": "Julianne Potter se da cuenta de que está enamorada de su mejor amigo justo cuando él le anuncia que está a punto de casarse, lo que la lleva a intentar sabotear el evento.",
-    "IdDrive": "1xCJdAN3cO4-JvOEGY8F6j_1QlcCbXyFa",
-    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPfxcuqokQQ9grOmOGLHSTDQHWKI-o5szuonI4EXP6mA&s=10"
+    "idDrive": "1xCJdAN3cO4-JvOEGY8F6j_1QlcCbXyFa",
+    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPfxcuqokQQ9grOmOGLHSTDQHWKI-o5szuonI4EXP6mA&s=10",
+    "descorta": "Julianne Potter se da cuenta de que está enamorada de su mejor amigo justo cuando él le anuncia que se casará.",
+    "descripCompleta": "Julianne Potter se da cuenta de que está enamorada de su mejor amigo justo cuando él le anuncia que está a punto de casarse, lo que la lleva a intentar sabotear el evento."
   },
   {
     "id": "a_traves_de_mi_ventana",
     "tipo": "pelicula",
     "titulo": "A través de mi ventana",
     "año": 2022,
+    "idDrive": "1t7-QAIPkezeWc4nFFTqydLis4ULc7IqB",
+    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJU6lTQuEbBek2rTb06Efcb7_d4RXtYJV9UzTh3gTf7g&s=10",
     "descorta": "Raquel siempre ha estado enamorada de su vecino Ares, pero nunca se han hablado.",
-    "descipCompleta": "Raquel lleva mucho tiempo enamorada de su vecino Ares, un joven de una familia adinerada. Cuando finalmente comienza una relación con él, ambos deberán enfrentarse a sus diferencias y a los obstáculos que amenazan con separarlos.",
-    "IdDrive": "1t7-QAIPkezeWc4nFFTqydLis4ULc7IqB",
-    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJU6lTQuEbBek2rTb06Efcb7_d4RXtYJV9UzTh3gTf7g&s=10"
+    "descripCompleta": "Raquel lleva mucho tiempo enamorada de su vecino Ares, un joven de una familia adinerada. Cuando finalmente comienza una relación con él, ambos deberán enfrentarse a sus diferencias y a los obstáculos que amenazan con separarlos."
   },
   {
     "id": "corazones_malheridos",
     "tipo": "pelicula",
     "titulo": "Corazones malheridos",
     "año": 2022,
+    "idDrive": "1IeodvpKt48sLZk6aI5WeFxpi4tLYLaL9",
+    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWthfGaOirQVHx6W1sHPuLXEw6pBo3eAwv5QTU8Neddg&s=10",
     "descorta": "Una aspirante a música y un marine con problemas se casan por conveniencia.",
-    "descipCompleta": "Una aspirante a música y un marine a punto de ser enviado al extranjero deciden casarse por conveniencia para obtener beneficios militares. Lo que comienza como un matrimonio falso poco a poco se convierte en una relación real, mientras ambos enfrentan sus propios problemas y heridas emocionales.",
-    "IdDrive": "1IeodvpKt48sLZk6aI5WeFxpi4tLYLaL9",
-    "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWthfGaOirQVHx6W1sHPuLXEw6pBo3eAwv5QTU8Neddg&s=10"
+    "descripCompleta": "Una aspirante a música y un marine a punto de ser enviado al extranjero deciden casarse por conveniencia para obtener beneficios militares. Lo que comienza como un matrimonio falso poco a poco se convierte en una relación real, mientras ambos enfrentan sus propios problemas y heridas emocionales."
   }
 ]
