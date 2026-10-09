@@ -1,25 +1,4 @@
-// ==========================================
-// 1. IMPORTACIONES Y CONFIGURACIÓN FIREBASE
-// ==========================================
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCYu2A2NU1pjoX5BrAj1g9JSg-BnKh0OHg",
-  authDomain: "mechaflix1.firebaseapp.com",
-  projectId: "mechaflix1",
-  storageBucket: "mechaflix1.firebasestorage.app",
-  messagingSenderId: "1037030873563",
-  appId: "1:1037030873563:web:0f2d8fd5e52befb897affe",
-  measurementId: "G-RRS18B8Y20"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-// ==========================================
-// 2. ESTADO GLOBAL DE LA APLICACIÓN
-// ==========================================
+// Estado global de la aplicación
 let todasLasPeliculas = [];
 let todasLasSeries = [];
 let paginaActual = 1;
@@ -39,9 +18,6 @@ const OMDB_API_KEY = '794853cc';
 
 let timerCursor = null;
 
-// ==========================================
-// 3. INICIALIZACIÓN Y EVENTOS
-// ==========================================
 document.addEventListener('DOMContentLoaded', () => {
   cargarTodoElCatalogo();
 
@@ -62,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Desplazamiento para lista de temporadas
-window.scrollTemporadas = function(direccion) {
+function scrollTemporadas(direccion) {
   const lista = document.getElementById('lista-temporadas');
   if (lista) {
     lista.scrollBy({ top: direccion * 120, behavior: 'smooth' });
@@ -92,42 +68,37 @@ function detenerOcultarCursor() {
   document.body.classList.remove('ocultar-cursor');
 }
 
-// ==========================================
-// 4. CARGA DE DATOS (FIREBASE + OMDB)
-// ==========================================
+// Carga inicial de datos enriquecidos con OMDb
 async function cargarTodoElCatalogo() {
   await Promise.all([obtenerPeliculas(), obtenerSeries()]);
   renderizarCatalogoConPaginacion();
 }
 
-// NUEVA FUNCIÓN: Descarga películas de Firebase en lugar del JSON local
 async function obtenerPeliculas() {
   try {
-    const querySnapshot = await getDocs(collection(db, "peliculas"));
-    let peliculasLocales = [];
-    
-    querySnapshot.forEach((doc) => {
-      peliculasLocales.push({ id_firebase: doc.id, ...doc.data() });
-    });
+    const res = await fetch('./data/peliculas.json');
+    if (res.ok) {
+      const peliculasLocales = await res.json();
+      
+      todasLasPeliculas = await Promise.all(peliculasLocales.map(async (peli) => {
+        if (peli.imagen && peli.imagen.trim() !== "" && peli.imagen !== "N/A") {
+          return peli;
+        }
 
-    todasLasPeliculas = await Promise.all(peliculasLocales.map(async (peli) => {
-      if (peli.imagen && peli.imagen.trim() !== "" && peli.imagen !== "N/A") {
-        return peli;
-      }
+        const query = peli.tituloIngles || peli.titulo;
+        const datosOmdb = await consultarOmdb(query);
 
-      const query = peli.tituloIngles || peli.titulo;
-      const datosOmdb = await consultarOmdb(query);
-
-      return {
-        ...peli,
-        imagen: (datosOmdb && datosOmdb.Poster && datosOmdb.Poster !== "N/A") 
-          ? datosOmdb.Poster 
-          : 'https://via.placeholder.com/300x450?text=Sin+Imagen',
-        descorta: peli.descorta || (datosOmdb && datosOmdb.Plot !== "N/A" ? datosOmdb.Plot : 'Sin descripción')
-      };
-    }));
+        return {
+          ...peli,
+          imagen: (datosOmdb && datosOmdb.Poster && datosOmdb.Poster !== "N/A") 
+            ? datosOmdb.Poster 
+            : 'https://via.placeholder.com/300x450?text=Sin+Imagen',
+          descorta: peli.descorta || (datosOmdb && datosOmdb.Plot !== "N/A" ? datosOmdb.Plot : 'Sin descripción')
+        };
+      }));
+    }
   } catch (err) {
-    console.error("Error al cargar películas desde Firebase:", err);
+    console.error("Error al cargar películas:", err);
   }
 }
 
@@ -171,9 +142,7 @@ async function consultarOmdb(titulo) {
   return null;
 }
 
-// ==========================================
-// 5. RENDERIZADO Y PAGINACIÓN
-// ==========================================
+// Renderiza catálogo con filtros y paginación
 function renderizarCatalogoConPaginacion() {
   const inputBusqueda = document.getElementById('input-busqueda').value.toLowerCase().trim();
   const secPelis = document.getElementById('seccion-peliculas');
@@ -269,21 +238,19 @@ function renderizarCatalogoConPaginacion() {
   paginacionContainer.innerHTML = paginacionHTML;
 }
 
-window.buscarContenido = function() {
+function buscarContenido() {
   paginaActual = 1;
   renderizarCatalogoConPaginacion();
 }
 
-window.cambiarPagina = function(numPagina) {
+function cambiarPagina(numPagina) {
   paginaActual = numPagina;
   renderizarCatalogoConPaginacion();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ==========================================
-// 6. REPRODUCCIÓN Y NAVEGACIÓN
-// ==========================================
-window.reproducirPelicula = function(titulo, idDrive, imagen, idRespaldo) {
+// Reproducción de Películas
+function reproducirPelicula(titulo, idDrive, imagen, idRespaldo) {
   esSerie = false;
   indiceEpisodioActual = -1;
 
@@ -332,7 +299,7 @@ function renderizarCapaServidores() {
   `;
 }
 
-window.cambiarServidor = function(numServidor) {
+function cambiarServidor(numServidor) {
   const iframe = document.getElementById('iframe-drive');
   const btns = document.querySelectorAll('.capa-servidores .btn-servidor');
   
@@ -347,7 +314,8 @@ window.cambiarServidor = function(numServidor) {
   }
 }
 
-window.abrirSerie = function(serieId, titulo, temporadas, imagenFondo) {
+// Reproducción y Navegación de Series (Estilo Reproductor de Música)
+function abrirSerie(serieId, titulo, temporadas, imagenFondo) {
   serieActual = serieId;
   esSerie = true;
   indiceEpisodioActual = -1;
@@ -377,7 +345,7 @@ window.abrirSerie = function(serieId, titulo, temporadas, imagenFondo) {
   document.querySelector('.cerrar-modal').focus();
 }
 
-window.seleccionarTemporada = function(numTemp, event) {
+function seleccionarTemporada(numTemp, event) {
   document.querySelectorAll('.btn-temporada').forEach(btn => btn.classList.remove('activa'));
   if (event && event.target) {
     event.target.classList.add('activa');
@@ -410,7 +378,7 @@ async function cargarCapitulosTemporada(numTemp) {
   }
 }
 
-window.reproducirEpisodio = function(index) {
+function reproducirEpisodio(index) {
   if (!episodiosTemporadaActual || !episodiosTemporadaActual[index]) return;
 
   indiceEpisodioActual = index;
@@ -423,6 +391,7 @@ window.reproducirEpisodio = function(index) {
   iframe.src = `https://drive.google.com/file/d/${ep.idDrive}/preview`;
   contenedorVideo.classList.remove('oculto');
 
+  // Resaltar episodio activo en la lista
   document.querySelectorAll('.card-episodio').forEach((card, i) => {
     if (i === index) {
       card.classList.add('activa');
@@ -463,14 +432,14 @@ function renderizarControlesSerie() {
   `;
 }
 
-window.cambiarEpisodio = function(direccion) {
+function cambiarEpisodio(direccion) {
   const nuevoIndice = indiceEpisodioActual + direccion;
   if (nuevoIndice >= 0 && nuevoIndice < episodiosTemporadaActual.length) {
     reproducirEpisodio(nuevoIndice);
   }
 }
 
-window.cerrarModal = function() {
+function cerrarModal() {
   document.getElementById('modal-reproductor').classList.add('oculto');
   document.getElementById('iframe-drive').src = '';
   document.getElementById('modal-backdrop').style.backgroundImage = 'none';
@@ -484,7 +453,7 @@ window.cerrarModal = function() {
   detenerOcultarCursor();
 }
 
-window.filtrar = function(tipo, event) {
+function filtrar(tipo, event) {
   document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
   if (event && event.target) {
     event.target.classList.add('active');
