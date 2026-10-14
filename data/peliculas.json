@@ -108,6 +108,7 @@
     "titulo": "Scream 7 (2026)",
     "tituloIngles": "Scream 7",
     "idDrive": "1towVpf724NbV0XsKfErWqvCEgiGHUnmZ",
+    "idDriveRespaldo": [],
     "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTc-31iL5IThe5cEI04UjOW2Ysa4rP2j2tEhHLyf7Rm0w&s=10",
     "descorta": "Ghostface reaparece para atemorizar a Sidney y a su familia.",
     "descripCompleta": "Una nueva amenaza emerge bajo la máscara de Ghostface, forzando a Sidney a enfrentarse una vez más a las sombras de su pasado para proteger a sus seres queridos."
@@ -128,6 +129,7 @@
     "titulo": "Hoppers: operación castor (2026)",
     "tituloIngles": "Hoppers",
     "idDrive": "1QfsYVbyNaxyNH1MOxXmGL7N7fdeIclGD",
+    "idDriveRespaldo": [],
     "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrIRhGRJXW4lCg29gc1t_DtHzXEuV0u9J8YRErnSimIg&s=10",
     "descorta": "Una joven transfiere su mente a un castor robótico para explorar la naturaleza.",
     "descripCompleta": "Mediante una avanzada tecnología, una investigadora se adentra en el mundo animal bajo la forma de un castor para descubrir sorprendentes secretos."
@@ -265,7 +267,7 @@
     "tituloIngles": "Guardians of the Galaxy",
     "idDrive": "1-qP9zkEwHbuCRa0gsEdZo-iErPfZq6iH",
     "imagen": "https://image.tmdb.org/t/p/w500/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg",
-    "descorta": "Un grupo de criminales espaciales inadaptados se une para salvar la galaxia.",
+    "descorta": "Un grupo de criminales espaciales inadaptados seUne para salvar la galaxia.",
     "descripCompleta": "Peter Quill roba un misterioso orbe y se convierte en el blanco de cazarrecompensas. Para sobrevivir, deberá aliarse con Gamora, Drax, Rocket y Groot en una batalla épica."
   },
   {
@@ -467,6 +469,7 @@
     "titulo": "Harry Potter y la piedra filosofal",
     "tituloIngles": "Harry Potter and the Sorcerer's Stone",
     "idDrive": "15_8elh4oMvMIiXik2elfH-KZLs50JAc4",
+    "idDriveRespaldo": [],
     "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRccZLEhuuMtYL_v9753fyplf3Xkt6yDuAvURfE-K8EHg&s=10",
     "descorta": "Un niño huérfano descubre que es un mago y asiste a la escuela de Hogwarts.",
     "descripCompleta": "En su onceavo cumpleaños, Harry Potter descubre que es un mago y es invitado a estudiar en el Colegio Hogwarts de Magia y Hechicería, donde descubre oscuros secretos sobre su pasado."
@@ -627,6 +630,7 @@
     "titulo": "La posesión de la momia",
     "tituloIngles": "The Mummy's Possession",
     "idDrive": "10CKqa7LZp8YkUu_3AO0Gw1-PrKhdw6Mt",
+    "idDriveRespaldo": [],
     "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEp8AIWwYBOZ0P3FDq4PdW8wyzHyyf5zFpMdsEELoOyA&s=10",
     "descorta": "Un espíritu egipcio antiguo busca venganza en el mundo moderno.",
     "descripCompleta": "Un grupo de arqueólogos libera por accidente a una entidad faraónica sedienta de poder, que empieza a poseer a los investigadores para completar una letal maldición."
@@ -881,8 +885,8 @@
     "idDrive": "0By54xevdrwbbMFh5d044TVNlU2M",
     "idDriveRespaldo": [],
     "imagen": "",
-    "descorta": "Un thriller lleno de tensión donde la situación se vuelve incontenible.",
-    "descripCompleta": "Los personajes se ven arrastrados a una espiral de peligro y decisiones drásticas sin retorno."
+    "descorta": "",
+    "descripCompleta": ""
   },
   {
     "id": "pandora",
@@ -892,8 +896,8 @@
     "idDrive": "0By54xevdrwbbNGlpUEw4c0hqeDQ",
     "idDriveRespaldo": [],
     "imagen": "",
-    "descorta": "Un desastre nuclear pone en jaque a toda una nación.",
-    "descripCompleta": "Tras un terremoto que daña una planta nuclear, un grupo de trabajadores y bomberos arriesgan sus vidas para evitar una catástrofe mayor."
+    "descorta": "",
+    "descripCompleta": ""
   },
   {
     "id": "71-en-el-fuego",
@@ -903,8 +907,8 @@
     "idDrive": "11psFCjg5LSzQyUTjty0hXOOLrwrSwrNX",
     "idDriveRespaldo": [],
     "imagen": "",
-    "descorta": "Un grupo de jóvenes soldados lucha heroicamente durante la guerra de Corea.",
-    "descripCompleta": "Setenta y uno estudiantes soldados defienden una escuela estratégica contra un ejército abrumador para frenar el avance enemigo."
+    "descorta": "",
+    "descripCompleta": ""
   },
   {
     "id": "hush",
@@ -914,8 +918,8 @@
     "idDrive": "1Kd0j9sK2LY8IDEGkXb3BVU9jj-7pEA_N",
     "idDriveRespaldo": [],
     "imagen": "",
-    "descorta": "Una escritora sorda debe luchar por su supervivencia en su casa aislada.",
-    "descripCompleta": "Un asesino enmascarado aparece en la ventana de una mujer sorda que vive en medio del bosque, convirtiendo su hogar en una trampa mortal."
+    "descorta": "",
+    "descripCompleta": ""
   },
   {
     "id": "el-legado-del-diablo",
@@ -925,8 +929,8 @@
     "idDrive": "1NFuQNfTLjMHYrFr6RqdDxiiXSE864zA9",
     "idDriveRespaldo": [],
     "imagen": "",
-    "descorta": "Una familia comienza a desmoronarse tras la muerte de su enigmática abuela.",
-    "descripCompleta": "A medida que ocurren eventos trágicos y perturbadores, salen a la luz aterradores secretos ancestrales sobre el destino de la familia."
+    "descorta": "",
+    "descripCompleta": ""
   },
   {
     "id": "la-posesion",
@@ -1396,6 +1400,160 @@
     "titulo": "Expediente Warren - El ultimo rito",
     "tituloIngles": "The Conjuring: The Devil Made Me Do It",
     "idDrive": "1Zok2QhGypBCz3GlJrDfGlCFT-kk8NmsQ",
+    "idDriveRespaldo": [],
+    "imagen": "",
+    "descorta": "",
+    "descripCompleta": ""
+  },
+  {
+    "id": "365-dias",
+    "tipo": "pelicula",
+    "titulo": "365 días",
+    "tituloIngles": "365 Days",
+    "idDrive": "10CPQUrVg0euo15qlcXEAb88pgl4hvUcK",
+    "idDriveRespaldo": [],
+    "imagen": "",
+    "descorta": "",
+    "descripCompleta": ""
+  },
+  {
+    "id": "jurassic-world-el-reino-caido",
+    "tipo": "pelicula",
+    "titulo": "Jurassic World: El Reino Caído",
+    "tituloIngles": "Jurassic World: Fallen Kingdom",
+    "idDrive": "17pOT828OddAZOTlMYlEpSBNsIsRU71r6",
+    "idDriveRespaldo": [],
+    "imagen": "",
+    "descorta": "",
+    "descripCompleta": ""
+  },
+  {
+    "id": "inframundo-4",
+    "tipo": "pelicula",
+    "titulo": "Inframundo 4",
+    "tituloIngles": "Underworld: Awakening",
+    "idDrive": "17bMiwZKIU0AlmO3Ed-j_FuiiEnbJaE63",
+    "idDriveRespaldo": [],
+    "imagen": "",
+    "descorta": "",
+    "descripCompleta": ""
+  },
+  {
+    "id": "jamaica-bajo-cero",
+    "tipo": "pelicula",
+    "titulo": "Jamaica bajo cero",
+    "tituloIngles": "Jamaica Under Zero",
+    "idDrive": "17MzXGxUWWGTZY-87tOniZyrWxWhi5N5N",
+    "idDriveRespaldo": [],
+    "imagen": "",
+    "descorta": "",
+    "descripCompleta": ""
+  },
+  {
+    "id": "hotel-transilvania-transformania",
+    "tipo": "pelicula",
+    "titulo": "Hotel Transilvania - Transformania",
+    "tituloIngles": "Hotel Transylvania: Transformania",
+    "idDrive": "172zGHGZFGXmhpNmOuJq5QrejZ-9tLDts",
+    "idDriveRespaldo": [],
+    "imagen": "",
+    "descorta": "",
+    "descripCompleta": ""
+  },
+  {
+    "id": "coyote-vs-acme",
+    "tipo": "pelicula",
+    "titulo": "Coyote vs ACME",
+    "tituloIngles": "Coyote vs Acme",
+    "idDrive": "1lrPGzSanHhVxeVhjtGkSrpzf06W10mGs",
+    "idDriveRespaldo": [],
+    "imagen": "",
+    "descorta": "",
+    "descripCompleta": ""
+  },
+  {
+    "id": "pinocho-2019",
+    "tipo": "pelicula",
+    "titulo": "Pinocho 2019",
+    "tituloIngles": "Pinocchio",
+    "idDrive": "1pVrvsDOpIrZ2EVXDwdhOzgglCsoMYHI9",
+    "idDriveRespaldo": [],
+    "imagen": "",
+    "descorta": "",
+    "descripCompleta": ""
+  },
+  {
+    "id": "mascotas-2021",
+    "tipo": "pelicula",
+    "titulo": "Mascotas 2021",
+    "tituloIngles": "Pets 2021",
+    "idDrive": "1RPMyQmqeLoRmYBMulGCd70LvB3w-3jO4",
+    "idDriveRespaldo": [],
+    "imagen": "",
+    "descorta": "",
+    "descripCompleta": ""
+  },
+  {
+    "id": "ruega-por-nosotros",
+    "tipo": "pelicula",
+    "titulo": "Ruega por nosotros",
+    "tituloIngles": "Pray for Us",
+    "idDrive": "1pVrvsDOpIrZ2EVXDwdhOzgglCsoMYHI9",
+    "idDriveRespaldo": [],
+    "imagen": "",
+    "descorta": "",
+    "descripCompleta": ""
+  },
+  {
+    "id": "el-ejercito-de-los-muertos",
+    "tipo": "pelicula",
+    "titulo": "El ejercito de los muertos",
+    "tituloIngles": "Army of the Dead",
+    "idDrive": "1ZHNDYJTCwB173aXbpXLEsAL-VeJO6Cq7",
+    "idDriveRespaldo": [],
+    "imagen": "",
+    "descorta": "",
+    "descripCompleta": ""
+  },
+  {
+    "id": "el-ejercito-de-los-muertos-2",
+    "tipo": "pelicula",
+    "titulo": "El ejercito de los muertos - segunda parte",
+    "tituloIngles": "Army of the Dead - Part 2",
+    "idDrive": "1ZHNDYJTCwB173aXbpXLEsAL-VeJO6Cq7",
+    "idDriveRespaldo": [],
+    "imagen": "",
+    "descorta": "",
+    "descripCompleta": ""
+  },
+  {
+    "id": "remi",
+    "tipo": "pelicula",
+    "titulo": "Remi",
+    "tituloIngles": "Remi",
+    "idDrive": "1Ioegav1PXALc5JkdIyi4nkYQjfdVS67o",
+    "idDriveRespaldo": [],
+    "imagen": "",
+    "descorta": "",
+    "descripCompleta": ""
+  },
+  {
+    "id": "shadow",
+    "tipo": "pelicula",
+    "titulo": "Shadow",
+    "tituloIngles": "Shadow",
+    "idDrive": "1jpZN3Y4heWVj4v29EGVa7AfO780zRptS",
+    "idDriveRespaldo": [],
+    "imagen": "",
+    "descorta": "",
+    "descripCompleta": ""
+  },
+  {
+    "id": "arraastrame-al-infierno",
+    "tipo": "pelicula",
+    "titulo": "Arraistrame al infierno",
+    "tituloIngles": "Drag Me to Hell",
+    "idDrive": "1Sm4USjIOjrS-YYaE86oRtHGRgScKczt0",
     "idDriveRespaldo": [],
     "imagen": "",
     "descorta": "",
