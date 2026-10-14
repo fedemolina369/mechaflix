@@ -1472,61 +1472,6 @@
     "descripCompleta": ""
   },
   {
-    "id": "pinocho-2019",
-    "tipo": "pelicula",
-    "titulo": "Pinocho 2019",
-    "tituloIngles": "Pinocchio",
-    "idDrive": "1pVrvsDOpIrZ2EVXDwdhOzgglCsoMYHI9",
-    "idDriveRespaldo": [],
-    "imagen": "",
-    "descorta": "",
-    "descripCompleta": ""
-  },
-  {
-    "id": "mascotas-2021",
-    "tipo": "pelicula",
-    "titulo": "Mascotas 2021",
-    "tituloIngles": "Pets 2021",
-    "idDrive": "1RPMyQmqeLoRmYBMulGCd70LvB3w-3jO4",
-    "idDriveRespaldo": [],
-    "imagen": "",
-    "descorta": "",
-    "descripCompleta": ""
-  },
-  {
-    "id": "ruega-por-nosotros",
-    "tipo": "pelicula",
-    "titulo": "Ruega por nosotros",
-    "tituloIngles": "Pray for Us",
-    "idDrive": "1pVrvsDOpIrZ2EVXDwdhOzgglCsoMYHI9",
-    "idDriveRespaldo": [],
-    "imagen": "",
-    "descorta": "",
-    "descripCompleta": ""
-  },
-  {
-    "id": "el-ejercito-de-los-muertos",
-    "tipo": "pelicula",
-    "titulo": "El ejercito de los muertos",
-    "tituloIngles": "Army of the Dead",
-    "idDrive": "1ZHNDYJTCwB173aXbpXLEsAL-VeJO6Cq7",
-    "idDriveRespaldo": [],
-    "imagen": "",
-    "descorta": "",
-    "descripCompleta": ""
-  },
-  {
-    "id": "el-ejercito-de-los-muertos-2",
-    "tipo": "pelicula",
-    "titulo": "El ejercito de los muertos - segunda parte",
-    "tituloIngles": "Army of the Dead - Part 2",
-    "idDrive": "1ZHNDYJTCwB173aXbpXLEsAL-VeJO6Cq7",
-    "idDriveRespaldo": [],
-    "imagen": "",
-    "descorta": "",
-    "descripCompleta": ""
-  },
-  {
     "id": "remi",
     "tipo": "pelicula",
     "titulo": "Remi",
