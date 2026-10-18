@@ -6,117 +6,97 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
   background-color: #080d0a;
   color: #e0ffe8;
   font-family: 'Rajdhani', sans-serif;
-  overflow-x: hidden;
-  position: relative;
+  overflow-x: hidden; /* Evita cualquier barra o desborde lateral */
+  width: 100%;
+  scroll-behavior: smooth;
 }
 
-/* Fondo Animado de Tuberías / Circuitos Verde Neón */
+/* Fondo Cyberpunk Neón Seguro (sin desbordes laterales) */
 body::before {
   content: '';
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background: 
-    linear-gradient(90deg, rgba(0, 255, 102, 0.03) 1px, transparent 1px),
-    linear-gradient(rgba(0, 255, 102, 0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
+    linear-gradient(90deg, rgba(0, 255, 102, 0.02) 1px, transparent 1px),
+    linear-gradient(rgba(0, 255, 102, 0.02) 1px, transparent 1px);
+  background-size: 50px 50px;
   z-index: -2;
-}
-
-body::after {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: -100%;
-  width: 300%;
-  height: 100vh;
-  background: radial-gradient(circle, rgba(0, 255, 102, 0.08) 0%, transparent 60%);
-  animation: tubeFlow 12s linear infinite;
-  z-index: -1;
   pointer-events: none;
 }
 
-@keyframes tubeFlow {
-  0% { transform: translateY(-30%) translateX(0); }
-  50% { transform: translateY(30%) translateX(20%); }
-  100% { transform: translateY(-30%) translateX(0); }
-}
-
-/* Navbar / Header */
+/* Navbar Adaptable para TV y Celulares */
 .navbar {
   position: fixed;
   top: 0;
   width: 100%;
-  height: 75px;
-  padding: 0 4%;
+  height: 70px;
+  padding: 0 5%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(8, 13, 10, 0.9);
-  backdrop-filter: blur(8px);
+  background: rgba(8, 13, 10, 0.95);
+  backdrop-filter: blur(10px);
   border-bottom: 2px solid #00ff66;
-  box-shadow: 0 0 15px rgba(0, 255, 102, 0.3);
+  box-shadow: 0 0 20px rgba(0, 255, 102, 0.25);
   z-index: 1000;
+  gap: 15px;
 }
 
 /* Logo 3D Neón */
 .brand-logo {
   font-family: 'Orbitron', sans-serif;
-  font-size: 2rem;
+  font-size: clamp(1.4rem, 3vw, 2rem);
   font-weight: 900;
   color: #00ff66;
   text-transform: uppercase;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   cursor: pointer;
   user-select: none;
-  position: relative;
+  white-space: nowrap;
   text-shadow: 
-    0 0 5px #00ff66,
-    0 0 10px #00ff66,
-    0 0 20px #00ff66,
-    2px 2px 2px rgba(0, 0, 0, 0.9),
-    -1px -1px 0 #003311;
-  transition: transform 0.2s ease, text-shadow 0.2s ease;
+    0 0 8px #00ff66,
+    0 0 15px #00ff66,
+    2px 2px 2px rgba(0, 0, 0, 0.9);
+  transition: transform 0.2s ease;
 }
 
 .brand-logo:hover {
-  transform: scale(1.05);
-  text-shadow: 
-    0 0 10px #00ff66,
-    0 0 20px #00ff66,
-    0 0 35px #00ff66,
-    3px 3px 4px rgba(0, 0, 0, 0.9);
+  transform: scale(1.03);
 }
 
-/* Buscador Neón */
+/* Buscador Flexible (Nunca se corta) */
 .search-container {
-  position: relative;
+  flex: 1;
+  max-width: 320px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .search-bar {
-  background: rgba(0, 20, 10, 0.8);
+  width: 100%;
+  max-width: 260px;
+  background: rgba(0, 20, 10, 0.9);
   border: 1px solid #00ff66;
   color: #00ff66;
-  padding: 8px 18px;
+  padding: 8px 16px;
   border-radius: 25px;
   font-family: 'Rajdhani', sans-serif;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
   outline: none;
-  width: 220px;
-  box-shadow: inset 0 0 5px rgba(0, 255, 102, 0.3);
+  box-shadow: inset 0 0 8px rgba(0, 255, 102, 0.3);
   transition: all 0.3s ease;
 }
 
 .search-bar:focus {
-  width: 280px;
-  box-shadow: 0 0 15px rgba(0, 255, 102, 0.6), inset 0 0 8px rgba(0, 255, 102, 0.5);
+  box-shadow: 0 0 15px rgba(0, 255, 102, 0.6), inset 0 0 10px rgba(0, 255, 102, 0.4);
 }
 
 .search-bar::placeholder {
@@ -127,14 +107,15 @@ body::after {
 .hero-banner {
   position: relative;
   height: 65vh;
-  min-height: 450px;
-  margin-top: 75px;
+  min-height: 400px;
+  margin-top: 70px;
   background-size: cover;
   background-position: center top;
   display: flex;
   align-items: flex-end;
-  padding: 0 5% 50px 5%;
+  padding: 0 5% 45px 5%;
   border-bottom: 1px solid rgba(0, 255, 102, 0.2);
+  transition: background-image 0.8s ease-in-out;
 }
 
 .hero-overlay {
@@ -144,8 +125,8 @@ body::after {
   width: 100%;
   height: 100%;
   background: 
-    linear-gradient(180deg, rgba(8,13,10,0.3) 0%, rgba(8,13,10,0.85) 75%, #080d0a 100%),
-    linear-gradient(90deg, rgba(8,13,10,0.95) 0%, transparent 60%);
+    linear-gradient(180deg, rgba(8,13,10,0.2) 0%, rgba(8,13,10,0.85) 70%, #080d0a 100%),
+    linear-gradient(90deg, rgba(8,13,10,0.9) 0%, transparent 65%);
 }
 
 .hero-content {
@@ -156,18 +137,18 @@ body::after {
 
 .hero-title {
   font-family: 'Orbitron', sans-serif;
-  font-size: 2.8rem;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
   font-weight: 800;
   color: #ffffff;
-  text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
-  margin-bottom: 15px;
+  text-shadow: 0 0 12px rgba(0, 255, 102, 0.6);
+  margin-bottom: 10px;
 }
 
 .hero-overview {
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
   line-height: 1.4;
   color: #b0e6c0;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -178,9 +159,9 @@ body::after {
   background: #00ff66;
   color: #080d0a;
   border: none;
-  padding: 12px 30px;
+  padding: 10px 24px;
   font-family: 'Orbitron', sans-serif;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 800;
   border-radius: 4px;
   cursor: pointer;
@@ -197,57 +178,48 @@ body::after {
   box-shadow: 0 0 25px rgba(0, 255, 102, 0.9);
 }
 
-/* Carrusel de Trailers */
-.trailers-section {
-  padding: 40px 4% 20px 4%;
+/* Secciones y Títulos */
+.section-container {
+  padding: 30px 5% 10px 5%;
 }
 
 .section-title {
   font-family: 'Orbitron', sans-serif;
-  font-size: 1.4rem;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
   color: #00ff66;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
 }
 
+/* Carrusel de Trailers Fluido para TV y Celulares */
 .trailers-carousel {
   display: flex;
-  gap: 20px;
+  gap: 16px;
   overflow-x: auto;
   padding-bottom: 15px;
-  scrollbar-width: thin;
-  scrollbar-color: #00ff66 #080d0a;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Oculta barra fea en Firefox */
 }
 
 .trailers-carousel::-webkit-scrollbar {
-  height: 8px;
-}
-
-.trailers-carousel::-webkit-scrollbar-track {
-  background: #080d0a;
-}
-
-.trailers-carousel::-webkit-scrollbar-thumb {
-  background: #00ff66;
-  border-radius: 4px;
+  display: none; /* Oculta barra en Chrome/TV/Safari */
 }
 
 .trailer-card {
-  flex: 0 0 280px;
+  flex: 0 0 260px;
   background: #0e1712;
   border: 1px solid rgba(0, 255, 102, 0.3);
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.3s ease, border-color 0.3s ease;
+  scroll-snap-align: start;
+  transition: transform 0.25s ease, border-color 0.25s ease;
 }
 
 .trailer-card:hover {
-  transform: scale(1.03);
+  transform: scale(1.02);
   border-color: #00ff66;
   box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
 }
@@ -255,7 +227,7 @@ body::after {
 .trailer-thumb {
   position: relative;
   width: 100%;
-  height: 158px;
+  height: 145px;
   background-size: cover;
   background-position: center;
   display: flex;
@@ -264,37 +236,37 @@ body::after {
 }
 
 .play-icon {
-  width: 45px;
-  height: 45px;
-  background: rgba(0, 255, 102, 0.85);
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 255, 102, 0.9);
   color: #080d0a;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   box-shadow: 0 0 10px #00ff66;
 }
 
 .trailer-info {
-  padding: 10px 12px;
+  padding: 10px;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: #ffffff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* Grilla del Catálogo */
+/* Grilla del Catálogo Principal */
 .catalog-container {
-  padding: 30px 4% 60px 4%;
+  padding: 20px 5% 60px 5%;
 }
 
 .movies-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 22px;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 18px;
 }
 
 .movie-card {
@@ -304,13 +276,13 @@ body::after {
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .movie-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-6px);
   border-color: #00ff66;
-  box-shadow: 0 0 20px rgba(0, 255, 102, 0.5);
+  box-shadow: 0 0 18px rgba(0, 255, 102, 0.5);
 }
 
 .movie-poster {
@@ -321,10 +293,10 @@ body::after {
 }
 
 .movie-title-bar {
-  padding: 10px;
+  padding: 9px;
   background: #080d0a;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   text-align: center;
   color: #e0ffe8;
   white-space: nowrap;
@@ -333,30 +305,30 @@ body::after {
   border-top: 1px solid rgba(0, 255, 102, 0.2);
 }
 
-/* Modal del Reproductor */
+/* Modal del Reproductor de Video */
 .modal-backdrop {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.92);
+  background: rgba(0, 0, 0, 0.95);
   backdrop-filter: blur(10px);
   z-index: 2000;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 15px;
 }
 
 .modal-content {
   position: relative;
   width: 100%;
-  max-width: 900px;
+  max-width: 950px;
   background: #080d0a;
   border: 2px solid #00ff66;
   border-radius: 10px;
-  box-shadow: 0 0 30px rgba(0, 255, 102, 0.5);
+  box-shadow: 0 0 35px rgba(0, 255, 102, 0.6);
   overflow: hidden;
 }
 
@@ -400,4 +372,21 @@ body::after {
   font-size: 2rem;
   color: #00ff66;
   text-shadow: 0 0 20px #00ff66;
+}
+
+/* Media Queries para adaptación perfecta en Celulares y Tablets */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 4%;
+  }
+  .search-bar {
+    max-width: 180px;
+  }
+  .hero-banner {
+    height: 55vh;
+  }
+  .movies-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
+  }
 }
