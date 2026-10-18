@@ -18,7 +18,7 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
 
-  // Función para mezclar un arreglo aleatoriamente
+  // Mezclar un arreglo aleatoriamente
   const shuffleArray = (array: any[]) => {
     return [...array].sort(() => Math.random() - 0.5);
   };
@@ -40,7 +40,7 @@ export default function App() {
             );
             const tmdbData = await res.json();
             
-            // Buscar trailer de YouTube
+            // Buscar trailer oficial de YouTube
             let trailerKey = null;
             if (tmdbData.videos && tmdbData.videos.results) {
               const trailer = tmdbData.videos.results.find(
@@ -65,16 +65,15 @@ export default function App() {
       );
 
       const validMovies = enrichedMovies.filter(m => m !== null);
-      
-      // Mezcla aleatoria de películas al iniciar
       const randomized = shuffleArray(validMovies);
+      
       setMovies(randomized);
 
       if (randomized.length > 0) {
         setFeaturedMovie(randomized[0]);
       }
 
-      // Filtrar películas que tengan trailer para el carrusel
+      // Filtrar todas las que tengan trailer disponible
       const withTrailers = randomized.filter(m => m.trailerKey !== null);
       setTrailers(withTrailers);
 
@@ -89,13 +88,29 @@ export default function App() {
     loadCatalog();
   }, []);
 
-  // Recargar/Reiniciar la página con orden aleatorio al presionar el logo
+  // Rotación automática del Banner destacado cada 15 segundos
+  useEffect(() => {
+    if (movies.length <= 1) return;
+    const bannerInterval = setInterval(() => {
+      setFeaturedMovie((currentFeatured: any) => {
+        const currentIndex = movies.findIndex(m => m.id === currentFeatured?.id);
+        const nextIndex = (currentIndex + 1) % movies.length;
+        return movies[nextIndex];
+      });
+    }, 15000);
+
+    return () => clearInterval(bannerInterval);
+  }, [movies]);
+
+  // Volver al inicio al hacer clic en el Logo (reinicia aleatoriamente)
   const handleHomeClick = () => {
     setSearchTerm('');
-    setMovies(prev => shuffleArray(prev));
-    if (movies.length > 0) {
-      setFeaturedMovie(movies[Math.floor(Math.random() * movies.length)]);
+    const randomized = shuffleArray(movies);
+    setMovies(randomized);
+    if (randomized.length > 0) {
+      setFeaturedMovie(randomized[0]);
     }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const filteredMovies = movies.filter(movie =>
@@ -112,7 +127,7 @@ export default function App() {
 
   return (
     <div className="app">
-      {/* Navbar neón con Logo y Buscador */}
+      {/* Navbar Adaptada y Limpia */}
       <nav className="navbar">
         <div className="brand-logo" onClick={handleHomeClick}>
           MECHAFLIX
@@ -128,7 +143,7 @@ export default function App() {
         </div>
       </nav>
 
-      {/* Hero Banner Destacado Aleatorio */}
+      {/* Hero Banner Destacado con Cambio Automático cada 15s */}
       {featuredMovie && !searchTerm && (
         <header 
           className="hero-banner" 
@@ -152,7 +167,7 @@ export default function App() {
 
       {/* Carrusel de Trailers Oficiales */}
       {!searchTerm && trailers.length > 0 && (
-        <section className="trailers-section">
+        <section className="section-container">
           <h2 className="section-title">🎬 Trailers Oficiales</h2>
           <div className="trailers-carousel">
             {trailers.map((movie) => (
@@ -174,8 +189,8 @@ export default function App() {
         </section>
       )}
 
-      {/* Catálogo de Películas */}
-      <main className="catalog-container" style={{ marginTop: searchTerm ? '90px' : '0' }}>
+      {/* Catálogo Principal de Películas */}
+      <main className="catalog-container">
         <h2 className="section-title">
           {searchTerm ? `Resultados para "${searchTerm}"` : '⚡ Catálogo Principal'}
         </h2>
@@ -197,7 +212,7 @@ export default function App() {
         </div>
       </main>
 
-      {/* Modal Reproductor */}
+      {/* Modal del Reproductor */}
       {selectedVideoUrl && (
         <div className="modal-backdrop" onClick={() => setSelectedVideoUrl(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
