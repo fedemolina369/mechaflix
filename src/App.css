@@ -1,98 +1,403 @@
-#root {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-  font-family: Arial, sans-serif;
-  color: #fff;
-  background-color: #141414;
-  min-height: 100vh;
-}
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;700&display=swap');
 
-.header h1 {
-  font-size: 2.5rem;
-  color: #e50914;
-  margin-bottom: 2rem;
-}
-
-.loading {
-  font-size: 1.2rem;
-  color: #aaa;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 1.5rem;
-}
-
-.card {
-  background-color: #1f1f1f;
-  border-radius: 8px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
-}
-
-.card img {
-  width: 100%;
-  height: 270px;
-  object-fit: cover;
-  display: block;
-}
-
-.card h3 {
-  font-size: 1rem;
-  padding: 0.8rem;
+* {
   margin: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Modal del reproductor */
-.modal-overlay {
+body {
+  background-color: #080d0a;
+  color: #e0ffe8;
+  font-family: 'Rajdhani', sans-serif;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Fondo Animado de Tuberías / Circuitos Verde Neón */
+body::before {
+  content: '';
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.85);
+  background: 
+    linear-gradient(90deg, rgba(0, 255, 102, 0.03) 1px, transparent 1px),
+    linear-gradient(rgba(0, 255, 102, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: -2;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 300%;
+  height: 100vh;
+  background: radial-gradient(circle, rgba(0, 255, 102, 0.08) 0%, transparent 60%);
+  animation: tubeFlow 12s linear infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes tubeFlow {
+  0% { transform: translateY(-30%) translateX(0); }
+  50% { transform: translateY(30%) translateX(20%); }
+  100% { transform: translateY(-30%) translateX(0); }
+}
+
+/* Navbar / Header */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 75px;
+  padding: 0 4%;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: space-between;
+  background: rgba(8, 13, 10, 0.9);
+  backdrop-filter: blur(8px);
+  border-bottom: 2px solid #00ff66;
+  box-shadow: 0 0 15px rgba(0, 255, 102, 0.3);
   z-index: 1000;
 }
 
-.modal-container {
-  background: #000;
-  padding: 1rem;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 800px;
+/* Logo 3D Neón */
+.brand-logo {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  color: #00ff66;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  text-shadow: 
+    0 0 5px #00ff66,
+    0 0 10px #00ff66,
+    0 0 20px #00ff66,
+    2px 2px 2px rgba(0, 0, 0, 0.9),
+    -1px -1px 0 #003311;
+  transition: transform 0.2s ease, text-shadow 0.2s ease;
+}
+
+.brand-logo:hover {
+  transform: scale(1.05);
+  text-shadow: 
+    0 0 10px #00ff66,
+    0 0 20px #00ff66,
+    0 0 35px #00ff66,
+    3px 3px 4px rgba(0, 0, 0, 0.9);
+}
+
+/* Buscador Neón */
+.search-container {
   position: relative;
 }
 
-.close-btn {
-  background: #e50914;
-  color: #fff;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  float: right;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
+.search-bar {
+  background: rgba(0, 20, 10, 0.8);
+  border: 1px solid #00ff66;
+  color: #00ff66;
+  padding: 8px 18px;
+  border-radius: 25px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  outline: none;
+  width: 220px;
+  box-shadow: inset 0 0 5px rgba(0, 255, 102, 0.3);
+  transition: all 0.3s ease;
 }
 
-.modal-container iframe {
+.search-bar:focus {
+  width: 280px;
+  box-shadow: 0 0 15px rgba(0, 255, 102, 0.6), inset 0 0 8px rgba(0, 255, 102, 0.5);
+}
+
+.search-bar::placeholder {
+  color: rgba(0, 255, 102, 0.5);
+}
+
+/* Banner Hero Destacado */
+.hero-banner {
+  position: relative;
+  height: 65vh;
+  min-height: 450px;
+  margin-top: 75px;
+  background-size: cover;
+  background-position: center top;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 5% 50px 5%;
+  border-bottom: 1px solid rgba(0, 255, 102, 0.2);
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 450px;
+  height: 100%;
+  background: 
+    linear-gradient(180deg, rgba(8,13,10,0.3) 0%, rgba(8,13,10,0.85) 75%, #080d0a 100%),
+    linear-gradient(90deg, rgba(8,13,10,0.95) 0%, transparent 60%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  max-width: 650px;
+}
+
+.hero-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+  margin-bottom: 15px;
+}
+
+.hero-overview {
+  font-size: 1.1rem;
+  line-height: 1.4;
+  color: #b0e6c0;
+  margin-bottom: 25px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.btn-neon {
+  background: #00ff66;
+  color: #080d0a;
   border: none;
+  padding: 12px 30px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
   border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(0, 255, 102, 0.6);
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-neon:hover {
+  background: #33ff88;
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(0, 255, 102, 0.9);
+}
+
+/* Carrusel de Trailers */
+.trailers-section {
+  padding: 40px 4% 20px 4%;
+}
+
+.section-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.4rem;
+  color: #00ff66;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.trailers-carousel {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 15px;
+  scrollbar-width: thin;
+  scrollbar-color: #00ff66 #080d0a;
+}
+
+.trailers-carousel::-webkit-scrollbar {
+  height: 8px;
+}
+
+.trailers-carousel::-webkit-scrollbar-track {
+  background: #080d0a;
+}
+
+.trailers-carousel::-webkit-scrollbar-thumb {
+  background: #00ff66;
+  border-radius: 4px;
+}
+
+.trailer-card {
+  flex: 0 0 280px;
+  background: #0e1712;
+  border: 1px solid rgba(0, 255, 102, 0.3);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.trailer-card:hover {
+  transform: scale(1.03);
+  border-color: #00ff66;
+  box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
+}
+
+.trailer-thumb {
+  position: relative;
+  width: 100%;
+  height: 158px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-icon {
+  width: 45px;
+  height: 45px;
+  background: rgba(0, 255, 102, 0.85);
+  color: #080d0a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  box-shadow: 0 0 10px #00ff66;
+}
+
+.trailer-info {
+  padding: 10px 12px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Grilla del Catálogo */
+.catalog-container {
+  padding: 30px 4% 60px 4%;
+}
+
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 22px;
+}
+
+.movie-card {
+  position: relative;
+  background: #0d1410;
+  border: 1px solid rgba(0, 255, 102, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.movie-card:hover {
+  transform: translateY(-8px);
+  border-color: #00ff66;
+  box-shadow: 0 0 20px rgba(0, 255, 102, 0.5);
+}
+
+.movie-poster {
+  width: 100%;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+  display: block;
+}
+
+.movie-title-bar {
+  padding: 10px;
+  background: #080d0a;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-align: center;
+  color: #e0ffe8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-top: 1px solid rgba(0, 255, 102, 0.2);
+}
+
+/* Modal del Reproductor */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(10px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  background: #080d0a;
+  border: 2px solid #00ff66;
+  border-radius: 10px;
+  box-shadow: 0 0 30px rgba(0, 255, 102, 0.5);
+  overflow: hidden;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #00ff66;
+  color: #080d0a;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-weight: 900;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 0 10px #00ff66;
+}
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.loading-screen {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  color: #00ff66;
+  text-shadow: 0 0 20px #00ff66;
 }
