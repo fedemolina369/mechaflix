@@ -10,12 +10,12 @@ html, body {
   background-color: #080d0a;
   color: #e0ffe8;
   font-family: 'Rajdhani', sans-serif;
-  overflow-x: hidden; /* Evita cualquier barra o desborde lateral */
+  overflow-x: hidden;
   width: 100%;
   scroll-behavior: smooth;
 }
 
-/* Fondo Cyberpunk Neón Seguro (sin desbordes laterales) */
+/* Fondo Cyberpunk Neón Seguro */
 body::before {
   content: '';
   position: fixed;
@@ -31,13 +31,13 @@ body::before {
   pointer-events: none;
 }
 
-/* Navbar Adaptable para TV y Celulares */
+/* Navbar Adaptable */
 .navbar {
   position: fixed;
   top: 0;
   width: 100%;
   height: 70px;
-  padding: 0 5%;
+  padding: 0 4%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -52,7 +52,7 @@ body::before {
 /* Logo 3D Neón */
 .brand-logo {
   font-family: 'Orbitron', sans-serif;
-  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
   font-weight: 900;
   color: #00ff66;
   text-transform: uppercase;
@@ -71,24 +71,48 @@ body::before {
   transform: scale(1.03);
 }
 
-/* Buscador Flexible (Nunca se corta) */
+/* Pestañas de Navegación */
+.nav-tabs {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.nav-btn {
+  background: transparent;
+  border: none;
+  color: #b0e6c0;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.nav-btn:hover, .nav-btn.active {
+  color: #00ff66;
+  text-shadow: 0 0 8px #00ff66;
+  background: rgba(0, 255, 102, 0.1);
+}
+
+/* Buscador Flexible */
 .search-container {
-  flex: 1;
-  max-width: 320px;
   display: flex;
   justify-content: flex-end;
 }
 
 .search-bar {
   width: 100%;
-  max-width: 260px;
+  max-width: 220px;
   background: rgba(0, 20, 10, 0.9);
   border: 1px solid #00ff66;
   color: #00ff66;
-  padding: 8px 16px;
+  padding: 7px 14px;
   border-radius: 25px;
   font-family: 'Rajdhani', sans-serif;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 700;
   outline: none;
   box-shadow: inset 0 0 8px rgba(0, 255, 102, 0.3);
@@ -133,6 +157,18 @@ body::before {
   position: relative;
   z-index: 10;
   max-width: 650px;
+}
+
+.badge-type {
+  display: inline-block;
+  background: #00ff66;
+  color: #080d0a;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 3px;
+  margin-bottom: 8px;
 }
 
 .hero-title {
@@ -192,7 +228,7 @@ body::before {
   letter-spacing: 1px;
 }
 
-/* Carrusel de Trailers Fluido para TV y Celulares */
+/* Carrusel de Trailers */
 .trailers-carousel {
   display: flex;
   gap: 16px;
@@ -200,11 +236,11 @@ body::before {
   padding-bottom: 15px;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: none; /* Oculta barra fea en Firefox */
+  scrollbar-width: none;
 }
 
 .trailers-carousel::-webkit-scrollbar {
-  display: none; /* Oculta barra en Chrome/TV/Safari */
+  display: none;
 }
 
 .trailer-card {
@@ -258,7 +294,7 @@ body::before {
   text-overflow: ellipsis;
 }
 
-/* Grilla del Catálogo Principal */
+/* Grilla del Catálogo */
 .catalog-container {
   padding: 20px 5% 60px 5%;
 }
@@ -285,6 +321,21 @@ body::before {
   box-shadow: 0 0 18px rgba(0, 255, 102, 0.5);
 }
 
+.card-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(8, 13, 10, 0.85);
+  border: 1px solid #00ff66;
+  color: #00ff66;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 3px;
+  z-index: 5;
+}
+
 .movie-poster {
   width: 100%;
   aspect-ratio: 2/3;
@@ -305,7 +356,143 @@ body::before {
   border-top: 1px solid rgba(0, 255, 102, 0.2);
 }
 
-/* Modal del Reproductor de Video */
+/* VISTA DE DETALLE DE SERIE (SELECCIÓN DE CAPÍTULOS) */
+.series-detail-container {
+  padding: 100px 5% 60px 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.back-btn {
+  background: transparent;
+  border: 1px solid #00ff66;
+  color: #00ff66;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+  background: rgba(0, 255, 102, 0.15);
+  box-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
+}
+
+.series-header {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 30px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.series-poster {
+  width: 220px;
+  border-radius: 8px;
+  border: 2px solid #00ff66;
+  box-shadow: 0 0 20px rgba(0, 255, 102, 0.3);
+}
+
+.series-info h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.2rem;
+  color: #fff;
+  margin-bottom: 10px;
+  text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+}
+
+.series-info p {
+  color: #b0e6c0;
+  line-height: 1.5;
+  max-width: 700px;
+}
+
+.seasons-tabs {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.season-btn {
+  background: #0d1410;
+  border: 1px solid rgba(0, 255, 102, 0.4);
+  color: #b0e6c0;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.season-btn.active, .season-btn:hover {
+  background: #00ff66;
+  color: #080d0a;
+  border-color: #00ff66;
+  box-shadow: 0 0 10px #00ff66;
+}
+
+.episodes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.episode-card {
+  background: #0d1410;
+  border: 1px solid rgba(0, 255, 102, 0.25);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.episode-card:hover {
+  transform: translateY(-4px);
+  border-color: #00ff66;
+  box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
+}
+
+.episode-thumb {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  background-color: #000;
+}
+
+.episode-details {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.episode-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.95rem;
+  color: #fff;
+  font-weight: 700;
+}
+
+.episode-overview {
+  font-size: 0.85rem;
+  color: #9abfa5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Modal del Reproductor */
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -374,13 +561,13 @@ body::before {
   text-shadow: 0 0 20px #00ff66;
 }
 
-/* Media Queries para adaptación perfecta en Celulares y Tablets */
+/* Media Queries */
 @media (max-width: 768px) {
   .navbar {
     padding: 0 4%;
   }
   .search-bar {
-    max-width: 180px;
+    max-width: 150px;
   }
   .hero-banner {
     height: 55vh;
@@ -388,5 +575,10 @@ body::before {
   .movies-grid {
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
     gap: 12px;
+  }
+  .series-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 }
