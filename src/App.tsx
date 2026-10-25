@@ -253,7 +253,6 @@ export default function App() {
           <div className="saga-detail-view" style={{ backgroundImage: `url(${currentSagaData?.backdrop})` }}>
             <div className="saga-detail-overlay"></div>
             
-            {/* Notificación Flotante tipo Menú PES en la esquina superior */}
             {currentSagaData?.music && (
               <>
                 <audio 
@@ -297,7 +296,6 @@ export default function App() {
                       else setSelectedVideoUrl(item.videoUrl);
                     }}
                   >
-                    <span className="card-badge">SAGA</span>
                     <img className="movie-poster" src={item.poster || 'https://via.placeholder.com/500x750?text=Sin+Imagen'} alt={item.title} />
                     <div className="movie-title-bar">{item.title}</div>
                   </div>
@@ -439,7 +437,6 @@ export default function App() {
                     else setSelectedVideoUrl(item.videoUrl);
                   }}
                 >
-                  <span className="card-badge">{item.type === 'tv' ? 'SERIE' : 'PELÍCULA'}</span>
                   <img className="movie-poster" src={item.poster || 'https://via.placeholder.com/500x750?text=Sin+Imagen'} alt={item.title} />
                   <div className="movie-title-bar">{item.title}</div>
                 </div>
