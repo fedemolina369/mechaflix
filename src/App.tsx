@@ -253,6 +253,26 @@ export default function App() {
           <div className="saga-detail-view" style={{ backgroundImage: `url(${currentSagaData?.backdrop})` }}>
             <div className="saga-detail-overlay"></div>
             
+            {/* Notificación Flotante tipo Menú PES en la esquina superior */}
+            {currentSagaData?.music && (
+              <>
+                <audio 
+                  ref={audioRef} 
+                  src={currentSagaData.music} 
+                  autoPlay 
+                  loop 
+                  style={{ display: 'none' }} 
+                />
+                <div className="pes-music-widget">
+                  <span className="pes-music-icon">🎵</span>
+                  <div className="pes-music-text">
+                    <span className="pes-music-label">REPRODUCIENDO</span>
+                    <span className="pes-music-title">Tema Oficial de {selectedSaga}</span>
+                  </div>
+                </div>
+              </>
+            )}
+
             <div className="series-detail-container" style={{ position: 'relative', zIndex: 2 }}>
               <button className="back-btn" onClick={() => setSelectedSaga(null)}>
                 ← Volver a Sagas
@@ -265,14 +285,6 @@ export default function App() {
                   <p>Colección completa de películas y entregas de la saga.</p>
                 </div>
               </div>
-
-              {/* Reproductor de Música Temática de la Saga */}
-              {currentSagaData?.music && (
-                <div className="audio-player-banner">
-                  <div className="audio-info">🎵 Música Oficial de la Saga</div>
-                  <audio ref={audioRef} className="audio-element" controls autoPlay loop src={currentSagaData.music}></audio>
-                </div>
-              )}
 
               <div className="section-title">Películas de la Saga</div>
               <div className="movies-grid">
