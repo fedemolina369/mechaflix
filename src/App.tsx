@@ -16,6 +16,7 @@ export default function App() {
   const [featuredMovie, setFeaturedMovie] = useState<any>(null);
   const [selectedVideoUrl, setSelectedVideoUrl] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [activeTab, setActiveTab] = useState<'all' | 'movie' | 'tv'>('all');
   const [loading, setLoading] = useState<boolean>(true);
 
   // Mezclar un arreglo aleatoriamente
@@ -26,17 +27,18 @@ export default function App() {
   const loadCatalog = async () => {
     setLoading(true);
     try {
-      const { data: dbMovies, error } = await supabase.from('Movies').select('*');
-      if (error || !dbMovies) return;
+      const { data: dbItems, error } = await supabase.from('Movies').select('*');
+      if (error || !dbItems) return;
 
-      const enrichedMovies = await Promise.all(
-        dbMovies.map(async (movie) => {
+      const enrichedItems = await Promise.all(
+        dbItems.map(async (item) => {
           try {
-            const tmdbId = movie.Tmdb_id || movie.tmdb_id;
-            const videoUrl = movie.Video_url || movie.video_url;
+            const tmdbId = item.Tmdb_id || item.tmdb_id;
+            const videoUrl = item.Video_url || item.video_url;
+            const mediaType = item.type === 'tv' ? 'tv' : 'movie'; // 'movie' por defecto
             
             const res = await fetch(
-              `https://api.themoviedb.org/3/movie/${tmdbId}?api_key=${TMDB_API_KEY}&language=es-ES&append_to_response=videos`
+              `https://api.themoviedb.org/3/${mediaType}/${tmdbId}?api_key=${TMDB_API_KEY}&language=es-ES&append_to_response=videos`
             );
             const tmdbData = await res.json();
             
@@ -50,13 +52,16 @@ export default function App() {
             }
 
             return {
-              id: movie.id,
+              id: item.id,
               videoUrl: videoUrl,
-              title: tmdbData.title || 'Título no disponible',
+              type: mediaType,
+              title: tmdbData.title || tmdbData.name || 'Título no disponible',
               overview: tmdbData.overview || 'Sin descripción disponible.',
               poster: tmdbData.poster_path ? `${TMDB_IMAGE_BASE}${tmdbData.poster_path}` : null,
               backdrop: tmdbData.backdrop_path ? `${TMDB_BACKDROP_BASE}${tmdbData.backdrop_path}` : null,
-              trailerKey: trailerKey
+              trailerKey: trailerKey,
+              numberOfSeasons: tmdbData.number_of_seasons || null,
+              numberOfEpisodes: tmdbData.number_of_episodes || null
             };
           } catch (err) {
             return null;
@@ -64,8 +69,8 @@ export default function App() {
         })
       );
 
-      const validMovies = enrichedMovies.filter(m => m !== null);
-      const randomized = shuffleArray(validMovies);
+      const validItems = enrichedItems.filter(m => m !== null);
+      const randomized = shuffleArray(validItems);
       
       setMovies(randomized);
 
@@ -73,7 +78,7 @@ export default function App() {
         setFeaturedMovie(randomized[0]);
       }
 
-      // Filtrar todas las que tengan trailer disponible
+      // Filtrar todos los que tengan trailer disponible
       const withTrailers = randomized.filter(m => m.trailerKey !== null);
       setTrailers(withTrailers);
 
@@ -102,9 +107,10 @@ export default function App() {
     return () => clearInterval(bannerInterval);
   }, [movies]);
 
-  // Volver al inicio al hacer clic en el Logo (reinicia aleatoriamente)
+  // Volver al inicio al hacer clic en el Logo
   const handleHomeClick = () => {
     setSearchTerm('');
+    setActiveTab('all');
     const randomized = shuffleArray(movies);
     setMovies(randomized);
     if (randomized.length > 0) {
@@ -113,9 +119,12 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const filteredMovies = movies.filter(movie =>
-    movie.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Filtrado según pestaña (Películas / Series) y término de búsqueda
+  const filteredMovies = movies.filter(item => {
+    const matchesTab = activeTab === 'all' ? true : item.type === activeTab;
+    const matchesSearch = item.title.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchesTab && matchesSearch;
+  });
 
   if (loading) {
     return (
@@ -127,24 +136,46 @@ export default function App() {
 
   return (
     <div className="app">
-      {/* Navbar Adaptada y Limpia */}
+      {/* Navbar con pestañas de Navegación */}
       <nav className="navbar">
         <div className="brand-logo" onClick={handleHomeClick}>
           MECHAFLIX
         </div>
+
+        <div className="nav-tabs">
+          <button 
+            className={`nav-btn ${activeTab === 'all' ? 'active' : ''}`} 
+            onClick={() => setActiveTab('all')}
+          >
+            INICIO
+          </button>
+          <button 
+            className={`nav-btn ${activeTab === 'movie' ? 'active' : ''}`} 
+            onClick={() => setActiveTab('movie')}
+          >
+            PELÍCULAS
+          </button>
+          <button 
+            className={`nav-btn ${activeTab === 'tv' ? 'active' : ''}`} 
+            onClick={() => setActiveTab('tv')}
+          >
+            SERIES
+          </button>
+        </div>
+
         <div className="search-container">
           <input 
             type="text" 
             className="search-bar" 
-            placeholder="Buscar película..." 
+            placeholder="Buscar..." 
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
       </nav>
 
-      {/* Hero Banner Destacado con Cambio Automático cada 15s */}
-      {featuredMovie && !searchTerm && (
+      {/* Hero Banner Destacado */}
+      {featuredMovie && !searchTerm && activeTab === 'all' && (
         <header 
           className="hero-banner" 
           style={{ 
@@ -153,6 +184,9 @@ export default function App() {
         >
           <div className="hero-overlay"></div>
           <div className="hero-content">
+            <span className="badge-type">
+              {featuredMovie.type === 'tv' ? 'SERIE' : 'PELÍCULA'}
+            </span>
             <h1 className="hero-title">{featuredMovie.title}</h1>
             <p className="hero-overview">{featuredMovie.overview}</p>
             <button 
@@ -166,47 +200,56 @@ export default function App() {
       )}
 
       {/* Carrusel de Trailers Oficiales */}
-      {!searchTerm && trailers.length > 0 && (
+      {!searchTerm && activeTab === 'all' && trailers.length > 0 && (
         <section className="section-container">
           <h2 className="section-title">🎬 Trailers Oficiales</h2>
           <div className="trailers-carousel">
-            {trailers.map((movie) => (
+            {trailers.map((item) => (
               <div 
-                key={`trailer-${movie.id}`} 
+                key={`trailer-${item.id}`} 
                 className="trailer-card"
-                onClick={() => setSelectedVideoUrl(`https://www.youtube.com/embed/${movie.trailerKey}?autoplay=1`)}
+                onClick={() => setSelectedVideoUrl(`https://www.youtube.com/embed/${item.trailerKey}?autoplay=1`)}
               >
                 <div 
                   className="trailer-thumb" 
-                  style={{ backgroundImage: `url(${movie.backdrop || movie.poster})` }}
+                  style={{ backgroundImage: `url(${item.backdrop || item.poster})` }}
                 >
                   <div className="play-icon">▶</div>
                 </div>
-                <div className="trailer-info">{movie.title}</div>
+                <div className="trailer-info">{item.title}</div>
               </div>
             ))}
           </div>
         </section>
       )}
 
-      {/* Catálogo Principal de Películas */}
-      <main className="catalog-container">
+      {/* Catálogo Principal */}
+      <main className="catalog-container" style={{ marginTop: searchTerm || activeTab !== 'all' ? '90px' : '0' }}>
         <h2 className="section-title">
-          {searchTerm ? `Resultados para "${searchTerm}"` : '⚡ Catálogo Principal'}
+          {searchTerm 
+            ? `Resultados para "${searchTerm}"` 
+            : activeTab === 'tv' 
+            ? '📺 Catálogo de Series' 
+            : activeTab === 'movie' 
+            ? '🎬 Catálogo de Películas' 
+            : '⚡ Catálogo Principal'}
         </h2>
         <div className="movies-grid">
-          {filteredMovies.map((movie) => (
+          {filteredMovies.map((item) => (
             <div 
-              key={movie.id} 
+              key={item.id} 
               className="movie-card"
-              onClick={() => setSelectedVideoUrl(movie.videoUrl)}
+              onClick={() => setSelectedVideoUrl(item.videoUrl)}
             >
+              <span className="card-badge">
+                {item.type === 'tv' ? 'SERIE' : 'PELÍCULA'}
+              </span>
               <img 
                 className="movie-poster"
-                src={movie.poster || 'https://via.placeholder.com/500x750?text=Sin+Imagen'} 
-                alt={movie.title} 
+                src={item.poster || 'https://via.placeholder.com/500x750?text=Sin+Imagen'} 
+                alt={item.title} 
               />
-              <div className="movie-title-bar">{movie.title}</div>
+              <div className="movie-title-bar">{item.title}</div>
             </div>
           ))}
         </div>
